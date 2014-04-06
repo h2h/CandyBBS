@@ -27,12 +27,14 @@ namespace Candy.Web.Controllers
             ISettingsService settingsService,
             ITopicService topicService,
             IPostService postService,
-            ICategoryService categoryService)
+            ICategoryService categoryService,
+            ITopicTagService topicTagService)
             : base(loggingService, unitOfWorkManager, userService, roleService, settingsService)
         {
             this._topicService = topicService;
             this._postService = postService;
             this._categoryService = categoryService;
+            this._topicTagService = topicTagService;
 
             LoggedOnUser = UserIsAuthenticated ? UserService.GetUser(Username) : null;
             UsersRole = LoggedOnUser == null ? RoleService.GetRole(AppConstants.GuestRoleName) : LoggedOnUser.Roles.FirstOrDefault();

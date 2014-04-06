@@ -91,53 +91,63 @@ create table Post
 	Topic_Id int references Topic(Id)
 )
 
-select * from Category
+create table TopicTag
+(
+	Id int primary key identity(1,1),
+	Tag varchar(100) not null,
+	Slug varchar(100) not null
+)
+create table TagInTopic
+(
+	Id int primary key identity(1,1),
+	Topic_Id int references Topic(Id),
+	TopicTag_Id int references TopicTag(Id)
+)
 
+
+select * from Category
 
 select * from Settings
 
 select * from Permission
 
-CREATE TABLE [dbo].[Post](
+
+USE [MVCForum]
+GO
+
+/****** Object:  Table [dbo].[Topic_Tag]    Script Date: 2014/4/7 1:08:53 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Topic_Tag](
 	[Id] [uniqueidentifier] NOT NULL,
-	[MembershipUser_Id] [uniqueidentifier] NOT NULL,
-	[PostContent] [ntext] NOT NULL,
-	[DateCreated] [datetime] NOT NULL,
-	[VoteCount] [int] NOT NULL,
 	[Topic_Id] [uniqueidentifier] NOT NULL,
-	[DateEdited] [datetime] NULL,
-	[IsSolution] [bit] NOT NULL,
-	[IsTopicStarter] [bit] NULL,
-	[FlaggedAsSpam] [bit] NULL,
-	[IpAddress] [nvarchar](50) NULL,
- CONSTRAINT [PK_Post] PRIMARY KEY CLUSTERED 
+	[TopicTag_Id] [uniqueidentifier] NOT NULL,
+ CONSTRAINT [PK_Topic_Tag] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+) ON [PRIMARY]
 
 GO
 
-ALTER TABLE [dbo].[Post] ADD  CONSTRAINT [DF_Post_VoteCount]  DEFAULT ((0)) FOR [VoteCount]
+ALTER TABLE [dbo].[Topic_Tag] ADD  CONSTRAINT [DF_Id]  DEFAULT (newsequentialid()) FOR [Id]
 GO
 
-ALTER TABLE [dbo].[Post] ADD  CONSTRAINT [DF_Post_IsApproved]  DEFAULT ((0)) FOR [IsSolution]
-GO
-
-ALTER TABLE [dbo].[Post] ADD  CONSTRAINT [DF_Post_IsTopicStarter]  DEFAULT ((0)) FOR [IsTopicStarter]
-GO
-
-ALTER TABLE [dbo].[Post]  WITH CHECK ADD  CONSTRAINT [FK_Post_MembershipUser] FOREIGN KEY([MembershipUser_Id])
-REFERENCES [dbo].[MembershipUser] ([Id])
-GO
-
-ALTER TABLE [dbo].[Post] CHECK CONSTRAINT [FK_Post_MembershipUser]
-GO
-
-ALTER TABLE [dbo].[Post]  WITH CHECK ADD  CONSTRAINT [FK_Post_Topic] FOREIGN KEY([Topic_Id])
+ALTER TABLE [dbo].[Topic_Tag]  WITH NOCHECK ADD  CONSTRAINT [FK_Topic_Tag_Topic] FOREIGN KEY([Topic_Id])
 REFERENCES [dbo].[Topic] ([Id])
 GO
 
-ALTER TABLE [dbo].[Post] CHECK CONSTRAINT [FK_Post_Topic]
+ALTER TABLE [dbo].[Topic_Tag] NOCHECK CONSTRAINT [FK_Topic_Tag_Topic]
+GO
+
+ALTER TABLE [dbo].[Topic_Tag]  WITH NOCHECK ADD  CONSTRAINT [FK_Topic_Tag_TopicTag] FOREIGN KEY([TopicTag_Id])
+REFERENCES [dbo].[TopicTag] ([Id])
+GO
+
+ALTER TABLE [dbo].[Topic_Tag] NOCHECK CONSTRAINT [FK_Topic_Tag_TopicTag]
 GO
 

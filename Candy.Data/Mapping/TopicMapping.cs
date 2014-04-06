@@ -18,7 +18,7 @@ namespace Candy.Data.Mapping
             HasMany(t => t.Tags).WithMany(t => t.Topics)
                 .Map(m =>
                 {
-                    m.ToTable("Topic_Tag");
+                    m.ToTable("TagInTopic");
                     m.MapLeftKey("TopicTag_Id");
                     m.MapRightKey("Topic_Id");
                 });

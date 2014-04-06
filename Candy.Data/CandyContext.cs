@@ -19,6 +19,7 @@ namespace Candy.Data
         public DbSet<Permission> Permission { get; set; }
         public DbSet<Post> Post { get; set; }
         public DbSet<Topic> Topic { get; set; }
+        public DbSet<TopicTag> TopicTag { get; set; }
         public CandyContext()
         {
             Configuration.LazyLoadingEnabled = true;

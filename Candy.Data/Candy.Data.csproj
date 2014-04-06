@@ -61,6 +61,7 @@
     <Compile Include="Mapping\RoleMapping.cs" />
     <Compile Include="Mapping\SettingsMapping.cs" />
     <Compile Include="Mapping\TopicMapping.cs" />
+    <Compile Include="Mapping\TopicTagMapping.cs" />
     <Compile Include="Mapping\UserMapping.cs" />
     <Compile Include="Mapping\UserMetaMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Repositories\RoleRepository.cs" />
     <Compile Include="Repositories\SettingsRepository.cs" />
     <Compile Include="Repositories\TopicRepository.cs" />
+    <Compile Include="Repositories\TopicTagRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="UnitOfWork\UnitOfWork.cs" />
     <Compile Include="UnitOfWork\UnitOfWorkManager.cs" />
