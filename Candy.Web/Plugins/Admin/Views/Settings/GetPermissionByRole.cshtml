@@ -1,0 +1,16 @@
+﻿@model PermissionsViewModels
+@foreach (var category in Model.Categories)
+{
+    <tr>
+        <td>@category.Name</td>
+        @foreach (var permission in Model.Permissions)
+        {
+            var isChecked = "";
+            <td>
+                <span class="permissioncheckbox">
+                    <input data-permisssion="@permission.Id" data-category="@category.Id" data-role="@Model.Role.Id" type="checkbox" id="@permission.Id-@category.Id" @isChecked />
+                </span>
+            </td>
+        }
+    </tr>
+}

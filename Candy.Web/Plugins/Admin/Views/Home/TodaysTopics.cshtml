@@ -1,0 +1,15 @@
+﻿@model TodaysTopics
+@if (Model.Topics.Any())
+{
+    <ul>
+        @foreach (var topic in Model.Topics)
+        {
+            <li>
+                <a href="@Url.Content(topic.NiceUrl)">@Html.Raw(topic.Name)</a>
+            </li> 
+        }
+    </ul> 
+}else
+{
+    <p>@Html.Lang("今日还没有任何主题")</p>
+}

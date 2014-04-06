@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AB4B6F69-C8A1-455B-81C5-3A6044CC2AC0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Candy.Domain</RootNamespace>
+    <AssemblyName>Candy.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppConstants.cs" />
+    <Compile Include="Exceptions\InUseUnableToDeleteException.cs" />
+    <Compile Include="Interfaces\IPagedList.cs" />
+    <Compile Include="Interfaces\Repositories\ICategoryPermissionForRoleRepository.cs" />
+    <Compile Include="Interfaces\Repositories\ICategoryRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IPermissionRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IPostRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IRoleRepository.cs" />
+    <Compile Include="Interfaces\Repositories\ISettingsRepository.cs" />
+    <Compile Include="Interfaces\Repositories\ITopicRepository.cs" />
+    <Compile Include="Interfaces\Repositories\ITopicTagRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IUploadedFileRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IUserRepository.cs" />
+    <Compile Include="Interfaces\Services\ICategoryPermissionForRoleService.cs" />
+    <Compile Include="Interfaces\Services\ICategoryService.cs" />
+    <Compile Include="Interfaces\Services\ILocalizationService.cs" />
+    <Compile Include="Interfaces\Services\IPermissionService.cs" />
+    <Compile Include="Interfaces\Services\IPostService.cs" />
+    <Compile Include="Interfaces\Services\IRoleService.cs" />
+    <Compile Include="Interfaces\Services\IThemeService.cs" />
+    <Compile Include="Interfaces\Services\ITopicService.cs" />
+    <Compile Include="Interfaces\Services\ITopicTagService.cs" />
+    <Compile Include="Interfaces\Services\IUploadedFileService.cs" />
+    <Compile Include="Interfaces\Services\IUserService.cs" />
+    <Compile Include="Models\CategoryPermissionForRole.cs" />
+    <Compile Include="Models\CategoryWithSubCategories.cs" />
+    <Compile Include="Models\Language.cs" />
+    <Compile Include="Models\PagedList.cs" />
+    <Compile Include="Models\Permission.cs" />
+    <Compile Include="Models\PermissionSet.cs" />
+    <Compile Include="Models\Post.cs" />
+    <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\Theme.cs" />
+    <Compile Include="Models\Topic.cs" />
+    <Compile Include="Models\TopicTag.cs" />
+    <Compile Include="Models\UploadedFile.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserMeta.cs" />
+    <Compile Include="UrlTypes.cs" />
+    <Compile Include="Events\EventManager.cs" />
+    <Compile Include="Interfaces\Events\IEventHandler.cs" />
+    <Compile Include="Interfaces\Events\IEventManager.cs" />
+    <Compile Include="Interfaces\ICandyContext.cs" />
+    <Compile Include="Interfaces\Services\ILoggingService.cs" />
+    <Compile Include="Interfaces\Services\IServiceBase.cs" />
+    <Compile Include="Interfaces\Services\ISettingsService.cs" />
+    <Compile Include="Interfaces\UnitOfWork\IUnitOfWork.cs" />
+    <Compile Include="Interfaces\UnitOfWork\IUnitOfWorkManager.cs" />
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Entity.cs" />
+    <Compile Include="Models\Log.cs" />
+    <Compile Include="Models\Settings.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Candy.Utilities\Candy.Utilities.csproj">
+      <Project>{40c0bb81-7d4e-4889-8130-7d2e632ffce3}</Project>
+      <Name>Candy.Utilities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

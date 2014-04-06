@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E74D761B-4F69-4D6D-B113-CBAD972F502C}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Candy.Web</RootNamespace>
+    <AssemblyName>Candy.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EFCachingProvider">
+      <HintPath>..\packages\CommunityEFProviderWrappers.EFCachingProvider.1.0.0\lib\net40-Client\EFCachingProvider.dll</HintPath>
+    </Reference>
+    <Reference Include="EFProviderWrapperToolkit">
+      <HintPath>..\packages\CommunityEFProviderWrappers.EFProviderWrapperToolkit.1.0.0\lib\net40-Client\EFProviderWrapperToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.1.1\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.1.1\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.1.1\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.1.1\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.1.1\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.1.1\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WebActivatorEx">
+      <HintPath>..\packages\WebActivatorEx.2.0.4\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Languages\en-US.json" />
+    <None Include="Languages\zh-CN.json" />
+    <Content Include="packages.config" />
+    <Content Include="Plugins\Admin\css\font.css" />
+    <Content Include="Plugins\Admin\css\style.css" />
+    <Content Include="Plugins\Admin\fonts\fontawesome-webfont.svg" />
+    <Content Include="Plugins\Admin\img\logo.jpg" />
+    <Content Include="Plugins\Admin\img\section.png" />
+    <Content Include="Plugins\Admin\js\candy.js" />
+    <Content Include="Plugins\Admin\js\jquery.min.js" />
+    <Content Include="Themes\Default\css\font.css" />
+    <Content Include="Themes\Default\css\style.css" />
+    <Content Include="Themes\Default\fonts\fontawesome-webfont.svg" />
+    <Content Include="Themes\Default\img\logo.jpg" />
+    <Content Include="Themes\Default\img\section.png" />
+    <Content Include="Themes\Default\js\candy.js" />
+    <Content Include="Themes\Default\js\jquery.min.js" />
+    <Content Include="Themes\Default\screenshot.png" />
+    <Content Include="Themes\Default\Views\Home\index.cshtml" />
+    <Content Include="Themes\Mobile\css\font.css" />
+    <Content Include="Themes\Mobile\css\mobile.css" />
+    <Content Include="Themes\Mobile\fonts\fontawesome-webfont.svg" />
+    <Content Include="Themes\Mobile\img\logo.jpg" />
+    <Content Include="Themes\Mobile\img\section.png" />
+    <Content Include="Themes\Mobile\js\mobile.js" />
+    <Content Include="Themes\Mobile\js\jquery.min.js" />
+    <Content Include="Themes\Mobile\screenshot.png" />
+    <Content Include="Themes\Web.config" />
+    <Content Include="Themes\Default\Views\Shared\_Layout.cshtml" />
+    <Content Include="Themes\Default\Views\_ViewStart.cshtml" />
+    <Content Include="Themes\Mobile\Views\Shared\_Layout.cshtml" />
+    <Content Include="Themes\Mobile\Views\_ViewStart.cshtml" />
+    <Content Include="Themes\Mobile\Views\Home\index.cshtml" />
+    <Content Include="Themes\Default\Views\User\login.cshtml" />
+    <Content Include="Themes\Default\fonts\fontawesome-webfont.eot" />
+    <Content Include="Themes\Default\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Themes\Default\fonts\fontawesome-webfont.woff" />
+    <Content Include="Themes\Default\Views\Category\index.cshtml" />
+    <Content Include="Themes\Default\Views\Category\show.cshtml" />
+    <Content Include="Themes\Default\Views\User\Register.cshtml" />
+    <Content Include="Themes\Default\Views\Widget\loginbox.cshtml" />
+    <Content Include="Themes\Default\Views\Widget\index.cshtml" />
+    <Content Include="Themes\Default\Views\User\index.cshtml" />
+    <Content Include="Themes\Default\Views\User\settings.cshtml" />
+    <Content Include="Themes\Default\Views\Topic\New.cshtml" />
+    <Content Include="Plugins\web.config" />
+    <Content Include="Plugins\Admin\fonts\fontawesome-webfont.eot" />
+    <Content Include="Plugins\Admin\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Plugins\Admin\fonts\fontawesome-webfont.woff" />
+    <Content Include="Plugins\Admin\Views\Home\Index.cshtml" />
+    <Content Include="Plugins\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Plugins\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Plugins\Admin\Views\Settings\index.cshtml" />
+    <Content Include="Plugins\Admin\Views\Home\TodaysTopics.cshtml" />
+    <Content Include="Plugins\Admin\Views\Home\LatestUsers.cshtml" />
+    <Content Include="Plugins\Admin\Views\Settings\email.cshtml" />
+    <Content Include="Themes\Default\Theme.json" />
+    <Content Include="Themes\Mobile\Theme.json" />
+    <Content Include="Plugins\Admin\Views\Settings\theme.cshtml" />
+    <Content Include="Plugins\Admin\Views\Settings\points.cshtml" />
+    <Content Include="Plugins\Admin\Views\Settings\Permissions.cshtml" />
+    <Content Include="Plugins\Admin\Views\Settings\GetPermissionByRole.cshtml" />
+    <Content Include="Plugins\Admin\Views\Category\index.cshtml" />
+    <Content Include="Plugins\Admin\Views\User\index.cshtml" />
+    <None Include="Properties\PublishProfiles\icoding - FTP %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\icoding - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\icoding - Web Deploy %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\icoding - Web Deploy.pubxml" />
+    <Content Include="Themes\Mobile\fonts\fontawesome-webfont.eot" />
+    <Content Include="Themes\Mobile\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Themes\Mobile\fonts\fontawesome-webfont.woff" />
+    <Content Include="Themes\Mobile\Views\Category\index.cshtml" />
+    <Content Include="Themes\Mobile\Views\Category\show.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Global.asax" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Application\AppHelpers.cs" />
+    <Compile Include="Application\AspNetCache.cs" />
+    <Compile Include="Application\CandyViewEngine.cs" />
+    <Compile Include="Application\HtmlHelperExtensions.cs" />
+    <Compile Include="Application\LocalizerHelper.cs" />
+    <Compile Include="App_Start\AppStartUp.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\BaseAdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SettingsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UserController.cs" />
+    <Compile Include="Areas\Admin\ViewModels\HomeViewModels.cs" />
+    <Compile Include="Areas\Admin\ViewModels\UserViewModels.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InstallController.cs" />
+    <Compile Include="Controllers\TopicController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\WidgetController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\CategoryViewModel.cs" />
+    <Compile Include="ViewModels\TopicViewModel.cs" />
+    <Compile Include="ViewModels\UserViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Candy.Domain\Candy.Domain.csproj">
+      <Project>{ab4b6f69-c8a1-455b-81c5-3a6044cc2ac0}</Project>
+      <Name>Candy.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Candy.IOC\Candy.IOC.csproj">
+      <Project>{d09845bf-8346-40c5-9384-2107f97ad1d4}</Project>
+      <Name>Candy.IOC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Candy.Utilities\Candy.Utilities.csproj">
+      <Project>{40c0bb81-7d4e-4889-8130-7d2e632ffce3}</Project>
+      <Name>Candy.Utilities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>3173</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:1520</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

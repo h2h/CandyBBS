@@ -1,0 +1,157 @@
+﻿@model Candy.Domain.Models.User
+@{
+    ViewBag.Title = Html.Lang("设置");
+    var avatar = string.Empty;
+    if (Model.Avatar.IsNullEmpty())
+    {
+        avatar = StringUtils.GetGravatarImage(Model.Email, 300);
+        if (avatar.IsNullEmpty())
+        {
+            avatar = DependencyResolver.Current.GetService<Candy.Domain.Interfaces.Services.ISettingsService>().Get(AppConstants.DefaultUserAvatar).Value;
+        }
+    }
+    else
+    {
+        avatar = Url.Content(Model.Avatar);
+    }
+}
+<div id="main" class="grid grid-left-300">
+    <div id="sidebar" class="col-3-300">
+        <div class="panel">
+            <div class="panel-body nopadding">
+                <div class="user-avatar">
+                    <a href="">
+                        <img src="@avatar" width="300" alt="@Model.UserName" title="@Model.UserName" />
+                        <span class="reavatar">@Html.Lang("修改头像")</span>
+                    </a>
+                </div>
+                <div class="user-menu">
+                    <ul>
+                        <li class="username">
+                            <span>@Model.Slug</span>
+                        </li>
+                        <li>
+                            <a href="">@Html.Lang("动态")</a>
+                        </li>
+                        <li>
+                            <a href="">@Html.Lang("主题")</a>
+                        </li>
+                        <li>
+                            <a href="">@Html.Lang("回复")</a>
+                        </li>
+                        <li>
+                            <a href="">
+                                @Html.Lang("消息")
+                                <em>(9)</em>
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="@Url.Content("~/settings/")">@Html.Lang("设置")</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="section" class="col-4-300">
+        <div class="panel">
+            <div class="panel-body">
+                <form action="@Url.Content("~/settings/")" method="Post" class="form-box">
+                    <h3>@Html.Lang("基本信息")</h3>
+                    <div class="form-group">
+                        <label for="username">
+                            @Html.Lang("用户名")
+                        </label>
+                        <input type="text" name="username" id="username" value="hubert" class="text" placeholder="请输入用户名" disabled />
+                    </div>
+                    <div class="form-group">
+                        <label for="slug">@Html.Lang("昵称")</label>
+                        <input type="text" name="slug" id="slug" value="@Model.Slug" class="text" placeholder="请输入昵称">
+                    </div>
+                    <div class="form-group">
+                        <label>@Html.Lang("性别")</label>
+                        <select name="" class="text">
+                            <option value="">@Html.Lang("男")</option>
+                            <option value="">@Html.Lang("女")</option>
+                            <option value="">@Html.Lang("其他")</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>@Html.Lang("生日")</label>
+                        <div class="input-group">
+                            <input type="text" name="year" id="" value="" class="text" placeholder="年" style="width:60px;">
+                            <span class="input-group-addon">年</span>
+                            <select name="" class="text">
+                                <option value="">一</option>
+                                <option value="">二</option>
+                                <option value="">三</option>
+                                <option value="">四</option>
+                                <option value="">五</option>
+                                <option value="">六</option>
+                                <option value="">七</option>
+                                <option value="">八</option>
+                                <option value="">九</option>
+                                <option value="">十</option>
+                                <option value="">十一</option>
+                                <option value="">十二</option>
+                            </select>
+                            <span class="input-group-addon">@Html.Lang("月")</span>
+                            <select name="" class="text">
+                                <option value="">1</option>
+                                <option value="">2</option>
+                                <option value="">3</option>
+                                <option value="">4</option>
+                                <option value="">5</option>
+                                <option value="">6</option>
+                            </select>
+                            <span class="input-group-addon">日</span>
+                        </div>
+                    </div>
+                    <h3>@Html.Lang("联系信息")</h3>
+                    <div class="form-group">
+                        <label for="email">
+                            @Html.Lang("电子邮箱")
+                        </label>
+                        <input type="email" name="email" id="email" value="@Model.Email" class="text" placeholder="请输入邮箱">
+                    </div>
+                    <div class="form-group">
+                        <label for="website">个人网站</label>
+                        <input type="url" name="website" id="website" value="@Model.Website" class="text" placeholder="请输入个人网站">
+                    </div>
+                    <div class="form-group">
+                        <label for="weibo">新浪微博</label>
+                        <input type="text" name="weibo" id="weibo" value="" class="text" placeholder="新浪微博">
+                    </div>
+                    <div class="form-group">
+                        <label for="gplus">Google+</label>
+                        <input type="text" name="gplus" id="gplus" value="" class="text" placeholder="Google+">
+                    </div>
+                    <h3>@Html.Lang("安全信息")</h3>
+
+                    <div class="form-group">
+                        <label for="password">
+                            新密码
+                            <span>(必须)</span>
+                        </label>
+                        <input type="password" name="password" id="password" value="" class="text" placeholder="请输入密码">
+                    </div>
+                    <div class="form-group">
+                        <label for="repassword">
+                            重复新密码
+                            <span>(必须)</span>
+                        </label>
+                        <div class="sm-line">
+                            <input type="password" name="repassword" id="repassword" value="" class="text" placeholder="请再次输入密码">
+                            <p class="info">提示：您的密码最好至少包含7个字符。为了保证密码强度，使用大小写字母，数字和符号，例如! " ? $ % ^ &amp; )。</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="sm-line">
+                            <button type="submit" class="btn btn-danger">更新个人信息</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

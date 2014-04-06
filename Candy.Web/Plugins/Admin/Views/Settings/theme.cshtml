@@ -1,0 +1,53 @@
+﻿@model ThemeViewModels
+@{
+    ViewBag.Title = Html.Lang("主题");
+}
+<div class="panel">
+    <div class="panel-header">
+        <h3>@Html.Lang("当前主题")</h3>
+    </div>
+    <div class="panel-body">
+        <div class="current-theme">
+            <div class="screenshot">
+                <img src="@Url.Content(Model.CurrentTheme.Screenshot)" alt="@Html.Lang("当前主题")" />
+            </div>
+            <div class="themeinfo">
+                <ul>
+                    <li>
+                        <b>@Html.Lang("主题名称：")</b>
+                        <p><a href="@Url.Content(Model.CurrentTheme.ThemeUrl)" title="@Model.CurrentTheme.Name">@Model.CurrentTheme.Name</a></p>
+                    </li>
+                    <li>
+                        <b>@Html.Lang("主题作者：")</b>
+                        <p><a href="@Url.Content(Model.CurrentTheme.AuthorUrl)" title="@Model.CurrentTheme.Author">@Model.CurrentTheme.Author</a></p>
+                    </li>
+                    <li>
+                        <b>@Html.Lang("主题版本：")</b>
+                        <p>@Model.CurrentTheme.Version</p>
+                    </li>
+                    <li>
+                        <b>@Html.Lang("主题描述：")</b>
+                        <p>@Model.CurrentTheme.Description</p>
+                    </li>
+                    <li>
+                        <b>@Html.Lang("主题标签：")</b>
+                        <p>@Model.CurrentTheme.Tags</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="panel-header">
+        <h3>@Html.Lang("所有主题")</h3>
+    </div>
+    <div class="panel-body">
+        @foreach (var theme in Model.AllThemes)
+        {
+            <div class="available-theme">
+                <div class="screenshot">
+                    <img src="@Url.Content(theme.Screenshot)" title="@theme.Name" />
+                </div>
+            </div>
+        }
+    </div>
+</div>

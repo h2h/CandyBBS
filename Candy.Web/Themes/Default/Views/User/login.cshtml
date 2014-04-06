@@ -1,0 +1,188 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@Html.Lang("CandyBBS","CandyBBS") > @Html.Lang("登录","登录")</title>
+    <link href="@Html.Path("css/font.css")" rel="stylesheet" />
+    <script src="@Html.Path("js/jquery.min.js")"></script>
+    <style type="text/css">
+        body {
+            font-size: 12px;
+            background: #e9edf0;
+            font-family: Tahoma,Microsoft YaHei,Verdana,Arial,Helvetica,sans-serif;
+        }
+
+        input:-webkit-autofill {
+            -webkit-box-shadow: 0 0 0px 1000px #FFFFFF inset;
+        } 
+        button, input, select, textarea {
+            margin: 0;
+            outline: 0 none;
+            color: #444;
+            vertical-align: baseline;
+            font-size: 12px;
+            font-family: Tahoma,Microsoft YaHei,Verdana,Arial,Helvetica,sans-serif;
+            *vertical-align: middle;
+        }
+        .login {
+            margin:200px auto 0 auto;
+            width:300px;
+        }
+        h1.logo {
+            text-align:center;
+            padding:20px 0; 
+        }
+            h1.logo a {
+                display: block;
+                text-decoration: none;
+                color: #adbece;
+                text-shadow: 0px 1px 1px rgba(0,0,0,0.6);
+                font-size: 36px;
+            }
+                h1.logo a span {
+                    color: #0f9d84;
+                }
+        .login {
+            position:relative;
+        }
+            .login form {
+                position:relative;
+            }
+                .login form #loginbox {
+                    position: relative;
+                    top: 0px;
+                    width: 300px;
+                }
+        .error {
+            color: #b94a48;
+            background-color: #f2dede;
+            border-color: #ebccd1;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ebccd1;
+            border-radius: 3px;
+            font-size: 12px;
+            display:none;
+        }
+        form p {
+            padding:0px;
+            margin:0px;
+            overflow:hidden;
+            position:relative;
+        }
+            form p label {
+                border: 1px solid #dedede;
+                border-right:none;
+                background:#fafafa;
+                border-radius:0px 0px 0px 3px;
+                color:#999999;
+                padding:10px 0px;
+                position:relative;
+                display:block;
+                float:left;
+                text-align:center;
+                width:50px;
+            }
+                form p label i.fa {
+                    font-size:18px;
+                    line-height:20px;
+                }
+                 form p input.text {
+                    padding: 10px 15px 10px 15px;
+                    border: 1px solid #dedede;
+                    border-radius: 0px 0px 3px 0px;
+                    width: 217px;
+                    position: relative;
+                    color: #999999;
+                    line-height:20px;
+                    display:inline-block;
+                    height:20px;
+                }
+            form p:first-child input {
+                border-radius:0px 3px 0px 0px;
+            }
+            form p:first-child label {
+                border-radius:3px 0px 0px 0px;
+            }
+            form p:first-child {
+                margin-bottom:-1px;
+            }
+            form p input:focus {
+                border:1px solid #ff6a00;
+            }
+            form p:first-child input:focus {
+                z-index:2;
+            }
+            .btn {
+                background: #EE7836;
+                color: #FFF;
+                border: none;
+                display: block;
+                padding: 14px 0;
+                text-align: center;
+                width: 100%;
+                cursor: pointer;
+                border-radius: 3px;
+                margin-top:40px;
+            }
+    </style>
+</head>
+<body>
+    <div class="login">
+        <h1 class="logo">
+            <a href="#">
+                <span>Candy</span>BBS
+            </a>
+        </h1>
+        <form action="" method="post">
+            <input type="hidden" name="UrlReferrer" value="@Request.UrlReferrer" />
+            <div class="error">
+                <p>密码不能为空</p>
+            </div>
+            <div id="loginbox">
+                <p>
+                    <label for="username"><i class="fa fa-user fa-lg"></i></label>
+                    <input type="text" id="username" name="username" class="text" value="" placeholder="@Html.Lang("请输入帐号或邮箱", "请输入帐号或邮箱")" />
+                </p>
+                <p>
+                    <label for="password"><i class="fa fa-lock fa-lg"></i></label>
+                    <input type="password" id="password" name="password" class="text" value="" placeholder="@Html.Lang("请输入密码", "请输入密码")" />
+                </p>
+            </div>
+            <button type="submit" class="btn">@Html.Lang("登录","登录")</button>
+        </form>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("button[type=submit]").on("click", function () {
+                if ($("#username").val() == "")
+                {
+                    $("#loginbox").shake();
+                    $(".error").slideDown().find("p").html("帐号或邮箱不能为空");
+                    return false;
+                }
+                if ($("#password").val() == "")
+                {
+                    $("#loginbox").shake();
+                    $(".error").slideDown().find("p").html("密码不能为空");
+                    return false;
+                }
+            });
+            jQuery.fn.extend({
+                shake: function () {
+                    return this.each(function () {
+                        var p, w;
+                        p = jQuery(this).css('position', 'relative');
+                        w = 45;
+                        for (var i = 1; 9 > i; i++) { p.animate({ left: (w - (w / 8) * i) * ((i % 2 == 0) ? 1 : -1) }, 100 - (i * i)) }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

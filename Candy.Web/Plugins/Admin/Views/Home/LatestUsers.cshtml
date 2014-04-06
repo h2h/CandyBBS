@@ -1,0 +1,16 @@
+﻿@model LatestUsersViewModels
+@if (Model.Users.Any())
+{ 
+    <ul>
+        @foreach (var user in Model.Users)
+        {
+            <li>
+                <a href="@Url.Content(user.NiceUrl)">@Html.Raw(user.UserName)</a>
+            </li> 
+        }
+    </ul>
+}
+else
+{
+    <p>@Html.Lang("还没有任何用户")</p>
+}

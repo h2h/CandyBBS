@@ -1,0 +1,49 @@
+﻿@model UserViewModels
+@{
+    ViewBag.Title = Html.Lang("用户管理");
+}
+<div class="panel">
+    <div class="panel-header">
+        <h3>@Html.Lang("所有用户")</h3>
+    </div>
+    <div class="panel-body">
+        <table class="cbtable" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>@Html.Lang("编辑")</th>
+                    <th>@Html.Lang("用户名")</th>
+                    <th>@Html.Lang("锁定")</th>
+                    <th>@Html.Lang("用户组")</th>
+                    <th>@Html.Lang("删除")</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var user in Model.Users)
+                {
+                <tr>
+                    <td>
+                        <a href="@Url.Content("~/admin/user/edit/"+user.Id)" class="btn">@Html.Lang("编辑")</a>
+                    </td>
+                    <td>
+                        <b>@user.UserName</b>
+                    </td>
+                    <td>
+                        <input type="checkbox" value="0" />
+                    </td>
+                    <td>
+                        <select>
+                            @foreach (var role in Model.Roles)
+                            {
+                                <option>@role.RoleName</option> 
+                            }
+                        </select>
+                    </td>
+                    <td>
+                        <a href="#" class="btn btn-danger">@Html.Lang("删除")</a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

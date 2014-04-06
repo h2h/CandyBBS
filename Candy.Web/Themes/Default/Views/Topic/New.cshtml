@@ -1,0 +1,43 @@
+﻿@model CreateTopicViewModel
+@{
+    ViewBag.Title = Html.Lang("发布主题");
+}
+
+<div id="main" class="grid grid-right-300">
+    <div class="col-1-300">
+        <div class="panel">
+            <div class="panel-body">
+                <form method="post" action="@Url.Content("~/Topic/New/")" class="form-box">
+                    <div class="form-group">
+                        <label for="name">@Html.Lang("标题")</label>
+                        <input type="text" id="name" name="name" value="@Model.Name" class="text" placeholder="@Html.Lang("请输入主题标题")" />
+                    </div>
+                    <div class="form-group">
+                        <label for="category">@Html.Lang("版块")</label>
+                        <select name="category" id="category">
+                            <option value="0">@Html.Lang("请选择版块")</option>
+                            @foreach (var category in Model.Categories)
+                            {
+                                <option value="@category.Id" @(category.Id == Model.Category ? "selected" : string.Empty)>@category.Name</option> 
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>@Html.Lang("内容")</label>
+                        <textarea name="content" class="text" placeholder="@Html.Lang("请输入主题内容")"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="tags">@Html.Lang("标签")</label>
+                        <input type="text" name="tags" id="tags" class="text" placeholder="@Html.Lang("请输入主题标签")" />
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" name="submit" class="btn btn-success">@Html.Lang("发布")</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="sidebar" class="col-2-300">
+        @Html.Action("Index", "Widget")
+    </div>
+</div>

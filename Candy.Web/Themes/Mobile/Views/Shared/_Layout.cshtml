@@ -1,0 +1,75 @@
+﻿@using Candy.Domain.Interfaces.Services
+@{
+    var currentUser = new Candy.Domain.Models.User();
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>@ViewBag.Title - Candy BBS</title>
+    <link href="@Url.Content(Html.Path("css/font.css"))" rel="stylesheet" />
+    <link href="@Url.Content(Html.Path("css/mobile.css"))" rel="stylesheet" />
+    <script type="text/javascript" src="@Url.Content(Html.Path("js/jquery.min.js"))"></script>
+    <script type="text/javascript" src="@Url.Content(Html.Path("js/mobile.js"))"></script>
+</head>
+<body>
+    <div class="user-menu">
+
+    </div>
+    <div class="container">
+        <div class="primary-nav">
+            <ul>
+                <li>
+                    <a href="@Url.Content("~/")">@Html.Lang("首页")</a>
+                </li>
+                <li>
+                    <a href="@Url.Content("~/forum")">@Html.Lang("版块")</a>
+                </li>
+            </ul>
+        </div>
+        @if (User.Identity.IsAuthenticated)
+        {
+            currentUser = DependencyResolver.Current.GetService<IUserService>().GetUser(User.Identity.Name);
+            <div class="user-menu">
+                <ul class="sub-nav">
+                    <li>
+                        <a href="@Url.Content(currentUser.NiceUrl)">@Html.Lang("个人主页")</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Content("~/Settings/")">@Html.Lang("资料设置")</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Content("~/logout/")">@Html.Lang("退出")</a>
+                    </li>
+                </ul>
+            </div>
+        }
+        else
+        {
+            <div class="user-menu">
+
+            </div> 
+        }
+        <div class="header">
+            <a href="#" class="menu-btn">
+                <i class="fa fa-list"></i>
+            </a>
+            <h1 class="logo">
+                CandyBBS
+            </h1>
+            <a href="#" class="user-btn">
+                @if(User.Identity.IsAuthenticated)
+                {
+                    <img src="@Url.Content(currentUser.GetAvatar)" width="48" alt="@currentUser.UserName" title="@currentUser.UserName" />
+                }else
+                {
+                    <i class="fa fa-user"></i>
+                }
+            </a>
+        </div>
+        <div class="content">
+            @RenderBody()
+        </div>
+    </div>
+</body>
+</html>

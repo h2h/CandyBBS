@@ -1,0 +1,74 @@
+﻿@model BaseSettingsViewModels
+@{
+    ViewBag.Title = Html.Lang("基本设置");
+}
+<div class="panel">
+    <div class="panel-header">
+        <h3>@Html.Lang("基本设置")</h3>
+    </div>
+    <div class="panel-body">
+        <form action="@Url.Content("~/admin/settings/update/")" method="post" class="form-box">
+            <input type="hidden" name="returnUrl" value="@Url.Content("~/admin/settings/")" />
+            <div class="form-group">
+                <label for="@AppConstants.SiteName">@Html.Lang("论坛名称")</label>
+                <input type="text" name="@AppConstants.SiteName" class="text" id="@AppConstants.SiteName" value="@Model.Settings[AppConstants.SiteName].Value" placeholder="@Html.Lang("请输入论坛名称")" />
+            </div>
+            <div class="form-group">
+                <label for="@AppConstants.SiteUrl">@Html.Lang("论坛网址")</label>
+                <input type="text" class="text" name="@AppConstants.SiteUrl" id="@AppConstants.SiteUrl" value="@Model.Settings[AppConstants.SiteUrl].Value" placeholder="@Html.Lang("请输入论坛的网址")" />
+            </div>
+            <div class="form-group">
+                <label>@Html.Lang("当前语言")</label>
+                <select name="@AppConstants.LanguageCulture">
+                    @foreach (var culture in Model.Cultural)
+                    {
+                         <option value="@culture.Name" @(culture.Name == Model.Settings[AppConstants.LanguageCulture].Value ? "selected" : "")>@culture.EnglishName</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label>@Html.Lang("关闭论坛")</label>
+                <select name="@AppConstants.IsClosed">
+                    <option value="true" @(Model.Settings[AppConstants.IsClosed].Value == "true" ? "selected" : "")>@Html.Lang("开启")</option>
+                    <option value="false" @(Model.Settings[AppConstants.IsClosed].Value != "true" ? "selected" : "")>@Html.Lang("关闭")</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>@Html.Lang("RSS订阅")</label>
+                <select name="@AppConstants.EnableRSSFeeds">
+                    <option value="true" @(Model.Settings[AppConstants.EnableRSSFeeds].Value == "true" ? "selected" : "")>@Html.Lang("开启")</option>
+                    <option value="false" @(Model.Settings[AppConstants.EnableRSSFeeds].Value != "true" ? "selected" : "")>@Html.Lang("关闭")</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>@Html.Lang("用户注册")</label>
+                <select name="@AppConstants.EnableRegister">
+                    <option value="true" @(Model.Settings[AppConstants.EnableRegister].Value == "true" ? "selected" : "")>@Html.Lang("开启")</option>
+                    <option value="false" @(Model.Settings[AppConstants.EnableRegister].Value != "true" ? "selected" : "")>@Html.Lang("关闭")</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="@AppConstants.TopicsPerPage">@Html.Lang("每页主题数量")</label>
+                <input type="text" name="@AppConstants.TopicsPerPage" value="@Model.Settings[AppConstants.TopicsPerPage].Value" id="@AppConstants.TopicsPerPage" class="text" placeholder="@Html.Lang("主题列表每页显示数量")" />
+            </div>
+            <div class="form-group">
+                <label for="@AppConstants.PostsPerPage">@Html.Lang("每页回复数量")</label>
+                <input type="text" name="@AppConstants.PostsPerPage" value="@Model.Settings[AppConstants.PostsPerPage].Value" id="@AppConstants.PostsPerPage" class="text" placeholder="@Html.Lang("回复列表每页显示数量")" />
+            </div>
+            <div class="form-group">
+                <label>@Html.Lang("新用户所属分组")</label>
+                <select name="@AppConstants.NewMemberStartingRole">
+                    @foreach (var role in Model.Roles)
+                    {
+                        <option value="@role.Id" @(int.Parse(Model.Settings[AppConstants.NewMemberStartingRole].Value) == role.Id ? "selected" : "")>@role.RoleName</option> 
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <div class="sm-line">
+                    <button type="submit" class="btn btn-danger">@Html.Lang("保存设置")</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

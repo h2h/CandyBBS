@@ -1,0 +1,98 @@
+﻿@using Candy.Domain.Interfaces.Services
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title - Candy</title>
+    <meta name="description" property="og:description" itemprop="description" content="" />
+    <meta name="keywords" content="" />
+    <meta property="og:site_name" content="" />
+    <meta property="og:url" content="" />
+    <link rel="alternate" type="application/rss+xml" title="RSS 2.0 Feed" href="" />
+    <link href="@Url.Content(Html.Path("css/font.css"))" rel="stylesheet" />
+    <link href="@Url.Content(Html.Path("css/style.css"))" rel="stylesheet" />
+    <script src="@Url.Content(Html.Path("js/jquery.min.js"))"></script>
+    <script src="@Url.Content(Html.Path("js/candy.js"))"></script>
+</head>
+<body>
+    <div id="wrapper">
+        <header id="header">
+            <div class="grid-1200">
+                <div class="logo col-1-4">
+                    <a href="">
+                        <img src="@Url.Content(Html.Path("img/logo.jpg"))" title="@Html.Lang("Candy BBS")" />
+                    </a>
+                </div>
+                <nav class="navbar col-1-2">
+                    <ul class="nav">
+                        <li>
+                            <a href="@Url.Content("~/")">@Html.Lang("首页")</a>
+                        </li>
+                        <li class="active">
+                            <a href="@Url.Content("~/forum")">@Html.Lang("版块")</a>
+                        </li>
+                    </ul>
+                </nav>
+                <nav class="navbar col-1-4" id="right-nav">
+                    <ul class="nav">
+                        <li class="header-search">
+                            <form action="" method="get" class="header-search-form">
+                                <input type="text" id="search-text" name="search" value="" placeholder="@Html.Lang("搜索")" />
+                                <button type="submit" id="search-button"><i class="fa fa-search"></i></button>
+                            </form>
+                        </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            var currentUser = DependencyResolver.Current.GetService<IUserService>().GetUser(User.Identity.Name);
+                            <li class="header-user">
+                                <a href="@Url.Content(currentUser.NiceUrl)">
+                                    <img src="@Url.Content(currentUser.GetAvatar)" width="48" alt="@currentUser.UserName" title="@currentUser.UserName" />
+                                </a>
+                                <ul class="sub-nav">
+                                    <li>
+                                        <a href="@Url.Content(currentUser.NiceUrl)">@Html.Lang("个人主页")</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Content("~/Settings/")">@Html.Lang("资料设置")</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Content("~/logout/")">@Html.Lang("退出")</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <div id="content" class="container">
+            @RenderBody()
+        </div>
+        <footer id="footer">
+            <div class="grid-1200">
+                <div class="col-1-2">
+                    <p>All Right Reserved by <a href="http://www.icoding.me" target="_blank">iCoding.Me</a></p>
+                </div>
+                <div class="col-1-2">
+                    <nav class="navbar">
+                        <ul class="nav navbar-nav">
+                            <li>
+                                <a href="">@Html.Lang("首页", "首页")</a>
+                            </li>
+                            <li>
+                                <a href="#">@Html.Lang("关于", "关于")</a>
+                            </li>
+                            <li>
+                                <a href="#">@Html.Lang("服务", "服务")</a>
+                            </li>
+                            <li>
+                                <a href="#">@Html.Lang("帮助", "帮助")</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
