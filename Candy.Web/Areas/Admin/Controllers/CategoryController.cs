@@ -7,6 +7,7 @@ using Candy.Domain;
 using Candy.Domain.Models;
 using Candy.Domain.Interfaces.Services;
 using Candy.Domain.Interfaces.UnitOfWork;
+using Candy.Web.Areas.Admin.ViewModels;
 
 namespace Candy.Web.Areas.Admin.Controllers
 {
@@ -24,6 +25,10 @@ namespace Candy.Web.Areas.Admin.Controllers
 
         public ActionResult Index()
         {
+            using(UnitOfWorkManager.NewUnitOfWork())
+            {
+                var categories = this._categoryService.GetAll();
+            }
             return View();
         }
 	}

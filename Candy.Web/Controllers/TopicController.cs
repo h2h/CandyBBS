@@ -100,6 +100,7 @@ namespace Candy.Web.Controllers
                             topic = this._topicService.Add(topic);
                             unitOfWork.SaveChanges();
 
+                            this._topicService.AddLastPost(topic, model.Content);
                             // 添加标签
                             if (!string.IsNullOrEmpty(model.Tags))
                             {

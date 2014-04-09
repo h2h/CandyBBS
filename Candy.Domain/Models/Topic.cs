@@ -20,7 +20,7 @@ namespace Candy.Domain.Models
         public virtual IList<TopicTag> Tags { get; set; }
         public string NiceUrl
         {
-            get { return UrlTypes.GenerateUrl(UrlType.Topic, this.Slug); }
+            get { return UrlTypes.GenerateUrl(UrlType.Topic, this.Id.ToString()); }
         }
     }
 }

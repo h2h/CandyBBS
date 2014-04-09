@@ -193,6 +193,7 @@
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\SettingsController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
+    <Compile Include="Areas\Admin\ViewModels\CategotyViewModels.cs" />
     <Compile Include="Areas\Admin\ViewModels\HomeViewModels.cs" />
     <Compile Include="Areas\Admin\ViewModels\UserViewModels.cs" />
     <Compile Include="Controllers\BaseController.cs" />

@@ -12,9 +12,11 @@ namespace Candy.Services
     public class TopicService : ITopicService
     {
         private readonly ITopicRepository _topicRepository;
-        public TopicService(ITopicRepository topicRepository)
+        private readonly IPostRepository _postRepository;
+        public TopicService(ITopicRepository topicRepository,IPostRepository postRepository)
         {
             this._topicRepository = topicRepository;
+            this._postRepository = postRepository;
         }
         public Topic SanitizeTopic(Topic topic)
         {
@@ -53,6 +55,26 @@ namespace Candy.Services
         public IList<Topic> GetTodaysTopics(int amountToTake)
         {
             return this._topicRepository.GetTodaysTopics(amountToTake);
+        }
+
+        public Topic AddLastPost(Topic topic, string postContent)
+        {
+            topic = SanitizeTopic(topic);
+
+            var post = new Post
+            {
+                DateCreated = DateTime.UtcNow,
+                DateEdited = DateTime.UtcNow,
+                PostContent = StringUtils.GetSafeHtml(postContent),
+                User = topic.User,
+                Topic = topic,
+                IpAddress = StringUtils.GetUsersIpAddress(),
+                PostType = "topic"
+            };
+
+            this._postRepository.Add(post);
+            topic.Posts.Add(post);
+            return topic;
         }
     }
 }

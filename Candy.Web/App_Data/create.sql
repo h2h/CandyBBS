@@ -111,43 +111,6 @@ select * from Settings
 
 select * from Permission
 
+select * from TopicTag
 
-USE [MVCForum]
-GO
-
-/****** Object:  Table [dbo].[Topic_Tag]    Script Date: 2014/4/7 1:08:53 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-CREATE TABLE [dbo].[Topic_Tag](
-	[Id] [uniqueidentifier] NOT NULL,
-	[Topic_Id] [uniqueidentifier] NOT NULL,
-	[TopicTag_Id] [uniqueidentifier] NOT NULL,
- CONSTRAINT [PK_Topic_Tag] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-
-GO
-
-ALTER TABLE [dbo].[Topic_Tag] ADD  CONSTRAINT [DF_Id]  DEFAULT (newsequentialid()) FOR [Id]
-GO
-
-ALTER TABLE [dbo].[Topic_Tag]  WITH NOCHECK ADD  CONSTRAINT [FK_Topic_Tag_Topic] FOREIGN KEY([Topic_Id])
-REFERENCES [dbo].[Topic] ([Id])
-GO
-
-ALTER TABLE [dbo].[Topic_Tag] NOCHECK CONSTRAINT [FK_Topic_Tag_Topic]
-GO
-
-ALTER TABLE [dbo].[Topic_Tag]  WITH NOCHECK ADD  CONSTRAINT [FK_Topic_Tag_TopicTag] FOREIGN KEY([TopicTag_Id])
-REFERENCES [dbo].[TopicTag] ([Id])
-GO
-
-ALTER TABLE [dbo].[Topic_Tag] NOCHECK CONSTRAINT [FK_Topic_Tag_TopicTag]
-GO
-
+select * from TagInTopic

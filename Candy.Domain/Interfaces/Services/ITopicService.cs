@@ -10,6 +10,7 @@ namespace Candy.Domain.Interfaces.Services
         Topic Add(Topic topic);
         Topic GetTopicBySlug(string slug);
         Topic Get(int topicId);
+        Topic AddLastPost(Topic topic, string postContent);
         int TopicCount();
         IList<Topic> GetTodaysTopics(int amountToTake);
         PagedList<Topic> GetPagedTopicsByCategory(int pageIndex, int pageSize, int amountToTake, int categotyId);

@@ -273,5 +273,16 @@ namespace Candy.Utilities
 
             return sBuilder.ToString();  // Return the hexadecimal string.
         }
+        public static string GetUsersIpAddress()
+        {
+            var context = HttpContext.Current;
+            var serverName = context.Request.ServerVariables["SERVER_NAME"];
+            if (serverName.ToLower().Contains("localhost"))
+            {
+                return serverName;
+            }
+            var ipList = context.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+            return !string.IsNullOrEmpty(ipList) ? ipList.Split(',')[0] : HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+        }
     }
 }
