@@ -167,7 +167,7 @@ namespace Candy.Services
             {
                 model.Password = GeneratePasswordHash(model.Password);
                 var newMemberStartingRole = int.Parse(this._settingsRepository.Get(AppConstants.NewMemberStartingRole).Value);
-                model.Roles = new List<Role> { this._roleRepository.Get(newMemberStartingRole) };
+                model.Role = this._roleRepository.Get(newMemberStartingRole);
                 model.Slug = model.UserName;
                 try
                 {
@@ -239,25 +239,6 @@ namespace Candy.Services
         public IList<User> GetUsersById(List<int> ids)
         {
             return this._userRepository.GetUsersById(ids);
-        }
-
-        /// <summary>
-        /// Return the roles found for this username
-        /// </summary>
-        /// <param name="username"></param>
-        /// <returns></returns>
-        public string[] GetRolesForUser(string username)
-        {
-            username = StringUtils.SafePlainText(username);
-            var roles = new List<string>();
-            var user = this._userRepository.GetUser(username);
-
-            if (user != null)
-            {
-                roles.AddRange(user.Roles.Select(role => role.RoleName));
-            }
-
-            return roles.ToArray();
         }
 
         /// <summary>

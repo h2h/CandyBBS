@@ -37,7 +37,7 @@ namespace Candy.Web.Controllers
             this._topicTagService = topicTagService;
 
             LoggedOnUser = UserIsAuthenticated ? UserService.GetUser(Username) : null;
-            UsersRole = LoggedOnUser == null ? RoleService.GetRole(AppConstants.GuestRoleName) : LoggedOnUser.Roles.FirstOrDefault();
+            UsersRole = LoggedOnUser == null ? RoleService.GetRole(AppConstants.GuestRoleName) : LoggedOnUser.Role;
         }
         //
         // GET: /Topic/
@@ -45,7 +45,13 @@ namespace Candy.Web.Controllers
         {
             return View();
         }
-
+        public ActionResult Show(int id)
+        {
+            using (UnitOfWorkManager.NewUnitOfWork())
+            {
+                return View(this._topicService.Get(id));
+            }
+        }
         public ActionResult New(int? categoryId)
         {
             using (UnitOfWorkManager.NewUnitOfWork())
@@ -109,7 +115,6 @@ namespace Candy.Web.Controllers
                             try
                             {
                                 unitOfWork.Commit();
-
                                 successfullyCreated = true;
                             }
                             catch (Exception ex)

@@ -29,7 +29,7 @@ namespace Candy.Web.Controllers
             this._topicService = topicService;
 
             LoggedOnUser = UserIsAuthenticated ? UserService.GetUser(Username) : null;
-            UsersRole = LoggedOnUser == null ? RoleService.GetRole(AppConstants.GuestRoleName) : LoggedOnUser.Roles.FirstOrDefault();
+            UsersRole = LoggedOnUser == null ? RoleService.GetRole(AppConstants.GuestRoleName) : LoggedOnUser.Role;
         }
         public ActionResult Index()
         {

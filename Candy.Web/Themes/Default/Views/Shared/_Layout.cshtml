@@ -49,6 +49,12 @@
                                     <img src="@Url.Content(currentUser.GetAvatar)" width="48" alt="@currentUser.UserName" title="@currentUser.UserName" />
                                 </a>
                                 <ul class="sub-nav">
+                                    @if (currentUser.IsAdmin)
+                                    {
+                                        <li>
+                                            <a href="@Url.Content("~/admin/")">@Html.Lang("管理后台")</a>
+                                        </li> 
+                                    }
                                     <li>
                                         <a href="@Url.Content(currentUser.NiceUrl)">@Html.Lang("个人主页")</a>
                                     </li>

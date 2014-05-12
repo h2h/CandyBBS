@@ -55,6 +55,23 @@ namespace Candy.Data.Repositories
 
             return new PagedList<Topic>(results, pageIndex, pageSize, total);
         }
+        public PagedList<Topic> GetPagedTopics(int pageIndex, int pageSize, int amountToTake)
+        {
+            var total = this._context.Topic.Count();
+            if (amountToTake < total)
+            {
+                total = amountToTake;
+            }
+            var results = this._context.Topic
+                .Include(x => x.Category)
+                .Include(x => x.Posts)
+                .OrderByDescending(x => x.IsSticky)
+                .ThenByDescending(x => x.CreateDate)
+                .Skip((pageIndex - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+            return new PagedList<Topic>(results, pageIndex, pageSize, total);
+        }
         public IList<Topic> GetTodaysTopics(int amountToTake)
         {
             return this._context.Topic.Include(x => x.User)

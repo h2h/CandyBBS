@@ -39,14 +39,14 @@
                                         <strong>
                                             <a href="@Url.Content(topic.User.NiceUrl)">@topic.User.Slug</a>
                                         </strong>
-                                        &nbsp;•&nbsp;@topic.Posts.LastOrDefault().DateCreated&nbsp;•&nbsp;最后回复来自
+                                        &nbsp;•&nbsp;@DatesUI.GetPrettyDate(topic.Posts.LastOrDefault().DateCreated)&nbsp;•&nbsp;最后回复来自
                                         <strong>
                                             <a href="@Url.Content("~/user/info/1")">Admin</a>
                                         </strong>
                                     </div>
                                     <div class="topic-count">
-                                        <a class="tcount" title="回复">52</a>
-                                        <span class="ncount" title="浏览">78</span>
+                                        <a class="tcount" title="回复">@topic.Posts.Where(p=>p.PostType == PostType.post.ToString()).Count()</a>
+                                        <span class="ncount" title="浏览">@topic.Views</span>
                                     </div>
                                 </div>
                             </li>
@@ -68,4 +68,4 @@
     <div id="sidebar" class="col-2-300">
         @Html.Action("Index","Widget")
     </div>
-</div>d
+</div>

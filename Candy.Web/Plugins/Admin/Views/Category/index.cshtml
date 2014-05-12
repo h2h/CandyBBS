@@ -1,17 +1,67 @@
-﻿@{
+﻿@model CategoryListViewModels
+
+@{
     ViewBag.Title = Html.Lang("所有版块");
 }
-<div class="panel">
-    <div class="panel-header">
-        <h3>@Html.Lang("所有版块")</h3>
-    </div>
-    <div class="panel-body">
-        <table class="cbtable" cellspacing="0">
-            <thead>
-                <tr>
-                    <th></th>
-                </tr>
-            </thead>
-        </table>
+@functions{
+    public IHtmlString DisplayTree(List<CategotyViewModels> cats,System.Text.StringBuilder sb,string plain)
+    {
+        foreach(var cat in cats)
+        {
+            sb.Append(DisplayCategory(cat.Category, plain).ToHtmlString());
+            if(cat.SubCategories.Any())
+            {
+                DisplayTree(cat.SubCategories, sb, plain + "&nbsp;&nbsp;&nbsp;&nbsp;");
+            }
+        }
+        return new HtmlString(sb.ToString());
+    }
+}
+@helper DisplayCategory(Category cat,string plain)
+{
+    <tr>
+        @if(cat.ParentCategory != null)
+        {
+            <td>@Html.Raw(plain)-&nbsp;@(cat.Name)</td>
+        }else
+        {
+            <td>@cat.Name</td>
+        }
+        <td>
+            <a href="">@cat.Topics.Count</a>
+        </td>
+        <td>
+            <a href="@Url.Content("~/admin/category/edit/"+cat.Id)" title="@Html.Lang("编辑")"><i class="fa fa-plus-circle"></i></a>
+            <a href="@Url.Content("~/admin/category/delete/"+cat.Id)" title="@Html.Lang("删除")"><i class="fa fa-times-circle"></i></a>
+        </td>
+    </tr>
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="grid simple">
+            <div class="grid-title no-border">
+                <h4>@Html.Lang("所有版块")</h4>
+            </div>
+            <div class="grid-body no-border">
+                <table class="table table-striped dataTable" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.Lang("版块")
+                            </th>
+                            <th>
+                                @Html.Lang("帖子")
+                            </th>
+                            <th class="center short">
+                                @Html.Lang("操作")
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @DisplayTree(Model.Categories, new System.Text.StringBuilder(), string.Empty)
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>

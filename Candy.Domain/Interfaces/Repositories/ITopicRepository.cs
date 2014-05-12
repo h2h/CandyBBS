@@ -11,6 +11,7 @@ namespace Candy.Domain.Interfaces.Repositories
         Topic GetTopicBySlug(string slug);
         Topic Get(int topicId);
         int TopicCount();
+        PagedList<Topic> GetPagedTopics(int pageIndex, int pageSize, int amountToTake);
         PagedList<Topic> GetPagedTopicsByCategory(int pageIndex, int pageSize, int amountToTake, int categoryId);
         IList<Topic> GetTodaysTopics(int amountToTake);
     }

@@ -1,0 +1,17 @@
+﻿@{
+    var generucMessage = new GenericMessageViewModel();
+    if(TempData[AppConstants.MessageViewBagName] != null)
+    {
+        generucMessage = (GenericMessageViewModel)TempData[AppConstants.MessageViewBagName];
+    }else if(ViewBag.Message != null)
+    {
+        generucMessage = (GenericMessageViewModel)ViewBag.Message;
+    }
+}
+@if(!string.IsNullOrEmpty(generucMessage.Message))
+{
+<div class="alert alert-@generucMessage.MessageType.ToString()">
+    <button class="close" data-dismiss="alert"><i class="fa fa-times-circle"></i></button>
+    @generucMessage.Message
+</div>
+}

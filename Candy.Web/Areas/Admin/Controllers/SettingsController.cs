@@ -123,7 +123,6 @@ namespace Candy.Web.Areas.Admin.Controllers
                 }
                 return Redirect(returnUrl);
             }
-            return View();
         }
 	}
 }

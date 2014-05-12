@@ -10,180 +10,198 @@
     <meta property="og:url" content="" />
     <link rel="alternate" type="application/rss+xml" title="RSS 2.0 Feed" href="" />
     <link href="@Url.Content(Html.AdminPath("css/font.css"))" rel="stylesheet" />
+    <link href="@Url.Content(Html.AdminPath("css/bootstrap-theme.css"))" rel="stylesheet" />
+    <link href="@Url.Content(Html.AdminPath("css/bootstrap.css"))" rel="stylesheet" />
+    <link href="@Url.Content(Html.AdminPath("css/responsive.css"))" rel="stylesheet" />
     <link href="@Url.Content(Html.AdminPath("css/style.css"))" rel="stylesheet" />
     <script src="@Url.Content(Html.AdminPath("js/jquery.min.js"))"></script>
+    <script src="@Url.Content(Html.AdminPath("js/bootstrap.min.js"))"></script>
     <script src="@Url.Content(Html.AdminPath("js/candy.js"))"></script>
     <script type="text/javascript">
         var app_base = "@Url.Content("~/")";
     </script>
 </head>
 <body>
-    <div id="wrapper">
-        <header id="header">
-            <div class="grid-1200">
-                <div class="logo col-1-4">
-                    <a href="">
-                        <img src="@Url.Content(Html.Path("img/logo.jpg"))" title="@Html.Lang("Candy BBS")" />
-                    </a>
-                </div>
-                <nav class="navbar col-1-2">
-                    <ul class="nav">
-                        <li>
-                            <a href="">@Html.Lang("首页")</a>
-                        </li>
-                        <li class="active">
-                            <a href="@Url.Content("~/forum")">@Html.Lang("版块")</a>
-                        </li>
-                    </ul>
-                </nav>
-                <nav class="navbar col-1-4" id="right-nav">
-                    <ul class="nav">
-                        <li class="header-search">
-                            <form action="" method="get" class="header-search-form">
-                                <input type="text" id="search-text" name="search" value="" placeholder="@Html.Lang("搜索")" />
-                                <button type="submit" id="search-button"><i class="fa fa-search"></i></button>
-                            </form>
-                        </li>
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            var currentUser = DependencyResolver.Current.GetService<IUserService>().GetUser(User.Identity.Name);
-                            var avatar = string.Empty;
-                            if (currentUser.Avatar.IsNullEmpty())
-                            {
-                                avatar = StringUtils.GetGravatarImage(currentUser.Email, 48);
-                                if (avatar.IsNullEmpty())
-                                {
-                                    avatar = DependencyResolver.Current.GetService<ISettingsService>().Get(AppConstants.DefaultUserAvatar).Value;
-                                }
-                            }
-                            else
-                            {
-                                avatar = Url.Content(currentUser.Avatar);
-                            }
-                            <li class="header-user">
-                                <a href="@Url.Content(currentUser.NiceUrl)">
-                                    <img src="@avatar" width="48" alt="@currentUser.UserName" title="@currentUser.UserName" />
-                                </a>
-                                <ul class="sub-nav">
-                                    <li>
-                                        <a href="@Url.Content(currentUser.NiceUrl)">@Html.Lang("个人主页")</a>
-                                    </li>
-                                    <li>
-                                        <a href="@Url.Content("~/Settings/")">@Html.Lang("资料设置")</a>
-                                    </li>
-                                    <li>
-                                        <a href="@Url.Content("~/logout/")">@Html.Lang("退出")</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        }
-                    </ul>
-                </nav>
+    <!-- Begin Header -->
+    <div class="header navbar navbar-inverse">
+        <!-- Begin Top Navigation Bar -->
+        <div class="navbar-inner">
+            <div class="header-seperation">
+                <ul class="nav pull-left notifcation-center" id="main-menu-toggle-wrapper" style="display:none">
+                    <li class="dropdown"> 
+                        <a id="main-menu-toggle" href="#main-menu" class=""> 
+                            <i class="fa fa-bars"></i>
+                        </a> 
+                    </li>
+                </ul>
+                <!-- Begin  Logo -->
+                <a href="@Url.Content("~/admin/")" title="@Html.Lang("Candy BBS")">
+                    <img class="logo" src="@Url.Content(Html.Path("img/logo.jpg"))" title="@Html.Lang("Candy BBS")" />
+                </a>
+                <!-- End Logo -->
             </div>
-        </header>
-        <div id="content" class="container">
-            <div id="main" class="grid grid-left-300">
-                <div id="sidebar" class="col-3-300">
-                    <div class="panel">
-                        <div class="panel-body nopadding">
-                            <ul class="admin-menu">
-                                <li class="title">
-                                    <span>@Html.Lang("设置")</span>
-                                </li>
-                                <li>
-                                    <a href="@Url.Content("~/admin/settings/")">@Html.Lang("基本设置")</a>
-                                </li>
-                                <li>
-                                    <a href="@Url.Content("~/admin/theme/")">@Html.Lang("主题")</a>
-                                </li>
-                                <li>
-                                    <a href="@Url.Content("~/admin/email/")">@Html.Lang("邮箱")</a>
-                                </li>
-                                <li>
-                                    <a href="@Url.Content("~/admin/points/")">@Html.Lang("积分")</a>
-                                </li>
-                                <li>
-                                    <a href="@Url.Content("~/admin/Permissions/")">@Html.Lang("权限")</a>
-                                </li>
-                                <li class="title">
-                                    <span>@Html.Lang("版块")</span>
-                                </li>
-                                <li>
-                                    <a href="@Url.Content("~/admin/category/index/")">@Html.Lang("所有版块")</a>
-                                </li>
-                                <li>
-                                    <a href="@Url.Content("~/admin/category/new/")">@Html.Lang("添加版块")</a>
-                                </li>
-                                <li class="title">
-                                    <span>@Html.Lang("主题")</span>
-                                </li>
-                                <li>
-                                    <a href="">@Html.Lang("所有主题")</a>
-                                </li>
-                                <li>
-                                    <a href="">@Html.Lang("主题标签")</a>
-                                </li>
-                                <li class="title">
-                                    <span>@Html.Lang("用户")</span>
-                                </li>
-                                <li>
-                                    <a href="@Url.Content("~/admin/user/index")">@Html.Lang("用户管理")</a>
-                                </li>
-                                <li>
-                                    <a href="">@Html.Lang("用户组")</a>
-                                </li>
-                                <li>
-                                    <a href="">@Html.Lang("添加用户组")</a>
-                                </li>
-                                <li class="title">
-                                    <span>@Html.Lang("工具")</span>
-                                </li>
-                                <li>
-                                    <a href="">@Html.Lang("导入导出")</a>
-                                </li>
-                                <li>
-                                    <a href="">@Html.Lang("批量操作")</a>
-                                </li>
-                                <li>
-                                    <a href="">@Html.Lang("邮箱黑名单")</a>
-                                </li>
-                                <li>
-                                    <a href="">@Html.Lang("日志")</a>
-                                </li>
-                            </ul>
+            <!-- End Responsive Menu Toggle -->
+            <div class="header-quick-nav">
+                <!-- Begin Top Navigation Menu -->
+                <div class="pull-left">
+                    <ul class="nav quick-section">
+                        <li class="quicklinks">
+                            <a href="@Url.Content("~/Admin/")">@Html.Lang("后台首页")</a>
+                        </li>
+                        <li class="quicklinks">
+                            <a href="@Url.Content("~/")">@Html.Lang("网站首页")</a>
+                        </li>
+                    </ul>
+                </div>
+                @{
+                    var currentUser = DependencyResolver.Current.GetService<IUserService>().GetUser(User.Identity.Name);
+                    var avatar = string.Empty;
+                    if (currentUser.Avatar.IsNullEmpty())
+                    {
+                        avatar = StringUtils.GetGravatarImage(currentUser.Email, 48);
+                        if (avatar.IsNullEmpty())
+                        {
+                            avatar = DependencyResolver.Current.GetService<ISettingsService>().Get(AppConstants.DefaultUserAvatar).Value;
+                        }
+                    }
+                    else
+                    {
+                        avatar = Url.Content(currentUser.Avatar);
+                    }
+                }
+                <!-- End Top Navigation Menu -->
+                <div class="pull-right">
+                    <div class="chat-toggler">
+                        <a href="#" class="dropdown-toggle" id="my-profile" data-placement="bottom" data-content="" data-toggle="dropdown" data-original-title="Notifications">
+                            <div class="user-details">
+                                <div class="username">
+                                    <span>@currentUser.Slug</span>
+                                </div>
+                            </div>
+                            <i class="fa fa-arrow-down"></i>
+                        </a>
+                        <div id="my-profile-detail" style="display:none">
+                            个人信息
+                        </div>
+                        <div class="profile-pic">
+                            <img src="@avatar" width="48" alt="@currentUser.UserName" title="@currentUser.UserName" />
                         </div>
                     </div>
                 </div>
-                <div id="section" class="col-4-300">
-                    @RenderBody()
-                </div>
             </div>
         </div>
-        <footer id="footer">
-            <div class="grid-1200">
-                <div class="col-1-2">
-                    <p>All Right Reserved by <a href="http://www.icoding.me" target="_blank">iCoding.Me</a></p>
-                </div>
-                <div class="col-1-2">
-                    <nav class="navbar">
-                        <ul class="nav navbar-nav">
-                            <li>
-                                <a href="">@Html.Lang("首页", "首页")</a>
-                            </li>
-                            <li>
-                                <a href="#">@Html.Lang("关于", "关于")</a>
-                            </li>
-                            <li>
-                                <a href="#">@Html.Lang("服务", "服务")</a>
-                            </li>
-                            <li>
-                                <a href="#">@Html.Lang("帮助", "帮助")</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
+    </div>
+    <div class="page-container row">
+        @{
+            var routeData = RouteTable.Routes.GetRouteData(Context).Values;
+            var action = routeData["action"].ToString().ToLower();
+            var controller = routeData["controller"].ToString().ToLower();
+            var menu = ViewBag.Menu;
+            var subMenu = ViewBag.SubMenu;
+        }
+        <div class="page-sidebar" id="main-menu">
+            <ul>
+                <li @(controller == "settings" ? "class=open" : "")>
+                    <a href="#">
+                        <i class="fa fa-cog"></i>
+                        <span class="title">@Html.Lang("设置")</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li @(action == "index" && controller == "settings" ? "class=active" : "")>
+                            <a href="@Url.Content("~/admin/settings/")">@Html.Lang("基本设置")</a>
+                        </li>
+                        <li @(action == "theme" && controller == "settings" ? "class=active" : "")>
+                            <a href="@Url.Content("~/admin/theme/")">@Html.Lang("主题")</a>
+                        </li>
+                        <li @(action == "email" && controller == "settings" ? "class=active" : "")>
+                            <a href="@Url.Content("~/admin/email/")">@Html.Lang("邮箱")</a>
+                        </li>
+                        <li @(action == "points" && controller == "settings" ? "class=active" : "")>
+                            <a href="@Url.Content("~/admin/points/")">@Html.Lang("积分")</a>
+                        </li>
+                        <li @(action == "permissions" && controller == "settings" ? "class=active" : "")>
+                            <a href="@Url.Content("~/admin/Permissions/")">@Html.Lang("权限")</a>
+                        </li>
+                    </ul>
+                </li>
+                <li @(controller == "category" ? "class=open" : "")>
+                    <a href="#">
+                        <i class="fa fa-cog"></i>
+                        <span class="title">@Html.Lang("版块")</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li @(action == "index" && controller == "category" ? "class=active" : "")>
+                            <a href="@Url.Content("~/admin/category/index/")">@Html.Lang("所有版块")</a>
+                        </li>
+                        <li @(action == "new" && controller == "category" ? "class=active" : "")>
+                            <a href="@Url.Content("~/admin/category/new/")">@Html.Lang("添加版块")</a>
+                        </li>
+                    </ul>
+                </li>
+                <li @(controller == "topic" ? "class=open" : "")>
+                    <a href="#">
+                        <i class="fa fa-cog"></i>
+                        <span class="title">@Html.Lang("帖子")</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li @(action == "index" && controller == "topic" ? "class=active" : "")>
+                            <a href="@Url.Content("~/admin/topic/index/")">@Html.Lang("所有帖子")</a>
+                        </li>
+                        <li @(action == "tags" && controller == "topic" ? "class=active" : "")>
+                            <a href="@Url.Content("~/admin/topic/tags/")">@Html.Lang("帖子标签")</a>
+                        </li>
+                    </ul>
+                </li>
+                <li @(controller == "user" ? "class=open" : "")>
+                    <a href="#">
+                        <i class="fa fa-cog"></i>
+                        <span class="title">@Html.Lang("用户")</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li @(action == "index" && controller == "user" ? "class=active" : "")>
+                            <a href="@Url.Content("~/admin/user/index")">@Html.Lang("用户管理")</a>
+                        </li>
+                        <li @(action == "role" && controller == "user" ? "class=active" : "")>
+                            <a href="@Url.Content("~/admin/user/role/")">@Html.Lang("用户组")</a>
+                        </li>
+                    </ul>
+                </li>
+                <li @(controller == "tools" ? "class=open" : "")>
+                    <a href="#">
+                        <i class="fa fa-cog"></i>
+                        <span class="title">@Html.Lang("工具")</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li @(subMenu == "导入导出" ? "class=active" : "")>
+                            <a href="">@Html.Lang("导入导出")</a>
+                        </li>
+                        <li @(subMenu == "批量操作" ? "class=active" : "")>
+                            <a href="">@Html.Lang("批量操作")</a>
+                        </li>
+                        <li @(subMenu == "邮箱黑名单" ? "class=active" : "")>
+                            <a href="">@Html.Lang("邮箱黑名单")</a>
+                        </li>
+                        <li @(subMenu == "日志" ? "class=active" : "")>
+                            <a href="">@Html.Lang("日志")</a>
+                        </li>
+                        <li @(action == "about" ? "class=active":"")>
+                            <a href="@Url.Content("~/admin/about/")">关于</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="page-content">
+            <div class="content">
+                @Html.Partial("_GenericMessage")
+                @RenderBody()
             </div>
-        </footer>
+        </div>
     </div>
 </body>
 </html>

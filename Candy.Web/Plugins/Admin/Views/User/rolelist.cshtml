@@ -1,0 +1,24 @@
+﻿@model List<Role>
+@{}
+<table class="table table-striped dataTable" cellspacing="0">
+    <thead>
+        <tr>
+            <th>@Html.Lang("用户组")</th>
+            <th>@Html.Lang("别名")</th>
+            <th>@Html.Lang("操作")</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var role in Model)
+        {
+            <tr>
+                <td>@role.RoleName</td>
+                <td>@role.Slug</td>
+                <td>
+                    <a href="@Url.Content("~/admin/user/editrole/" + role.Id)" title="@Html.Lang("编辑")"><i class="fa fa-plus-circle"></i></a>
+                    <a href="@Url.Content("~/admin/user/deleterole/" + role.Id)" title="@Html.Lang("删除")"><i class="fa fa-times-circle"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

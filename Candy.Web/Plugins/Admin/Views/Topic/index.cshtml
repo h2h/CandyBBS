@@ -1,0 +1,83 @@
+﻿@model PagedList<Topic>
+@{
+    ViewBag.Title = Html.Lang("所有帖子");
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="grid simple">
+            <div class="grid-title no-border">
+                <h4>@Html.Lang("所有帖子")</h4>
+            </div>
+            <div class="grid-body no-border">
+                <table class="table table-striped dataTable" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.Lang("标题")
+                            </th>
+                            <th>
+                                @Html.Lang("作者")
+                            </th>
+                            <th>
+                                @Html.Lang("分类")
+                            </th>
+                            <th>
+                                @Html.Lang("标签")
+                            </th>
+                            <th>
+                                @Html.Lang("回复")
+                            </th>
+                            <th>
+                                @Html.Lang("日期")
+                            </th>
+                            <th class="center short">
+                                @Html.Lang("操作")
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.TotalCount > 0)
+                        {
+                            foreach (var topic in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <a href="@Url.Content(topic.NiceUrl)">@topic.Name</a>
+                                    </td>
+                                    <td>
+                                        <a href="@Url.Content(topic.User.NiceUrl)">@topic.User.UserName</a>
+                                    </td>
+                                    <td>
+                                        <a href="@Url.Content(topic.Category.NiceUrl)">@topic.Category.Name</a>
+                                    </td>
+                                    <td>
+                                        @if(topic.Tags.Count > 0)
+                                        {
+                                            foreach(var tag  in topic.Tags)
+                                            {
+                                                <a href="@Url.Content(tag.NiceUrl)">@tag.Tag</a>
+                                            }
+                                        }else
+                                        {
+                                            @Html.Lang("无")
+                                        }
+                                    </td>
+                                    <td>
+                                        <a href="">@topic.Posts.Where(a=>a.PostType==PostType.post.ToString()).Count()</a>
+                                    </td>
+                                    <td>
+                                        @DatesUI.GetPrettyDate(topic.CreateDate)
+                                    </td>
+                                    <td>
+                                        <a href="/admin/category/edit/1" title="编辑"><i class="fa fa-plus-circle"></i></a>
+                                        <a href="/admin/category/delete/1" title="删除"><i class="fa fa-times-circle"></i></a>
+                                    </td>
+                                </tr> 
+                            } 
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

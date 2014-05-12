@@ -25,7 +25,7 @@ namespace Candy.Web.Areas.Admin.Controllers
         {
             get
             {
-                if (User != null)
+                if (User == null)
                 {
                     throw new UserNotLoggedOnException();
                 }

@@ -30,7 +30,7 @@ namespace Candy.Data.Repositories
         public User GetUser(string username)
         {
             return this._context.User
-                .Include(x => x.Roles)
+                .Include(x => x.Role)
                 .FirstOrDefault(name => name.UserName.ToLower() == username.ToLower());
         }
 
@@ -50,7 +50,7 @@ namespace Candy.Data.Repositories
         public User GetUserBySlug(string slug)
         {
             return this._context.User
-                .Include(x => x.Roles)
+                .Include(x => x.Role)
                 .FirstOrDefault(name => name.Slug == slug);
 
         }
@@ -58,14 +58,14 @@ namespace Candy.Data.Repositories
         public User GetUserByEmail(string email)
         {
             return this._context.User
-                .Include(x => x.Roles)
+                .Include(x => x.Role)
                 .FirstOrDefault(name => name.Email == email);
         }
 
         public IList<User> GetUserBySlugLike(string slug)
         {
             return this._context.User
-                    .Include(x => x.Roles)
+                    .Include(x => x.Role)
                     .Where(name => name.Slug.ToUpper().Contains(slug.ToUpper()))
                     .ToList();
         }
@@ -80,7 +80,7 @@ namespace Candy.Data.Repositories
         public User Get(int id)
         {
             return this._context.User
-                .Include(x => x.Roles)
+                .Include(x => x.Role)
                 .FirstOrDefault(x => x.Id == id);
         }
 

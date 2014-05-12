@@ -11,14 +11,7 @@ namespace Candy.Data.Mapping
 
             HasMany(x=>x.UserMeta).WithRequired(x=>x.User);
 
-            HasMany(x => x.Roles)
-                .WithMany(x => x.Users)
-                .Map(m =>
-                {
-                    m.ToTable("UsersInRoles");
-                    m.MapLeftKey("User_Id");
-                    m.MapRightKey("Role_Id");
-                });
+            HasRequired(t => t.Role).WithMany(t => t.Users).Map(m => m.MapKey("Role_Id"));
         }
     }
 }

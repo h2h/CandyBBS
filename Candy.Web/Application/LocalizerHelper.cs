@@ -5,7 +5,7 @@ using Candy.Domain.Interfaces.Services;
 
 namespace Candy.Web.Application
 {
-    public class LocalizerHelper
+    public static class LocalizerHelper
     {
         public static string Lang(string text)
         {

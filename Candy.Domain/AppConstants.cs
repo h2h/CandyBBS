@@ -2,6 +2,12 @@
 
 namespace Candy.Domain
 {
+    public enum PostType
+    {
+        post,
+        topic,
+        page
+    }
     public static class AppConstants
     {
         public const string CategoryUrlIdentifier = "c";
@@ -12,6 +18,7 @@ namespace Candy.Domain
         public const string DefaultTheme = "Default";
         public const string CurrentTheme = "CurrentTheme";
         public const string MobileTheme = "Mobile";
+
         // View Bag Constants
         public const string MessageViewBagName = "Message";
         public const string DefaultCategoryViewBagName = "DefauleCategory";
@@ -19,11 +26,11 @@ namespace Candy.Domain
         /// <summary>
         /// 管理员角色
         /// </summary>
-        public const string AdminRoleName = "Admin";
+        public const string AdminRoleName = "admin";
         /// <summary>
         /// 访客角色， 未登录用户默认角色
         /// </summary>
-        public const string GuestRoleName = "Guest";
+        public const string GuestRoleName = "guest";
         /// <summary>
         /// 版主角色
         /// </summary>

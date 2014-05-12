@@ -22,7 +22,7 @@ namespace Candy.Web.Controllers
             : base(loggingService, unitOfWorkManager, userService, roleService, settingsService)
         {
             this.LoggedOnUser = UserIsAuthenticated ? UserService.GetUser(Username) : null;
-            this.UsersRole = LoggedOnUser == null ? RoleService.GetRole(AppConstants.GuestRoleName) : LoggedOnUser.Roles.FirstOrDefault();
+            this.UsersRole = LoggedOnUser == null ? RoleService.GetRole(AppConstants.GuestRoleName) : LoggedOnUser.Role;
         }
 
         public ActionResult Index()
@@ -30,6 +30,10 @@ namespace Candy.Web.Controllers
             return View();
         }
         public ActionResult LoginBox()
+        {
+            return View();
+        }
+        public ActionResult UserInfo()
         {
             return View();
         }

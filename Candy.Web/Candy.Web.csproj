@@ -97,20 +97,30 @@
     <Content Include="Languages\en-US.json" />
     <None Include="Languages\zh-CN.json" />
     <Content Include="packages.config" />
+    <Content Include="Plugins\Admin\css\bootstrap-theme.css" />
+    <Content Include="Plugins\Admin\css\bootstrap.css" />
     <Content Include="Plugins\Admin\css\font.css" />
+    <Content Include="Plugins\Admin\css\responsive.css" />
+    <Content Include="Plugins\Admin\css\simditor.css" />
     <Content Include="Plugins\Admin\css\style.css" />
     <Content Include="Plugins\Admin\fonts\fontawesome-webfont.svg" />
     <Content Include="Plugins\Admin\img\logo.jpg" />
     <Content Include="Plugins\Admin\img\section.png" />
+    <Content Include="Plugins\Admin\img\Tick.png" />
+    <Content Include="Plugins\Admin\js\bootstrap.min.js" />
     <Content Include="Plugins\Admin\js\candy.js" />
     <Content Include="Plugins\Admin\js\jquery.min.js" />
+    <Content Include="Plugins\Admin\js\select2.min.js" />
+    <Content Include="Plugins\Admin\js\simditor-all.min.js" />
     <Content Include="Themes\Default\css\font.css" />
+    <Content Include="Themes\Default\css\simditor.css" />
     <Content Include="Themes\Default\css\style.css" />
     <Content Include="Themes\Default\fonts\fontawesome-webfont.svg" />
     <Content Include="Themes\Default\img\logo.jpg" />
     <Content Include="Themes\Default\img\section.png" />
     <Content Include="Themes\Default\js\candy.js" />
     <Content Include="Themes\Default\js\jquery.min.js" />
+    <Content Include="Themes\Default\js\simditor-all.min.js" />
     <Content Include="Themes\Default\screenshot.png" />
     <Content Include="Themes\Default\Views\Home\index.cshtml" />
     <Content Include="Themes\Mobile\css\font.css" />
@@ -158,6 +168,16 @@
     <Content Include="Plugins\Admin\Views\Settings\GetPermissionByRole.cshtml" />
     <Content Include="Plugins\Admin\Views\Category\index.cshtml" />
     <Content Include="Plugins\Admin\Views\User\index.cshtml" />
+    <Content Include="Plugins\Admin\Views\Category\Edit.cshtml" />
+    <Content Include="Plugins\Admin\Views\Category\New.cshtml" />
+    <Content Include="Plugins\Admin\Views\User\role.cshtml" />
+    <Content Include="Plugins\Admin\Views\User\rolelist.cshtml" />
+    <Content Include="Plugins\Admin\Views\User\Editrole.cshtml" />
+    <Content Include="Plugins\Admin\Views\User\EditUser.cshtml" />
+    <Content Include="Plugins\Admin\Views\Shared\_GenericMessage.cshtml" />
+    <Content Include="Plugins\Admin\Views\tools\about.cshtml" />
+    <Content Include="Plugins\Admin\Views\Topic\index.cshtml" />
+    <Content Include="Plugins\Admin\Views\Topic\tags.cshtml" />
     <None Include="Properties\PublishProfiles\icoding - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\icoding - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\icoding - Web Deploy %282%29.pubxml" />
@@ -167,6 +187,8 @@
     <Content Include="Themes\Mobile\fonts\fontawesome-webfont.woff" />
     <Content Include="Themes\Mobile\Views\Category\index.cshtml" />
     <Content Include="Themes\Mobile\Views\Category\show.cshtml" />
+    <Content Include="Themes\Default\Views\Widget\UserInfo.cshtml" />
+    <Content Include="Themes\Default\Views\Topic\show.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -184,6 +206,7 @@
     <Compile Include="Application\AppHelpers.cs" />
     <Compile Include="Application\AspNetCache.cs" />
     <Compile Include="Application\CandyViewEngine.cs" />
+    <Compile Include="Application\DatesUI.cs" />
     <Compile Include="Application\HtmlHelperExtensions.cs" />
     <Compile Include="Application\LocalizerHelper.cs" />
     <Compile Include="App_Start\AppStartUp.cs" />
@@ -192,9 +215,13 @@
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\SettingsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ToolsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TopicController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Areas\Admin\ViewModels\CategotyViewModels.cs" />
+    <Compile Include="Areas\Admin\ViewModels\GenericMessageViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\HomeViewModels.cs" />
+    <Compile Include="Areas\Admin\ViewModels\RoleViewModels.cs" />
     <Compile Include="Areas\Admin\ViewModels\UserViewModels.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
@@ -208,6 +235,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CategoryViewModel.cs" />
+    <Compile Include="ViewModels\Mapping\ViewModelMapping.cs" />
     <Compile Include="ViewModels\TopicViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>

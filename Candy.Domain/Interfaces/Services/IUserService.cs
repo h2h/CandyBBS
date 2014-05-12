@@ -18,7 +18,6 @@ namespace Candy.Domain.Interfaces.Services
         User SanitizeUser(User User);
         LoginAttemptStatus ValidateUser(string userName, string password, int maxInvalidPasswordAttempts);
         LoginAttemptStatus LastLoginStatus { get; }
-        string[] GetRolesForUser(string username);
         User GetUser(string username);
         User GetUserByEmail(string email);
         User GetUserBySlug(string slug);

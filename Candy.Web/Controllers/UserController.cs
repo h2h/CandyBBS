@@ -32,7 +32,7 @@ namespace Candy.Web.Controllers
             this._postServive = postService;
 
             this.LoggedOnUser = UserIsAuthenticated ? UserService.GetUser(Username) : null;
-            this.UsersRole = LoggedOnUser == null ? RoleService.GetRole(AppConstants.GuestRoleName) : LoggedOnUser.Roles.FirstOrDefault();
+            this.UsersRole = LoggedOnUser == null ? RoleService.GetRole(AppConstants.GuestRoleName) : LoggedOnUser.Role;
         }
         public ActionResult Index(string username)
         {

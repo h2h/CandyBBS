@@ -27,6 +27,7 @@ create table Role
 	Id int primary key identity(1,1),
 	RoleName varchar(256) not null
 )
+
 create table [User]
 (
 	Id int primary key identity(1,1),
@@ -37,18 +38,14 @@ create table [User]
 	PasswordAnswer varchar(256),
 	CreateDate datetime default GETUTCDATE(),
 	LastLoginDate datetime default GETUTCDATE(),
+	Role_Id int references [Role](Id),
 	Slug varchar(150),
 	[Signature] text,
 	Website varchar(256),
 	Avatar varchar(256),
 	ActivationKey varchar(64)
 )
-create table UsersInRoles
-(
-	Id int primary key identity(1,1),
-	Role_Id int references [Role](Id),
-	[User_Id] int references [User](Id)
-)
+
 
 create table UserMeta
 (
@@ -66,7 +63,6 @@ create table CategoryPermissionForRole
 	Category_Id int references Category(Id),
 	IsTicked bit not null
 )
-
 create table Topic
 (
 	Id int primary key identity(1,1),
@@ -79,6 +75,7 @@ create table Topic
 	[User_Id] int references [User](Id),
 	Category_Id int references Category(Id)
 )
+
 create table Post
 (
 	Id int primary key identity(1,1),
@@ -97,6 +94,8 @@ create table TopicTag
 	Tag varchar(100) not null,
 	Slug varchar(100) not null
 )
+
+
 create table TagInTopic
 (
 	Id int primary key identity(1,1),

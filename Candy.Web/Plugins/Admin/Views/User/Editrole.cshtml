@@ -1,0 +1,44 @@
+﻿@model RoleViewModel
+@{
+    ViewBag.Title = "用户组";
+    ViewBag.Menu = "用户";
+    ViewBag.SubMenu = "用户组";
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="grid simple">
+            <div class="grid-title no-border">
+                <h4>@Html.Lang("用户组")</h4>
+            </div>
+            <div class="grid-body no-border">
+                <div class="row">
+                    <div class="col-md-4">
+                        <form action="@Url.Content("~/admin/user/editrole/")" method="post" class="">
+                            <div class="form-group">
+                                <label>@Html.Lang("名称")</label>
+                                <div class="controls">
+                                    <input type="text" name="name" value="@Model.Name" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>@Html.Lang("别名")</label>
+                                <div class="controls">
+                                    <input type="text" name="slug" value="@Model.Slug" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <div class="pull-left">
+                                    <input type="hidden" name="id" value="@Model.Id" />
+                                    <button type="submit" class="btn btn-danger btn-cons">保存</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-8">
+                        @Html.Action("RoleList")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

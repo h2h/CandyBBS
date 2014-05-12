@@ -47,6 +47,10 @@ namespace Candy.Services
         {
             return this._topicRepository.TopicCount();
         }
+        public PagedList<Topic> GetPagedTopics(int pageIndex, int pageSize, int amountToTake)
+        {
+            return this._topicRepository.GetPagedTopics(pageIndex, pageSize, amountToTake);
+        }
         public PagedList<Topic> GetPagedTopicsByCategory(int pageIndex, int pageSize, int amountToTake, int categoryId)
         {
             return this._topicRepository.GetPagedTopicsByCategory(pageIndex, pageSize, amountToTake, categoryId);

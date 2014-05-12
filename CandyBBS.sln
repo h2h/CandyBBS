@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Candy.Services", "Candy.Ser
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Candy.Web", "Candy.Web\Candy.Web.csproj", "{E74D761B-4F69-4D6D-B113-CBAD972F502C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Candy.DB", "Candy.DB\Candy.DB.csproj", "{E119E586-0B52-4C85-8DA0-20B6E51945CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Candy.DB.Test", "Candy.DB.Test\Candy.DB.Test.csproj", "{01AD2310-E3CE-4676-92C1-E6B20F8468B2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,14 @@ Global
 		{E74D761B-4F69-4D6D-B113-CBAD972F502C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E74D761B-4F69-4D6D-B113-CBAD972F502C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E74D761B-4F69-4D6D-B113-CBAD972F502C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E119E586-0B52-4C85-8DA0-20B6E51945CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E119E586-0B52-4C85-8DA0-20B6E51945CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E119E586-0B52-4C85-8DA0-20B6E51945CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E119E586-0B52-4C85-8DA0-20B6E51945CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01AD2310-E3CE-4676-92C1-E6B20F8468B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01AD2310-E3CE-4676-92C1-E6B20F8468B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01AD2310-E3CE-4676-92C1-E6B20F8468B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01AD2310-E3CE-4676-92C1-E6B20F8468B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

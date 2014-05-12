@@ -25,7 +25,7 @@ namespace Candy.Services
 
         public Role UsersRole(User user)
         {
-            return user == null ? this._roleService.GetRole(AppConstants.GuestRoleName) : user.Roles.FirstOrDefault();
+            return user == null ? this._roleService.GetRole(AppConstants.GuestRoleName) : user.Role;
         }
         public Post SanitizePost(Post post)
         {

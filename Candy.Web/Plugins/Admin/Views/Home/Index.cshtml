@@ -1,68 +1,68 @@
 ﻿@{
     ViewBag.Title = Html.Lang("管理首页");
 }
-<div class="grid">
-    <div class="col-1-2">
-        <div class="panel">
-            <div class="panel-header">
-                <h3>@Html.Lang("今日主题")</h3>
+<div class="row">
+    <div class="col-md-6">
+        <div class="grid simple">
+            <div class="grid-title no-border">
+                <h4>@Html.Lang("今日主题")</h4>
             </div>
-            <div class="panel-body">
+            <div class="grid-body no-border">                
                 @Html.Action("TodaysTopics")
             </div>
-        </div>
+        </div> 
     </div>
-    <div class="col-1-2">
-        <div class="panel">
-            <div class="panel-header">
-                <h3>@Html.Lang("更新推送")</h3>
+    <div class="col-md-6">
+        <div class="grid simple">
+            <div class="grid-title no-border">
+                <h4>@Html.Lang("更新推送")</h4>
             </div>
-            <div class="panel-body">
-                Home
+            <div class="grid-body no-border">
+                <p>更新推送</p>
             </div>
         </div>
     </div>
 </div>
-<div class="grid">
-    <div class="col-1-2">
-        <div class="panel">
-            <div class="panel-header">
-                <h3>@Html.Lang("最新用户")</h3>
+<div class="row">
+    <div class="col-md-6">
+        <div class="grid simple">
+            <div class="grid-title no-border">
+                <h4>@Html.Lang("最新用户")</h4>
             </div>
-            <div class="panel-body">                
+            <div class="grid-body no-border">
                 @Html.Action("LatestUsers")
             </div>
         </div>
     </div>
-    <div class="col-1-2">
-        <div class="panel">
-            <div class="panel-header">
-                <h3>@Html.Lang("活跃用户")</h3>
+    <div class="col-md-6">
+        <div class="grid simple">
+            <div class="grid-title no-border">
+                <h4>@Html.Lang("活跃用户")</h4>
             </div>
-            <div class="panel-body">
-                Home
+            <div class="grid-body no-border">
+                <p>活跃用户</p>
             </div>
         </div>
     </div>
 </div>
-<div class="grid">
-    <div class="col-1-2">
-        <div class="panel">
-            <div class="panel-header">
-                <h3>@Html.Lang("热门主题")</h3>
+<div class="row">
+    <div class="col-md-6">
+        <div class="grid simple">
+            <div class="grid-title no-border">
+                <h4>@Html.Lang("热门主题")</h4>
             </div>
-            <div class="panel-body">
-                Home
+            <div class="grid-body no-border">
+                <p>热门主题</p>
             </div>
         </div>
     </div>
-    <div class="col-1-2">
-        <div class="panel">
-            <div class="panel-header">
-                <h3>@Html.Lang("官方动态")</h3>
+    <div class="col-md-6">
+        <div class="grid simple">
+            <div class="grid-title no-border">
+                <h4>@Html.Lang("官方动态")</h4>
             </div>
-            <div class="panel-body">
-                Home
+            <div class="grid-body no-border">
+                <p>官方动态</p>
             </div>
         </div>
     </div>

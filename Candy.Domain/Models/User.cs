@@ -72,7 +72,7 @@ namespace Candy.Domain.Models
         /// 激活
         /// </summary>
         public string ActivationKey { get; set; }
-        public virtual IList<Role> Roles { get; set; }
+        public virtual Role Role { get; set; }
         public virtual IList<Topic> Topics { get; set; }
         public virtual IList<UserMeta> UserMeta { get; set; }
 
@@ -100,6 +100,15 @@ namespace Candy.Domain.Models
                     avatar = this.Avatar;
                 }
                 return avatar;
+            }
+        }
+        public bool IsAdmin
+        {
+            get
+            {
+                if (this.Role.Slug == AppConstants.AdminRoleName)
+                    return true;
+                return false;
             }
         }
     }

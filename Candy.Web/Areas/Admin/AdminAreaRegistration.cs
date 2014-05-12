@@ -45,6 +45,12 @@ namespace Candy.Web.Areas.Admin
                 new string[] { "Candy.Web.Areas.Admin.Controllers" }
             );
             context.MapRoute(
+                "Tools_About",
+                "Admin/about",
+                new { controller = "Tools", action = "About" },
+                new string[] { "Candy.Web.Areas.Admin.Controllers" }
+            );
+            context.MapRoute(
                 "Admin_default",
                 "Admin/{controller}/{action}/{id}",
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional },

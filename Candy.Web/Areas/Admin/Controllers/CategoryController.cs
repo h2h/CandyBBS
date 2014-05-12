@@ -27,9 +27,55 @@ namespace Candy.Web.Areas.Admin.Controllers
         {
             using(UnitOfWorkManager.NewUnitOfWork())
             {
-                var categories = this._categoryService.GetAll();
+                var categories = _categoryService.GetAll();
+                return View(new CategoryListViewModels
+                {
+                    Categories = SanitizeCategory(categories, null).SubCategories
+                });
             }
+        }
+        public ActionResult New()
+        {
+            using (UnitOfWorkManager.NewUnitOfWork())
+            {
+                return View(new CategoryEditViewModels
+                {
+                    Category = null,
+                    Categories = SanitizeCategory(_categoryService.GetAll(), null).SubCategories
+                });
+            }
+        }
+        [HttpPost]
+        public ActionResult New(FormCollection collection)
+        {
             return View();
+        }
+        public ActionResult Edit(int id)
+        {
+            using (UnitOfWorkManager.NewUnitOfWork())
+            {
+                return View(new CategoryEditViewModels
+                {
+                    Category = _categoryService.Get(id),
+                    Categories = SanitizeCategory(_categoryService.GetAll(), null).SubCategories
+                });
+            }
+        }
+        private CategotyViewModels SanitizeCategory(IEnumerable<Category> categories,Category model)
+        {
+            var catModel = new CategotyViewModels();
+
+            catModel.Category = model;
+            catModel.SubCategories = new List<CategotyViewModels>();
+
+            if (categories.Where(a => a.ParentCategory == model).Any())
+            {
+                foreach (var cat in categories.Where(a => a.ParentCategory==model))
+                {
+                    catModel.SubCategories.Add(SanitizeCategory(categories, cat));  
+                }
+            }
+            return catModel;
         }
 	}
 }

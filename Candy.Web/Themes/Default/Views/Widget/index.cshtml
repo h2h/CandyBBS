@@ -1,4 +1,11 @@
 ﻿@{
     Layout = null;
 }
-@Html.Action("LoginBox","Widget")
+@if (User.Identity.IsAuthenticated)
+{
+    @Html.Action("UserInfo", "Widget");
+}
+else
+{
+    @Html.Action("LoginBox", "Widget");
+}
