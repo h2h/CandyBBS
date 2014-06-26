@@ -9,7 +9,7 @@
     <div class="panel-body">
         <div class="current-theme">
             <div class="screenshot">
-                <img src="@Url.Content(Model.CurrentTheme.Screenshot)" alt="@Html.Lang("当前主题")" />
+                <img src="@Url.Absolute(Model.CurrentTheme.Screenshot)" alt="@Html.Lang("当前主题")" />
             </div>
             <div class="themeinfo">
                 <ul>
@@ -45,7 +45,7 @@
         {
             <div class="available-theme">
                 <div class="screenshot">
-                    <img src="@Url.Content(theme.Screenshot)" title="@theme.Name" />
+                    <img src="@Url.Absolute(theme.Screenshot)" title="@theme.Name" />
                 </div>
             </div>
         }

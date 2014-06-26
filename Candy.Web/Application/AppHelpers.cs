@@ -5,6 +5,8 @@ using System.Reflection;
 using System.Web;
 using Candy.Utilities;
 using Candy.Domain;
+using System.Web.Mvc;
+using Candy.Domain.Interfaces.Services;
 
 namespace Candy.Web.Application
 {
@@ -49,6 +51,11 @@ namespace Candy.Web.Application
             var previousVersionNo = GetPreviousVersionNo();
 
             return (currentVersionNo != previousVersionNo);
+        }
+        public static string GetSiteName()
+        {
+            var settingsService = DependencyResolver.Current.GetService<ISettingsService>();
+            return settingsService.Get()[AppConstants.SiteName].Value;
         }
     }
 }

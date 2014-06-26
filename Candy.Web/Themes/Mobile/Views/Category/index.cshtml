@@ -25,17 +25,17 @@
                     var lastTopic = s.Topics.OrderByDescending(x => x.CreateDate).FirstOrDefault();
                     <li class="forum">
                         <div class="forum-avatar">
-                            <a href="@Url.Content(s.NiceUrl)">
-                                <img src="@Url.Content(Html.Path("img/section.png"))" />
+                            <a href="@Url.Absolute(s.NiceUrl)">
+                                <img src="@Url.Absolute(Html.Path("img/section.png"))" />
                             </a>
                         </div>
                         <div class="forum-info">
                             <h3 class="forum-title">
-                                <a href="@Url.Content(s.NiceUrl)">@s.Name</a>
+                                <a href="@Url.Absolute(s.NiceUrl)">@s.Name</a>
                             </h3>
                             @if (lastTopic != null)
                             {
-                                <a href="@Url.Content(lastTopic.NiceUrl)" class="new-topic">@lastTopic.Name</a>
+                                <a href="@Url.Absolute(lastTopic.NiceUrl)" class="new-topic">@lastTopic.Name</a>
                             }
                             else
                             {

@@ -1,0 +1,253 @@
+﻿html, body {
+    margin:0px;
+    padding:0px;
+    height:100%;
+}
+body {
+    font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #FFFFFF inset;
+}
+button, input, select, textarea {
+    margin: 0;
+    outline: 0 none;
+    color: #666;
+    vertical-align: baseline;
+    font: 13px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    *vertical-align: middle;
+}
+p {
+    margin:0px;
+    padding:0px;
+}
+.fix {
+    position:fixed;
+}
+.icon {
+    width:16px;
+    height:16px;
+    display:inline-block;
+    margin-top:4px;
+    background:url(../img/login_icon.png);
+}
+.icon-user {
+    background-position: -12px -12px;
+}
+.icon-pass {
+    background-position: -12px -52px;
+}
+.icon-help {
+    background-position: -12px -92px;
+}
+.icon-error {
+    background-position: -12px -132px;
+}
+.icon-checkbox {
+    background-position: -12px -172px;
+}
+.icon-adduser {
+    background-position: -12px -212px;
+}
+.tips {
+    position: absolute;
+    display: inline-block;
+    padding: 0px 10px;
+    font-size: 12px;
+    line-height: 40px;
+    color: #FFF;
+    vertical-align: baseline;
+    white-space: nowrap;
+    background: #ff4400;
+    border-radius: 2px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+    .tips .tips-arrow {
+        position:absolute;
+        width:0;
+        height:0;
+        vertical-align:top;
+        content:"";
+        top: 14px;
+        left: -6px;
+        border-right: 6px solid #ff4400;
+        border-top: 6px solid transparent;
+        border-bottom: 6px solid transparent;
+    }
+    .tips .tips-arrow-top {
+        top:-12px;
+        left:50%;
+        margin-left:-6px;
+        border-right: 6px solid transparent;
+        border-left: 6px solid transparent;
+        border-bottom: 6px solid #ff4400;
+    }
+#container {
+    height: 100%;
+    width:100%;
+    position:relative;
+    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKAQMAAAC3/F3+AAAABlBMVEUAAAAAAAClZ7nPAAAAAnRSTlNZAB3qKyUAAAAPSURBVAjXYwh1YAACHCQAMFcC6k4iUqgAAAAASUVORK5CYII=');
+}
+.login {
+    vertical-align:middle;
+    width:250px;
+    top:50%;
+    position:relative;
+    margin: 0px auto;
+}
+    .login a.logo {
+        display:block;
+        margin-bottom:20px;
+    }
+        .login a.logo img {
+            margin:0px;
+            padding:0px;
+            border:none;
+            width:250px;
+        }
+form {
+    margin:0px;
+    padding:0px;
+}
+.login-container {
+    box-shadow: 0 2px 1px rgba(0,0,0,0.15);
+}
+    .login-container .form-group {
+        border-bottom:1px solid #dedede;
+        display:table;
+        position:relative;
+    }
+        .login-container .form-group:last-child {
+            border-bottom:none;
+        }
+    .login-container .form-group label {
+        width:40px;
+        height:40px;
+        text-align:center;
+        left: 0px;
+        background: #eaeaea;
+        color: #999999;
+        vertical-align:middle;
+        display:table-cell;
+        font-size:13px;
+    }
+        .login-container .form-group:first-child label {
+            border-radius:2px 0px 0px 0px;
+        }
+        .login-container .form-group:last-child label {
+            border-radius:0px 0px 0px 2px;
+        }
+    .login-container .form-group input.text {
+        padding: 10px;
+        letter-spacing: 1px;
+        border: none;
+        box-sizing: border-box;
+        -moz-box-sizing:border-box;
+        height: 40px;
+        background: #FFFFFF;
+        width: 210px;
+        vertical-align: middle;
+        display: table-cell;
+    }
+        .login-container .form-group:first-child input.text {
+            border-radius:0px 2px 0px 0px;
+        }
+        .login-container .form-group:last-child input.text {
+            border-radius:0px 0px 2px 0px;
+            padding-right:40px;
+        }
+        .login-container .form-group input.text:focus {
+            background:#fafafa;
+        }
+        .login-container .form-group.active label .icon-user {
+            background-position:-52px -12px;
+        }
+        .login-container .form-group.active label .icon-pass {
+            background-position:-52px -52px;
+        }
+        .login-container .form-group a.help {
+            position:absolute;
+            top: 0px;
+            right: -12px;
+            display:block;
+            width:40px;
+            height:40px;
+        }
+            .login-container .form-group a.help .icon-help {
+                margin-top:12px;
+            }
+            .login-container .form-group a.help:hover .icon {
+                background-position:-52px -92px;
+            }
+            .login-container .form-group .pass-help {
+                position:absolute;
+                left:40px;
+                top:0px;
+                opacity:0;
+            }
+        .login-container .form-group .login-msg {
+            left:262px;
+            opacity:0;
+        }
+        .login-container .form-group label input[type=checkbox] {
+            opacity:0;
+            width:0px;
+            height:0px;
+        }
+        .login-container .form-group label .icon-checkbox {
+            cursor:pointer;
+        }
+            .login-container .form-group label .icon-checkbox.active {
+                background-position: -52px -172px;
+            }
+        .login-container .form-group .subline {
+            background: #FFF;
+            display: block;
+            width: 210px;
+            line-height: 40px;
+            text-indent: 10px;
+            font-size: 13px;
+            letter-spacing: 1px;
+            color: #999;
+            border-radius:0px 0px 2px 0px;
+        }
+            .login-container .form-group .subline span {
+                cursor:pointer;
+            }
+            .login-container .form-group .subline a {
+                position:absolute;
+                height:40px;
+                line-height:40px;
+                text-decoration:none;
+                right:10px;
+                color:#5cba3c;
+                display:inline-block;
+                padding-right:20px;
+                color:#999;
+            }
+                .login-container .form-group .subline a:hover {
+                    color:#eb4f38;
+                }
+                .login-container .form-group .subline a .icon {
+                    display: inline-block;
+                    position: absolute;
+                    top: 7px;
+                    right: 0px;
+                }
+                .login-container .form-group .subline a:hover .icon {
+                    background-position: -52px -212px;
+                }
+    .btn {
+        background: #5cba3c;
+        color: #FFF;
+        border: none;
+        display: block;
+        padding: 14px 0;
+        text-align: center;
+        width: 100%;
+        cursor: pointer;
+        border-radius: 2px;
+        margin-top: 40px;
+        box-shadow: 0 2px 1px rgba(0,0,0,0.15);
+    }

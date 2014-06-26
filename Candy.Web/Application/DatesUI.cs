@@ -40,13 +40,13 @@ namespace Candy.Web.Application
                     return LocalizerHelper.Lang("{0}小时以前", Math.Floor((double)(((double)totalSeconds) / 3600.0)));
                 }
             }
-            if (totalDays == 1)
+            else if (totalDays == 1)
             {
-                return LocalizerHelper.Lang("1天前发布");
+                return LocalizerHelper.Lang("1天前");
             }
-            if (totalDays == 7)
+            else
             {
-                return LocalizerHelper.Lang("{0}周前发布", Math.Ceiling((double)(((double)totalDays) / 7.0)));
+                return LocalizerHelper.Lang("{0}周前", Math.Ceiling((double)(((double)totalDays) / 7.0)));
             }
             return string.Empty;
         }

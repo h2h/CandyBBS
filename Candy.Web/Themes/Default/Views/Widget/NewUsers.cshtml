@@ -1,0 +1,29 @@
+﻿@model IList<User>
+@{
+    Layout = null;
+}
+<div class="widget" id="new-users">
+    <div class="widget-title">
+        <h3>@Html.Lang("最新用户")</h3>
+    </div>
+    <div class="widget-body">
+        <ul>
+            @if (Model.Any())
+            {
+                foreach(var user in Model)
+                {
+                <li>
+                    <a class="user-avatar" href="@Url.Absolute(user.NiceUrl)" title="@user.Slug">
+                        <img src="@user.GetAvatar(36)" />
+                    </a>
+                    <a class="user-name" href="@Url.Absolute(user.NiceUrl)" title="@user.Slug"><b>@user.Slug</b></a>
+                    @if (user.Topics.Any())
+                    {
+                        <a class="user-topic" href="@Url.Absolute(user.Topics.LastOrDefault().NiceUrl)" title="@user.Topics.LastOrDefault().Name">@user.Topics.LastOrDefault().Name</a>
+                    }
+                </li>
+                }
+            }
+        </ul>
+    </div>
+</div>

@@ -65,15 +65,18 @@ namespace Candy.Services
                     if (tag != null)
                     {
                         existingTags.Add(tag);
+                        tag.Topics.Add(topic);
                     }
                     else
                     {
                         var nTag = new TopicTag
                         {
                             Tag = newTag,
-                            Slug = ServiceHelpers.CreateUrl(newTag)
+                            Slug = ServiceHelpers.CreateUrl(newTag),
+                            Topics = new List<Topic> { topic }
                         };
                         this._tagRepository.Add(nTag);
+                        newTags.Add(nTag);
                     }
                 }
                 newTags.AddRange(existingTags);
@@ -116,7 +119,7 @@ namespace Candy.Services
                 oldTag.Tag = safeNewName;
             }
         }
-        public Dictionary<string, int> GetPopularTags(int? amount)
+        public Dictionary<TopicTag, int> GetPopularTags(int? amount)
         {
             return _tagRepository.GetPopularTags(amount);
         }

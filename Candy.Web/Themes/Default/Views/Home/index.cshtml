@@ -1,3 +1,50 @@
-﻿@{
-    ViewBag.Title = "Hello World";
+﻿@model PagedList<Topic>
+@{
+    ViewBag.Title = Html.Lang("最新主题");
 }
+<div class="page-title">
+    <h2>@Html.Lang("最新主题")</h2>
+</div>
+<div class="filter">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="@Url.Absolute("~")">@Html.Lang("最新主题")</a></li>
+        <li><a href="@Url.Absolute("~/Home/Popular/")">@Html.Lang("热门主题")</a></li>
+        <li><a href="@Url.Absolute("~/Home/Sticky/")">@Html.Lang("推荐主题")</a></li>
+    </ul>
+</div>
+<div class="topics">
+    @foreach(var topic in Model)
+    {
+        <div class="topic">
+            <div class="user-avatar">
+                <a href="@Url.Absolute(topic.User.NiceUrl)">
+                    <img src="@Url.Absolute(topic.User.GetAvatar(48))" class="avatar" />
+                </a>
+            </div>
+            <div class="topic-info">
+                <div class="topic-title">
+                    <a class="tips tips-important" href="@Url.Absolute(topic.Category.NiceUrl)">@topic.Category.Name<i class="tips-arrow"></i></a>
+                    <h2 class="topic-title">
+                        <a href="@Url.Absolute(topic.NiceUrl)">@topic.Name</a>
+                    </h2>
+                </div>
+                <div class="topic-meta">
+                    <span>
+                        <a href="@Url.Absolute(topic.User.NiceUrl)" title="@topic.User.Slug">@topic.User.Slug</a>
+                        &nbsp;发布于&nbsp;@DatesUI.GetPrettyDate(topic.Posts.FirstOrDefault().DateCreated)&nbsp;
+                    </span>
+                    <span>
+                        回复(@topic.Posts.Where(p => p.PostType == PostType.post.ToString()).Count())
+                    </span>
+                    <span>
+                        阅读(@topic.Views)
+                    </span>
+                    <span>
+                        最后回复来自
+                        <a href="@Url.Absolute("~/user/info/1")" title="@topic.User.Slug">@topic.User.Slug</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    }
+</div>

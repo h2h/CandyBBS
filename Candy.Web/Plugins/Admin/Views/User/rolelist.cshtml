@@ -15,8 +15,8 @@
                 <td>@role.RoleName</td>
                 <td>@role.Slug</td>
                 <td>
-                    <a href="@Url.Content("~/admin/user/editrole/" + role.Id)" title="@Html.Lang("编辑")"><i class="fa fa-plus-circle"></i></a>
-                    <a href="@Url.Content("~/admin/user/deleterole/" + role.Id)" title="@Html.Lang("删除")"><i class="fa fa-times-circle"></i></a>
+                    <a href="@Url.Absolute("~/admin/user/editrole/" + role.Id)" title="@Html.Lang("编辑")"><i class="fa fa-plus-circle"></i></a>
+                    <a href="@Url.Absolute("~/admin/user/deleterole/" + role.Id)" title="@Html.Lang("删除")"><i class="fa fa-times-circle"></i></a>
                 </td>
             </tr>
         }

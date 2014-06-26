@@ -1,6 +1,60 @@
-﻿@{
+﻿@model User
+@{
     Layout = null;
 }
 <div class="widget" id="userinfo">
-    用户信息
+    <div class="wd-userinfo">
+        <div class="wd-userinfo-banner">
+            <img src="~/Themes/Default/img/bg_small.jpg" />
+        </div>
+        <div class="wd-userinfo-meta">
+            <div class="wd-userinfo-avatar">
+                <a href="@Url.Absolute(Model.NiceUrl)" class="avatar">
+                    <img src="@Url.Content(Model.GetAvatar(100))" alt="@Model.Slug" />
+                </a>
+            </div>
+            <div class="wd-userinfo-name">
+                <strong>@Model.Slug</strong>
+                <strong>·</strong>
+                <small>@Model.Role.RoleName</small>
+            </div>
+            <div class="wd-userinfo-total ">
+                <ul>
+                    <li>
+                        <a href="@Url.Absolute(Model.NiceUrl)">
+                            <strong class="xcbu">@Model.Topics.Count</strong>
+                            <p>主题</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Absolute(Model.NiceUrl)">
+                            <strong class="xcbu">@Model.Posts.Where(p => p.PostType == PostType.post.ToString()).ToList().Count</strong>
+                            <p>回复</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Absolute(Model.NiceUrl)">
+                            <strong class="xcbu">5</strong>
+                            <p>微博</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="wd-userinfo-level">
+        <div class="mbs">
+            <span>
+                <i class="wb-lv lv3"></i>
+                <strong>小有名气</strong>
+            </span>
+            <span class="exp-val">
+                <em>174</em>
+                /200
+            </span>
+        </div>
+        <div class="progress mbs" id="exp_info">
+            <div class="progress-bar " style="width: 87%;"></div>
+        </div>
+    </div>
 </div>

@@ -11,6 +11,7 @@ using Candy.Domain.Interfaces.Services;
 using Candy.Domain.Interfaces.Repositories;
 using Candy.Domain.Interfaces.UnitOfWork;
 using Candy.Utilities;
+using Candy.Web.Application;
 using System.Web.Security;
 
 namespace Candy.Web.Controllers
@@ -45,6 +46,73 @@ namespace Candy.Web.Controllers
         public ActionResult Settings()
         {
             return View(LoggedOnUser);
+        }
+
+        public ActionResult LoginBox()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public JsonResult LoginForJson(LoginViewModel model)
+        {
+            var result = new MessageViewModel();
+            result.Result = "false";
+            using (var unitOfWork = UnitOfWorkManager.NewUnitOfWork())
+            {
+                var username = model.UserName;
+                var password = model.Password;
+                try
+                {
+                    if (ModelState.IsValid)
+                    {
+                        var user = new User();
+                        var loginAttemptStatus = UserService.ValidateUser(username, password, 3);
+                        if (loginAttemptStatus == LoginAttemptStatus.LoginSuccessful)
+                        {
+                            user = UserService.GetUser(username);
+                            if (user.ActivationKey.IsNullEmpty())
+                            {
+                                FormsAuthentication.SetAuthCookie(username, model.RememberMe);
+                                user.LastLoginDate = DateTime.UtcNow;
+
+                                if (Url.IsLocalUrl(model.ReturnUrl) && model.ReturnUrl.Length > 1 && model.ReturnUrl.StartsWith("/") && !model.ReturnUrl.StartsWith("//") && !model.ReturnUrl.StartsWith("/\\"))
+                                {
+                                    result.Result = "true";
+                                    result.Message = LocalizerHelper.Lang("登录成功");
+                                    result.ReturnUrl = Url.Absolute(model.ReturnUrl);
+                                }
+                                result.Result = "true";
+                                result.Message = LocalizerHelper.Lang("登录成功");
+                                result.ReturnUrl = Url.Absolute("~/");
+                            }
+                            else
+                            {
+                                result.Result = "false";
+                                result.Message = LocalizerHelper.Lang(string.Format("账号未激活，<a href=\"{0}\">现在激活</a>", Url.Absolute("~/Activation/")));
+                            }
+                        }
+                        else
+                        {
+                            result.Result = "false";
+                            result.Message = LocalizerHelper.Lang("账号或密码错误");
+                        }
+                    }
+                }
+                finally
+                {
+                    try
+                    {
+                        unitOfWork.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        unitOfWork.Rollback();
+                        LoggingService.Error(ex);
+                    }
+                }
+            }
+            return Json(result,JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Login()
@@ -151,6 +219,15 @@ namespace Candy.Web.Controllers
                     return RedirectToAction("Index", "Home");
                 }
             }
+            return View();
+        }
+        public ActionResult LogOut()
+        {
+            FormsAuthentication.SignOut();
+            return Redirect("~/");
+        }
+        public ActionResult ForgetPassword()
+        {
             return View();
         }
 	}

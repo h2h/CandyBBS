@@ -9,7 +9,7 @@
                 <h4>@Html.Lang("积分设置")</h4>
             </div>
             <div class="grid-body no-border">
-                <form action="@Url.Content("~/admin/settings/update")" method="post" class="form-box">
+                <form action="@Url.Absolute("~/admin/settings/update")" method="post" class="form-box">
                     <div class="form-group">
                         <label class="form-label" for="@AppConstants.PointsAddedPerTopic">@Html.Lang("发布主题")</label>
                         <div class="controller">

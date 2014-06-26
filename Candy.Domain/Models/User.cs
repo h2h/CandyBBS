@@ -75,6 +75,7 @@ namespace Candy.Domain.Models
         public virtual Role Role { get; set; }
         public virtual IList<Topic> Topics { get; set; }
         public virtual IList<UserMeta> UserMeta { get; set; }
+        public virtual IList<Post> Posts { get; set; }
 
         public string NiceUrl
         {
@@ -83,24 +84,22 @@ namespace Candy.Domain.Models
         /// <summary>
         /// 获取用户头像
         /// </summary>
-        public string GetAvatar
+        public string GetAvatar(int size = 48)
         {
-            get {
-                var avatar = string.Empty;
-                if (this.Avatar.IsNullEmpty())
-                {
-                    avatar = StringUtils.GetGravatarImage(this.Email, 48);
-                    if (avatar.IsNullEmpty())
-                    {
-                        avatar = this.Avatar;
-                    }
-                }
-                else
+            var avatar = string.Empty;
+            if (this.Avatar.IsNullEmpty())
+            {
+                avatar = StringUtils.GetGravatarImage(this.Email, size);
+                if (avatar.IsNullEmpty())
                 {
                     avatar = this.Avatar;
                 }
-                return avatar;
             }
+            else
+            {
+                avatar = this.Avatar;
+            }
+            return avatar;
         }
         public bool IsAdmin
         {

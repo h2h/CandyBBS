@@ -1,19 +1,26 @@
-﻿@model Topic
+﻿@model ShowTopicViewModel
 @{
-    ViewBag.Title = Model.Name;
+    ViewBag.Title = Model.Topic.Name;
 }
-<div id="main" class="grid grid-right-300">
-    <div class="col-1-300">
-        <div class="panel">
-            <div class="panel-title">
-                <h1>@Model.Name</h1>
-            </div>
-            <div class="panel-body">
-                @Html.Raw(Model.Posts.Where(p => p.PostType == PostType.topic.ToString()).FirstOrDefault().PostContent)
-            </div>
-        </div>
-    </div>
-    <div id="sidebar" class="col-2-300">
-        @Html.Action("Index", "Widget")
-    </div>
+<div class="page-title">
+    <h2>@Model.Topic.Name</h2>
+</div>
+<div class="meta">
+    <span>
+        <a href="@Url.Absolute(Model.Topic.User.NiceUrl)" title="@Model.Topic.User.Slug">@Model.Topic.User.Slug</a>
+        &nbsp;发布于&nbsp;@DatesUI.GetPrettyDate(Model.Topic.Posts.FirstOrDefault().DateCreated)&nbsp;
+    </span>
+    <span>
+        回复(@Model.Topic.Posts.Where(p => p.PostType == PostType.post.ToString()).Count())
+    </span>
+    <span>
+        阅读(@Model.Topic.Views)
+    </span>
+    <span>
+        最后回复来自
+        <a href="@Url.Absolute("~/user/info/1")" title="@Model.Topic.User.Slug">@Model.Topic.User.Slug</a>
+    </span>
+</div>
+<div class="topic-context typo">
+    @Html.Raw(Model.TopicStarterPost.PostContent)
 </div>

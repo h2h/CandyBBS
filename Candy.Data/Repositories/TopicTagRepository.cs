@@ -21,18 +21,18 @@ namespace Candy.Data.Repositories
             return _context.TopicTag.ToList();
         }
 
-        public Dictionary<string, int> GetPopularTags(int? amountToTake)
+        public Dictionary<TopicTag, int> GetPopularTags(int? amountToTake)
         {
             amountToTake = amountToTake ?? int.MaxValue;
             var tags = _context.TopicTag
                 .Include(x => x.Topics.Count)
                 .OrderByDescending(x => x.Topics.Count())
                 .Take((int)amountToTake)
-                .Select(s => new { TopicCount = s.Topics.Count(), TopicName = s.Tag })
+                .Select(s => new { TopicCount = s.Topics.Count(), Tag = s })
                 .Where(x => x.TopicCount > 0)
                 .OrderByDescending(s => s.TopicCount).ToList();
 
-            return tags.ToDictionary(tag => tag.TopicName, tag => tag.TopicCount);
+            return tags.ToDictionary(s => s.Tag, s => s.TopicCount);
         }
 
         public TopicTag GetTagName(string tag)

@@ -42,20 +42,20 @@
                             {
                                 <tr>
                                     <td>
-                                        <a href="@Url.Content(topic.NiceUrl)">@topic.Name</a>
+                                        <a href="@Url.Absolute(topic.NiceUrl)">@topic.Name</a>
                                     </td>
                                     <td>
-                                        <a href="@Url.Content(topic.User.NiceUrl)">@topic.User.UserName</a>
+                                        <a href="@Url.Absolute(topic.User.NiceUrl)">@topic.User.UserName</a>
                                     </td>
                                     <td>
-                                        <a href="@Url.Content(topic.Category.NiceUrl)">@topic.Category.Name</a>
+                                        <a href="@Url.Absolute(topic.Category.NiceUrl)">@topic.Category.Name</a>
                                     </td>
                                     <td>
                                         @if(topic.Tags.Count > 0)
                                         {
                                             foreach(var tag  in topic.Tags)
                                             {
-                                                <a href="@Url.Content(tag.NiceUrl)">@tag.Tag</a>
+                                                <a href="@Url.Absolute(tag.NiceUrl)">@tag.Tag</a>
                                             }
                                         }else
                                         {

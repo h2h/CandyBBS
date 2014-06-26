@@ -1,39 +1,61 @@
 ﻿@model CreateTopicViewModel
 @{
+    Layout = "~/Themes/Default/Views/Shared/_NewTopicLayout.cshtml";
     ViewBag.Title = Html.Lang("发布主题");
 }
 <div id="main" class="grid grid-right-300">
     <div class="col-1-300">
         <div class="panel">
-            <div class="panel-body">
-                <form method="post" action="@Url.Content("~/Topic/New/")" id="topic-form" class="form-box">
+            <div class="panel-body no-padding">
+                <form method="post" action="@Url.Absolute("~/Topic/New/")" id="topic-form" class="form-box">
                     <div class="form-group">
-                        <input type="text" id="name" name="name" value="@Model.Name" class="text" placeholder="@Html.Lang("请输入主题标题")" />
+                        <input type="text" id="name" name="name" value="@Model.Name" class="form-control" placeholder="@Html.Lang("请输入主题标题")" />
                     </div>
                     <div class="form-group">
                         <textarea name="content" id="editor" class="text" placeholder="@Html.Lang("请输入主题内容")"></textarea>
                     </div>
                     <div class="form-group">
-                        <input type="text" name="tags" id="tags" class="text" placeholder="@Html.Lang("请输入主题标签")" />
+                        <input type="text" name="tags" id="tags" data-role="tagsinput" class="text" placeholder="@Html.Lang("请输入主题标签")" />
                     </div>
-                    <div class="form-group">
+                    @if (Model.Category == 0)
+                    {
+                        <div class="form-group">
+                            <select name="category">
+                                @if (Model.Categories.Any())
+                                {
+                                    foreach(var c in Model.Categories)
+                                    {
+                                        <option value="@c.Id">@c.Name</option> 
+                                    }
+                                }
+                            </select>
+                        </div> 
+                    }else
+                    {
                         <input type="hidden" name="category" value="@Model.Category" />
+                    }
+                    <div class="form-group">
                         <button type="submit" name="submit" class="btn btn-success">@Html.Lang("发布")</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <div id="sidebar" class="col-2-300">
-        @Html.Action("Index", "Widget")
-    </div>
 </div>
-<link rel="stylesheet" type="text/css" href="@Url.Content(Html.Path("css/simditor.css"))" />
-<script type="text/javascript" src="@Url.Content(Html.Path("js/simditor-all.min.js"))"></script>
+@section Header
+{
+<link rel="stylesheet" type="text/css" href="@Url.Absolute(Html.Path("css/simditor.css"))" />
+<script type="text/javascript" src="@Url.Absolute(Html.Path("js/simditor-all.js"))"></script>
+<script type="text/javascript" src="@Url.Absolute(Html.Path("js/simditor-markdown.js"))"></script>
+<script type="text/javascript" src="@Url.Absolute(Html.Path("js/bootstrap-tagsinput.min.js"))"></script>
+<script type="text/javascript" src="@Url.Absolute(Html.Path("js/bootstrap-tagsinput-angular.js"))"></script>
 <script type="text/javascript">
     $(function () {
         var editor = new Simditor({
-            textarea: $('#editor')
+            textarea: $('#editor'),
+            markdown: true,
+            toolbarFloat:true
         });
     });
 </script>
+}

@@ -21,4 +21,15 @@ namespace Candy.Web.ViewModels
         public IEnumerable<Category> Categories { get; set; }
         public User LoggedOnUser { get; set; }
     }
+    public class ShowTopicViewModel
+    {
+        public Post TopicStarterPost { get; set; }
+        public Topic Topic { get; set; }
+        public PagedList<Post> Posts { get; set; }
+        public PermissionSet Permissions { get; set; }
+        public int? PageIndex { get; set; }
+        public int? TotalCount { get; set; }
+        public User User { get; set; }
+    }
+
 }

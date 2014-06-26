@@ -39,8 +39,8 @@
                                     <a href="#" title="@(Html.Lang("查看 {0} 的所有帖子",user.UserName))">@user.Topics.Count</a>
                                 </td>
                                 <td>
-                                    <a href="@Url.Content("~/admin/user/edituser/"+user.Id)" title="@Html.Lang("编辑")"><i class="fa fa-plus-circle"></i></a>
-                                    <a href="@Url.Content("~/admin/user/deleteuser/"+user.Id)" title="@Html.Lang("删除")"><i class="fa fa-times-circle"></i></a>
+                                    <a href="@Url.Absolute("~/admin/user/edituser/"+user.Id)" title="@Html.Lang("编辑")"><i class="fa fa-plus-circle"></i></a>
+                                    <a href="@Url.Absolute("~/admin/user/deleteuser/"+user.Id)" title="@Html.Lang("删除")"><i class="fa fa-times-circle"></i></a>
                                 </td>
                             </tr>
                         }

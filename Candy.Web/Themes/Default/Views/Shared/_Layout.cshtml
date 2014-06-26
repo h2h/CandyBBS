@@ -8,80 +8,126 @@
     <meta name="keywords" content="" />
     <meta property="og:site_name" content="" />
     <meta property="og:url" content="" />
+    @RenderSection("SocialMeta", false)
     <link rel="alternate" type="application/rss+xml" title="RSS 2.0 Feed" href="" />
-    <link href="@Url.Content(Html.Path("css/font.css"))" rel="stylesheet" />
-    <link href="@Url.Content(Html.Path("css/style.css"))" rel="stylesheet" />
-    <script src="@Url.Content(Html.Path("js/jquery.min.js"))"></script>
-    <script src="@Url.Content(Html.Path("js/candy.js"))"></script>
+    <link href="@Url.Absolute(Html.Path("css/bootstrap.css"))" rel="stylesheet" />
+    <link href="@Url.Absolute(Html.Path("css/bootstrap-theme.css"))" rel="stylesheet" />
+    <link href="@Url.Absolute(Html.Path("css/font-awesome.css"))" rel="stylesheet" />
+    <link href="@Url.Absolute(Html.Path("css/style.css"))" rel="stylesheet" />
+    <script src="@Url.Absolute(Html.Path("js/jquery.min.js"))"></script>
+    <script src="@Url.Absolute(Html.Path("js/candy.js"))"></script>
+    <script src="@Url.Absolute(Html.Path("js/bootstrap.js"))"></script>
+    @RenderSection("Header", false)
 </head>
 <body>
-    <div id="wrapper">
-        <header id="header">
-            <div class="grid-1200">
-                <div class="logo col-1-4">
-                    <a href="">
-                        <img src="@Url.Content(Html.Path("img/logo.jpg"))" title="@Html.Lang("Candy BBS")" />
-                    </a>
-                </div>
-                <nav class="navbar col-1-2">
-                    <ul class="nav">
-                        <li>
-                            <a href="@Url.Content("~/")">@Html.Lang("首页")</a>
-                        </li>
-                        <li class="active">
-                            <a href="@Url.Content("~/forum")">@Html.Lang("版块")</a>
-                        </li>
-                    </ul>
-                </nav>
-                <nav class="navbar col-1-4" id="right-nav">
-                    <ul class="nav">
-                        <li class="header-search">
-                            <form action="" method="get" class="header-search-form">
-                                <input type="text" id="search-text" name="search" value="" placeholder="@Html.Lang("搜索")" />
-                                <button type="submit" id="search-button"><i class="fa fa-search"></i></button>
-                            </form>
-                        </li>
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            var currentUser = DependencyResolver.Current.GetService<IUserService>().GetUser(User.Identity.Name);
-                            <li class="header-user">
-                                <a href="@Url.Content(currentUser.NiceUrl)">
-                                    <img src="@Url.Content(currentUser.GetAvatar)" width="48" alt="@currentUser.UserName" title="@currentUser.UserName" />
-                                </a>
-                                <ul class="sub-nav">
-                                    @if (currentUser.IsAdmin)
+    <div class="page-container">
+        <header id="header" class="header header-fixed">
+            <div class="container">
+                <div class="row row-l-250">
+                    <div class="col-l-250">
+                        <div class="logo">
+                            <a href="">
+                                <img src="@Url.Absolute(Html.Path("img/logo.jpg"))" title="@Html.Lang("Candy BBS")" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-l-100">
+                        <div class="row row-r-300">
+                            <div class="col-r-100">
+                                <div class="row row-r-300">
+                                    <div class="col-r-100">
+                                        <ul class="nav navbar-nav navbar-left nav-pills" id="left-nav">
+                                            <li class="active">
+                                                <a href="@Url.Absolute("~/")">@Html.Lang("首页")</a>
+                                            </li>
+                                            <li>
+                                                <a href="@Url.Absolute("~/forum")">@Html.Lang("版块")</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-r-300">
+                                        <form action="" method="get" class="header-search-form pull-right">
+                                            <div class="input-group">
+                                                <input type="text" id="search-text" class="form-control no-border" name="search" value="" placeholder="@Html.Lang("搜索")" />
+                                                <span class="input-group-btn">
+                                                    <button type="submit" id="search-button" class="btn"><i class="fa fa-search"></i></button>
+                                                </span>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-r-300">
+                                <ul class="nav nav-pills navbar-right" id="right-nav">
+                                    @if (User.Identity.IsAuthenticated)
                                     {
-                                        <li>
-                                            <a href="@Url.Content("~/admin/")">@Html.Lang("管理后台")</a>
-                                        </li> 
+                                        var currentUser = DependencyResolver.Current.GetService<IUserService>().GetUser(User.Identity.Name);
+                                        <li class="header-user">
+                                            <a href="@Url.Absolute(currentUser.NiceUrl)" data-toggle="dropdown">
+                                                <img src="@Url.Content(currentUser.GetAvatar(48))" width="48" alt="@currentUser.UserName" title="@currentUser.UserName" />
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-menu-right mg-r-xs">
+                                                @if (currentUser.IsAdmin)
+                                                {
+                                                    <li>
+                                                        <a href="@Url.Absolute("~/admin/")">@Html.Lang("管理后台")</a>
+                                                    </li>
+                                                }
+                                                <li>
+                                                    <a href="@Url.Absolute(currentUser.NiceUrl)">@Html.Lang("个人主页")</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Absolute("~/Settings/")">@Html.Lang("资料设置")</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Absolute("~/logout/")">@Html.Lang("退出")</a>
+                                                </li>
+                                            </ul>
+                                        </li>
                                     }
-                                    <li>
-                                        <a href="@Url.Content(currentUser.NiceUrl)">@Html.Lang("个人主页")</a>
-                                    </li>
-                                    <li>
-                                        <a href="@Url.Content("~/Settings/")">@Html.Lang("资料设置")</a>
-                                    </li>
-                                    <li>
-                                        <a href="@Url.Content("~/logout/")">@Html.Lang("退出")</a>
-                                    </li>
+                                    else
+                                    {
+                                        <li class="header-login">
+                                            <a href="@Url.Absolute("~/login")">@Html.Lang("登录")</a>
+                                        </li>
+                                        <li class="header-register">
+                                            <a href="@Url.Absolute("~/register")">@Html.Lang("注册")</a>
+                                        </li>
+                                    }
                                 </ul>
-                            </li>
-                        }
-                    </ul>
-                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </header>
-        <div id="content" class="container">
-            @RenderBody()
-        </div>
-        <footer id="footer">
-            <div class="grid-1200">
-                <div class="col-1-2">
-                    <p>All Right Reserved by <a href="http://www.icoding.me" target="_blank">iCoding.Me</a></p>
+        <section class="main-content">
+            <div class="container">
+                <div class="row row-l-250">
+                    <div class="col-l-250 leftsidebar">
+                        @Html.Action("LeftWidget", "Widget")
+                    </div>
+                    <div class="col-l-100">
+                        <div class="row row-r-300">
+                            <div class="col-r-100 content">
+                                @RenderBody()
+                            </div>
+                            <div class="col-r-300 rightsidebar">
+                                @Html.Action("Index", "Widget")
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-1-2">
-                    <nav class="navbar">
-                        <ul class="nav navbar-nav">
+            </div>
+        </section>
+        <footer id="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <p>All Right Reserved by <a href="http://www.icoding.me" target="_blank">iCoding.Me</a></p>
+                    </div>
+                    <div class="col-xs-6">
+                        <ul class="nav navbar-nav nav-pills navbar-right">
                             <li>
                                 <a href="">@Html.Lang("首页", "首页")</a>
                             </li>
@@ -95,7 +141,7 @@
                                 <a href="#">@Html.Lang("帮助", "帮助")</a>
                             </li>
                         </ul>
-                    </nav>
+                    </div>
                 </div>
             </div>
         </footer>

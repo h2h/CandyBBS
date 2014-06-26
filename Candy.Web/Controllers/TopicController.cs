@@ -8,6 +8,7 @@ using Candy.Domain.Models;
 using Candy.Domain.Interfaces.Services;
 using Candy.Domain.Interfaces.UnitOfWork;
 using Candy.Web.ViewModels;
+using Candy.Utilities;
 
 namespace Candy.Web.Controllers
 {
@@ -45,11 +46,53 @@ namespace Candy.Web.Controllers
         {
             return View();
         }
-        public ActionResult Show(int id)
+        public ActionResult Show(int id,int? p)
         {
-            using (UnitOfWorkManager.NewUnitOfWork())
+            var pageIndex = p ?? 1;
+            var pageSize = int.Parse(SettingsService.Get()[AppConstants.PostsPerPage].Value);
+            using (var unitOfWork = UnitOfWorkManager.NewUnitOfWork())
             {
-                return View(this._topicService.Get(id));
+                var topic = this._topicService.Get(id);
+                if (topic != null)
+                {
+                    var posts = this._postService.GetPagedPostsByTopic(pageIndex, pageSize, int.MaxValue, topic.Id);
+
+                    var topicStarter = this._postService.GetTopicStarterPost(topic.Id);
+
+                    var permissions = RoleService.GetPermissions(topic.Category, UsersRole);
+
+                    if (permissions[AppConstants.PermissionDenyAccess].IsTicked)
+                    {
+                    }
+
+                    var viewModel = new ShowTopicViewModel
+                    {
+                        Topic = topic,
+                        Posts = posts,
+                        PageIndex = posts.PageIndex,
+                        TotalCount = posts.TotalCount,
+                        Permissions = permissions,
+                        User = LoggedOnUser,
+                        TopicStarterPost = topicStarter
+                    };
+
+                    var addVIew = !(UserIsAuthenticated && LoggedOnUser.Id == topic.User.Id);
+
+                    if (!BotUtils.UserIsBot() && addVIew)
+                    {
+                        topic.Views = (topic.Views + 1);
+                        try
+                        {
+                            unitOfWork.Commit();
+                        }
+                        catch (Exception ex)
+                        {
+                            LoggingService.Error(ex);
+                        }
+                    }
+                    return View(viewModel);
+                }
+                return View();
             }
         }
         public ActionResult New(int? categoryId)
@@ -116,6 +159,7 @@ namespace Candy.Web.Controllers
                             {
                                 unitOfWork.Commit();
                                 successfullyCreated = true;
+                                return Redirect(topic.NiceUrl);
                             }
                             catch (Exception ex)
                             {
@@ -132,7 +176,7 @@ namespace Candy.Web.Controllers
                     }
                 }
             }
-            return View();
+            return RedirectToAction("New");
         }
 	}
 }

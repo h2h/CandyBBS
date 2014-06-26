@@ -47,6 +47,8 @@ namespace Candy.Data
             modelBuilder.Configurations.Add(new CategoryMapping());
             modelBuilder.Configurations.Add(new UserMapping());
             modelBuilder.Configurations.Add(new TopicMapping());
+            modelBuilder.Configurations.Add(new TopicTagMapping());
+            modelBuilder.Configurations.Add(new PostMapping());
             modelBuilder.Configurations.Add(new RoleMapping());
             modelBuilder.Configurations.Add(new PermissionMapping());
             modelBuilder.Configurations.Add(new CategoryPermissionForRoleMapping());

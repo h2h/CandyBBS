@@ -46,7 +46,7 @@
                             </a>
                         </li>
                         <li class="active">
-                            <a href="@Url.Content("~/settings/")">@Html.Lang("设置")</a>
+                            <a href="@Url.Absolute("~/settings/")">@Html.Lang("设置")</a>
                         </li>
                     </ul>
                 </div>
@@ -56,7 +56,7 @@
     <div id="section" class="col-4-300">
         <div class="panel">
             <div class="panel-body">
-                <form action="@Url.Content("~/settings/")" method="Post" class="form-box">
+                <form action="@Url.Absolute("~/settings/")" method="Post" class="form-box">
                     <h3>@Html.Lang("基本信息")</h3>
                     <div class="form-group">
                         <label for="username">

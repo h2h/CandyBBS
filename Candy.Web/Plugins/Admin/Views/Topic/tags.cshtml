@@ -13,7 +13,7 @@
                 {
                     foreach(var tag in Model)
                     {
-                        <a href="@Url.Content(tag.NiceUrl)"><span class="label label-important">@string.Format("{0}({1})", tag.Tag, tag.Topics.Count)</span></a>
+                        <a href="@Url.Absolute(tag.NiceUrl)"><span class="label label-important">@string.Format("{0}({1})", tag.Tag, tag.Topics.Count)</span></a>
                     }
                 }
                 else

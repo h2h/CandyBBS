@@ -9,16 +9,16 @@
     <meta property="og:site_name" content="" />
     <meta property="og:url" content="" />
     <link rel="alternate" type="application/rss+xml" title="RSS 2.0 Feed" href="" />
-    <link href="@Url.Content(Html.AdminPath("css/font.css"))" rel="stylesheet" />
-    <link href="@Url.Content(Html.AdminPath("css/bootstrap-theme.css"))" rel="stylesheet" />
-    <link href="@Url.Content(Html.AdminPath("css/bootstrap.css"))" rel="stylesheet" />
-    <link href="@Url.Content(Html.AdminPath("css/responsive.css"))" rel="stylesheet" />
-    <link href="@Url.Content(Html.AdminPath("css/style.css"))" rel="stylesheet" />
-    <script src="@Url.Content(Html.AdminPath("js/jquery.min.js"))"></script>
-    <script src="@Url.Content(Html.AdminPath("js/bootstrap.min.js"))"></script>
-    <script src="@Url.Content(Html.AdminPath("js/candy.js"))"></script>
+    <link href="@Url.Absolute(Html.AdminPath("css/font.css"))" rel="stylesheet" />
+    <link href="@Url.Absolute(Html.AdminPath("css/bootstrap-theme.css"))" rel="stylesheet" />
+    <link href="@Url.Absolute(Html.AdminPath("css/bootstrap.css"))" rel="stylesheet" />
+    <link href="@Url.Absolute(Html.AdminPath("css/responsive.css"))" rel="stylesheet" />
+    <link href="@Url.Absolute(Html.AdminPath("css/style.css"))" rel="stylesheet" />
+    <script src="@Url.Absolute(Html.AdminPath("js/jquery.min.js"))"></script>
+    <script src="@Url.Absolute(Html.AdminPath("js/bootstrap.min.js"))"></script>
+    <script src="@Url.Absolute(Html.AdminPath("js/candy.js"))"></script>
     <script type="text/javascript">
-        var app_base = "@Url.Content("~/")";
+        var app_base = "@Url.Absolute("~/")";
     </script>
 </head>
 <body>
@@ -35,8 +35,8 @@
                     </li>
                 </ul>
                 <!-- Begin  Logo -->
-                <a href="@Url.Content("~/admin/")" title="@Html.Lang("Candy BBS")">
-                    <img class="logo" src="@Url.Content(Html.Path("img/logo.jpg"))" title="@Html.Lang("Candy BBS")" />
+                <a href="@Url.Absolute("~/admin/")" title="@Html.Lang("Candy BBS")">
+                    <img class="logo" src="@Url.Absolute(Html.Path("img/logo.jpg"))" title="@Html.Lang("Candy BBS")" />
                 </a>
                 <!-- End Logo -->
             </div>
@@ -46,10 +46,10 @@
                 <div class="pull-left">
                     <ul class="nav quick-section">
                         <li class="quicklinks">
-                            <a href="@Url.Content("~/Admin/")">@Html.Lang("后台首页")</a>
+                            <a href="@Url.Absolute("~/Admin/")">@Html.Lang("后台首页")</a>
                         </li>
                         <li class="quicklinks">
-                            <a href="@Url.Content("~/")">@Html.Lang("网站首页")</a>
+                            <a href="@Url.Absolute("~/")">@Html.Lang("网站首页")</a>
                         </li>
                     </ul>
                 </div>
@@ -109,19 +109,22 @@
                     </a>
                     <ul class="sub-menu">
                         <li @(action == "index" && controller == "settings" ? "class=active" : "")>
-                            <a href="@Url.Content("~/admin/settings/")">@Html.Lang("基本设置")</a>
+                            <a href="@Url.Absolute("~/admin/settings/")">@Html.Lang("基本设置")</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Absolute("~/admin/menu/")">@Html.Lang("菜单")</a>
                         </li>
                         <li @(action == "theme" && controller == "settings" ? "class=active" : "")>
-                            <a href="@Url.Content("~/admin/theme/")">@Html.Lang("主题")</a>
+                            <a href="@Url.Absolute("~/admin/theme/")">@Html.Lang("主题")</a>
                         </li>
                         <li @(action == "email" && controller == "settings" ? "class=active" : "")>
-                            <a href="@Url.Content("~/admin/email/")">@Html.Lang("邮箱")</a>
+                            <a href="@Url.Absolute("~/admin/email/")">@Html.Lang("邮箱")</a>
                         </li>
                         <li @(action == "points" && controller == "settings" ? "class=active" : "")>
-                            <a href="@Url.Content("~/admin/points/")">@Html.Lang("积分")</a>
+                            <a href="@Url.Absolute("~/admin/points/")">@Html.Lang("积分")</a>
                         </li>
                         <li @(action == "permissions" && controller == "settings" ? "class=active" : "")>
-                            <a href="@Url.Content("~/admin/Permissions/")">@Html.Lang("权限")</a>
+                            <a href="@Url.Absolute("~/admin/Permissions/")">@Html.Lang("权限")</a>
                         </li>
                     </ul>
                 </li>
@@ -133,10 +136,10 @@
                     </a>
                     <ul class="sub-menu">
                         <li @(action == "index" && controller == "category" ? "class=active" : "")>
-                            <a href="@Url.Content("~/admin/category/index/")">@Html.Lang("所有版块")</a>
+                            <a href="@Url.Absolute("~/admin/category/index/")">@Html.Lang("所有版块")</a>
                         </li>
                         <li @(action == "new" && controller == "category" ? "class=active" : "")>
-                            <a href="@Url.Content("~/admin/category/new/")">@Html.Lang("添加版块")</a>
+                            <a href="@Url.Absolute("~/admin/category/new/")">@Html.Lang("添加版块")</a>
                         </li>
                     </ul>
                 </li>
@@ -148,10 +151,10 @@
                     </a>
                     <ul class="sub-menu">
                         <li @(action == "index" && controller == "topic" ? "class=active" : "")>
-                            <a href="@Url.Content("~/admin/topic/index/")">@Html.Lang("所有帖子")</a>
+                            <a href="@Url.Absolute("~/admin/topic/index/")">@Html.Lang("所有帖子")</a>
                         </li>
                         <li @(action == "tags" && controller == "topic" ? "class=active" : "")>
-                            <a href="@Url.Content("~/admin/topic/tags/")">@Html.Lang("帖子标签")</a>
+                            <a href="@Url.Absolute("~/admin/topic/tags/")">@Html.Lang("帖子标签")</a>
                         </li>
                     </ul>
                 </li>
@@ -163,10 +166,10 @@
                     </a>
                     <ul class="sub-menu">
                         <li @(action == "index" && controller == "user" ? "class=active" : "")>
-                            <a href="@Url.Content("~/admin/user/index")">@Html.Lang("用户管理")</a>
+                            <a href="@Url.Absolute("~/admin/user/index")">@Html.Lang("用户管理")</a>
                         </li>
                         <li @(action == "role" && controller == "user" ? "class=active" : "")>
-                            <a href="@Url.Content("~/admin/user/role/")">@Html.Lang("用户组")</a>
+                            <a href="@Url.Absolute("~/admin/user/role/")">@Html.Lang("用户组")</a>
                         </li>
                     </ul>
                 </li>
@@ -190,7 +193,7 @@
                             <a href="">@Html.Lang("日志")</a>
                         </li>
                         <li @(action == "about" ? "class=active":"")>
-                            <a href="@Url.Content("~/admin/about/")">关于</a>
+                            <a href="@Url.Absolute("~/admin/about/")">关于</a>
                         </li>
                     </ul>
                 </li>

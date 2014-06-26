@@ -58,6 +58,7 @@
     <Compile Include="Mapping\CategoryMapping.cs" />
     <Compile Include="Mapping\CategoryPermissionForRoleMapping.cs" />
     <Compile Include="Mapping\PermissionMapping.cs" />
+    <Compile Include="Mapping\PostMapping.cs" />
     <Compile Include="Mapping\RoleMapping.cs" />
     <Compile Include="Mapping\SettingsMapping.cs" />
     <Compile Include="Mapping\TopicMapping.cs" />

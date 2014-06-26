@@ -31,8 +31,8 @@
             <a href="">@cat.Topics.Count</a>
         </td>
         <td>
-            <a href="@Url.Content("~/admin/category/edit/"+cat.Id)" title="@Html.Lang("编辑")"><i class="fa fa-plus-circle"></i></a>
-            <a href="@Url.Content("~/admin/category/delete/"+cat.Id)" title="@Html.Lang("删除")"><i class="fa fa-times-circle"></i></a>
+            <a href="@Url.Absolute("~/admin/category/edit/"+cat.Id)" title="@Html.Lang("编辑")"><i class="fa fa-plus-circle"></i></a>
+            <a href="@Url.Absolute("~/admin/category/delete/"+cat.Id)" title="@Html.Lang("删除")"><i class="fa fa-times-circle"></i></a>
         </td>
     </tr>
 }

@@ -2,70 +2,58 @@
 @{
     ViewBag.Title = Model.Category.Name;
 }
-<div id="main" class="grid grid-right-300">
-    <div class="col-1-300">
-        <div class="panel">
-            <div class="panel-body">
-                @Model.Category.Name
-            </div>
-        </div>
-        <div class="panel">
-            <div class="panel-body nopadding">
-                <div class="cat-head-bar">
-                    <div class="filter">
-                        <span>@Html.Lang("筛选")</span>
+<div class="page-title">
+    <h2>@Model.Category.Name</h2>
+</div>
+<div class="filter">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#" data-toggle="tab">@Html.Lang("最新主题")</a></li>
+        <li><a href="#" data-toggle="tab">@Html.Lang("热门主题")</a></li>
+        <li><a href="#" data-toggle="tab">@Html.Lang("推荐主题")</a></li>
+    </ul>
+</div>
+<div class="topics">
+    @if (Model.Topics.Any())
+    {
+        foreach (var topic in Model.Topics)
+        {
+            <div class="topic">
+                <div class="user-avatar">
+                    <a href="@Url.Absolute(topic.User.NiceUrl)">
+                        <img src="@Url.Absolute(topic.User.GetAvatar(48))" class="avatar" />
+                    </a>
+                </div>
+                <div class="topic-info">
+                    <div class="topic-title">
+                        <a class="tips tips-important" href="@Url.Absolute(topic.Category.NiceUrl)">@topic.Category.Name<i class="tips-arrow"></i></a>
+                        <h2 class="topic-title">
+                            <a href="@Url.Absolute(topic.NiceUrl)">@topic.Name</a>
+                        </h2>
                     </div>
-                    @if(User.Identity.IsAuthenticated){
-                    <a id="new-topic" href="@Url.Content("~/topic/new/?categoryId="+@Model.Category.Id)">@Html.Lang("发帖")</a>
-                    }
-                </div>
-                <div class="topic-list">
-                    @if (Model.Topics.TotalCount > 0)
-                    {
-                    <ul>
-                        @foreach(var topic in Model.Topics)
-                        {
-                            <li>
-                                <div class="user-avatar">
-                                    <a href="@Url.Content(topic.User.NiceUrl)">
-                                        <img src="@Url.Content(topic.User.GetAvatar)" class="avatar" />
-                                    </a>
-                                </div>
-                                <div class="topic-info">
-                                    <h2 class="topic-title">
-                                        <a href="@Url.Content(topic.NiceUrl)">@topic.Name</a>
-                                    </h2>
-                                    <div class="topic-meta">
-                                        <strong>
-                                            <a href="@Url.Content(topic.User.NiceUrl)">@topic.User.Slug</a>
-                                        </strong>
-                                        &nbsp;•&nbsp;@DatesUI.GetPrettyDate(topic.Posts.LastOrDefault().DateCreated)&nbsp;•&nbsp;最后回复来自
-                                        <strong>
-                                            <a href="@Url.Content("~/user/info/1")">Admin</a>
-                                        </strong>
-                                    </div>
-                                    <div class="topic-count">
-                                        <a class="tcount" title="回复">@topic.Posts.Where(p=>p.PostType == PostType.post.ToString()).Count()</a>
-                                        <span class="ncount" title="浏览">@topic.Views</span>
-                                    </div>
-                                </div>
-                            </li>
-                        }
-                        </ul>
-                        if (Model.Topics.TotalPages > 1)
-                        {
-                             
-                        }
-                    }
-                    else
-                    {
-                        <p>@Html.Lang("还没有帖子")</p> 
-                    }
+                    <div class="topic-meta">
+                        <span>
+                            <a href="@Url.Absolute(topic.User.NiceUrl)" title="@topic.User.Slug">@topic.User.Slug</a>
+                            &nbsp;发布于&nbsp;@DatesUI.GetPrettyDate(topic.Posts.FirstOrDefault().DateCreated)&nbsp;
+                        </span>
+                        <span>
+                            回复(@topic.Posts.Where(p => p.PostType == PostType.post.ToString()).Count())
+                        </span>
+                        <span>
+                            阅读(@topic.Views)
+                        </span>
+                        <span>
+                            最后回复来自
+                            <a href="@Url.Absolute("~/user/info/1")" title="@topic.User.Slug">@topic.User.Slug</a>
+                        </span>
+                    </div>
                 </div>
             </div>
+        }
+    }
+    else
+    {
+        <div class="no-topic">
+            <p>@Html.Lang("还没有任何帖子")</p>
         </div>
-    </div>
-    <div id="sidebar" class="col-2-300">
-        @Html.Action("Index","Widget")
-    </div>
+    }
 </div>

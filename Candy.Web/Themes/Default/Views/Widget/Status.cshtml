@@ -1,0 +1,29 @@
+﻿@model StatusViewModel
+@{
+    Layout = null;
+}
+<div class="widget" id="status">
+    <div class="widget-title">
+        <h3>@Html.Lang("社区状态")</h3>
+    </div>
+    <div class="widget-body">
+        <ul>
+            <li>
+                <span class="tips">@Model.TopicConut</span>
+                主题
+            </li>
+            <li>
+                <span class="tips">14</span>
+                回复
+            </li>
+            <li>
+                <span class="tips">@Model.UserCount</span>
+                用户
+            </li>
+            <li>
+                <span class="tips">14</span>
+                访问
+            </li>
+        </ul>
+    </div>
+</div>

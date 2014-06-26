@@ -14,7 +14,7 @@
                 <div class="filter">
                     <span>@Html.Lang("筛选")</span>
                 </div>
-                <a id="new-topic" href="@Url.Content("~/topic/new/?categoryId="+@Model.Category.Id)">@Html.Lang("发帖")</a>
+                <a id="new-topic" href="@Url.Absolute("~/topic/new/?categoryId="+@Model.Category.Id)">@Html.Lang("发帖")</a>
             </div>
             <div class="topic-list">
                 @if (Model.Topics.TotalCount > 0)
@@ -24,21 +24,21 @@
                     {
                         <li>
                             <div class="user-avatar">
-                                <a href="@Url.Content("~/user/info/1")">
+                                <a href="@Url.Absolute("~/user/info/1")">
                                     <img src="http://localhost:1230/sb/uploads/avatar/1/01/1_avatar_big.jpg" class="avatar" />
                                 </a>
                             </div>
                             <div class="topic-info">
                                 <h2 class="topic-title">
-                                    <a href="@Url.Content("~/topic/1/")">使用简单的 JavaScript，我们为什么应该抵制 ES6</a>
+                                    <a href="@Url.Absolute("~/topic/1/")">使用简单的 JavaScript，我们为什么应该抵制 ES6</a>
                                 </h2>
                                 <div class="topic-meta">
                                     <strong>
-                                        <a href="@Url.Content("~/user/info/1")">Hubert</a>
+                                        <a href="@Url.Absolute("~/user/info/1")">Hubert</a>
                                     </strong>
                                     &nbsp;•&nbsp;47分钟前&nbsp;•&nbsp;最后回复来自
                                     <strong>
-                                        <a href="@Url.Content("~/user/info/1")">Admin</a>
+                                        <a href="@Url.Absolute("~/user/info/1")">Admin</a>
                                     </strong>
                                 </div>
                                 <div class="topic-count">

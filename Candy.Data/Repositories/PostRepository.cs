@@ -5,6 +5,7 @@ using System.Linq;
 using Candy.Domain.Interfaces;
 using Candy.Domain.Interfaces.Repositories;
 using Candy.Domain.Models;
+using Candy.Domain;
 
 namespace Candy.Data.Repositories
 {
@@ -21,7 +22,8 @@ namespace Candy.Data.Repositories
         }
         public Post GetTopicStarterPost(int topicId)
         {
-            return null;
+            string postType = PostType.topic.ToString();
+            return this._context.Post.Where(a => a.PostType == postType && a.Topic.Id == topicId).FirstOrDefault();
         }
         public IEnumerable<Post> GetAllWithTopics()
         {
@@ -45,7 +47,18 @@ namespace Candy.Data.Repositories
 
         public PagedList<Post> GetPagedPostsByTopic(int pageIndex, int pageSize, int amountToTake, int topicId)
         {
-            return null;
+            var postType = PostType.post.ToString();
+            var total = this._context.Post.Count(x=>x.PostType == postType && x.Topic.Id == topicId);
+            if(amountToTake < total)
+                total = amountToTake;
+            var results = this._context.Post
+                .Include(x=>x.User)
+                .Where(x => x.PostType == postType && x.Topic.Id == topicId)
+                .OrderByDescending(x=>x.DateCreated)
+                .Skip((pageIndex -1 )*pageSize)
+                .Take(pageSize)
+                .ToList();
+            return new PagedList<Post>(results, pageIndex, pageSize, total);
         }
 
         public IList<Post> GetPostsByUser(int userId)

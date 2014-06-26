@@ -9,7 +9,7 @@
                 <h4>@Html.Lang("添加版块")</h4>
             </div>
             <div class="grid-body no-border">
-                <form action="@Url.Content("~/admin/category/new/")" method="post" class="form-box">
+                <form action="@Url.Absolute("~/admin/category/new/")" method="post" class="form-box">
                     <div class="form-group">
                         <label class="form-label" for="name">@Html.Lang("名称")</label>
                         <div class="controls">
@@ -52,9 +52,9 @@
         </div>
     </div>
 </div>
-<link rel="stylesheet" type="text/css" href="@Url.Content(Html.AdminPath("css/simditor.css"))" />
-<script type="text/javascript" src="@Url.Content(Html.AdminPath("js/simditor-all.min.js"))"></script>
-<script type="text/javascript" src="@Url.Content(Html.AdminPath("js/select2.min.js"))"></script>
+<link rel="stylesheet" type="text/css" href="@Url.Absolute(Html.AdminPath("css/simditor.css"))" />
+<script type="text/javascript" src="@Url.Absolute(Html.AdminPath("js/simditor-all.min.js"))"></script>
+<script type="text/javascript" src="@Url.Absolute(Html.AdminPath("js/select2.min.js"))"></script>
 <script type="text/javascript">
     $(function () {
         var editor = new Simditor({

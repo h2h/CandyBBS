@@ -10,7 +10,7 @@ namespace Candy.Domain.Interfaces.Repositories
         IEnumerable<TopicTag> GetByTopic(Topic topic);
         PagedList<TopicTag> GetPagedGroupedTags(int pageIndex, int pageSize);
         PagedList<TopicTag> SearchPagedGroupedTags(string search, int pageIndex, int pageSize);
-        Dictionary<string, int> GetPopularTags(int? amountToTake);
+        Dictionary<TopicTag, int> GetPopularTags(int? amountToTake);
         TopicTag GetTagName(string tag);
         TopicTag Add(TopicTag item);
         TopicTag Get(int id);

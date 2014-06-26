@@ -9,8 +9,8 @@
                 <h4>@Html.Lang("基本设置")</h4>
             </div>
             <div class="grid-body no-border">
-                <form action="@Url.Content("~/admin/settings/update/")" method="post" class="form-box">
-                    <input type="hidden" name="returnUrl" value="@Url.Content("~/admin/settings/")" />
+                <form action="@Url.Absolute("~/admin/settings/update/")" method="post" class="form-box">
+                    <input type="hidden" name="returnUrl" value="@Url.Absolute("~/admin/settings/")" />
                     <div class="form-group">
                         <label class="form-label" for="@AppConstants.SiteName">@Html.Lang("论坛名称")</label>
                         <div class="controls">

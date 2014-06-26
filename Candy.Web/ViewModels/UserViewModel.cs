@@ -9,6 +9,10 @@ namespace Candy.Web.ViewModels
     public class UserViewModel
     {
     }
+    public class UserInfoViewModel
+    {
+        public string UserName { get; set; }
+    }
     public class LoginViewModel
     {
         public string ReturnUrl { get; set; }

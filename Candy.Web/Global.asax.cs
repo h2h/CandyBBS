@@ -52,6 +52,24 @@ namespace Candy.Web
                 new string[] { "Candy.Web.Controllers" }
             );
             routes.MapRoute(
+                "LogOut",
+                "logout",
+                new { controller = "User", action = "LogOut" },
+                new string[] { "Candy.Web.Controllers" }
+            );
+            routes.MapRoute(
+                "ForgetPassword",
+                "forgetpassword",
+                new { controller = "User", action = "ForgetPassword" },
+                new string[] { "Candy.Web.Controllers" }
+            );
+            routes.MapRoute(
+                "Activation",
+                "activation",
+                new { controller = "User", action = "Activation" },
+                new string[] { "Candy.Web.Controllers" }
+            );
+            routes.MapRoute(
                 "Forum List",
                 "forum",
                 new { controller = "Category", action = "Index", id = UrlParameter.Optional },
@@ -59,19 +77,19 @@ namespace Candy.Web
             );
             routes.MapRoute(
                 "Category",
-                string.Concat(AppConstants.CategoryUrlIdentifier, "/{slug}"),
+                string.Concat(AppConstants.CategoryUrlIdentifier, "/{slug}.html"),
                 new { controller = "Category", action = "Show", slug = UrlParameter.Optional },
                 new string[] { "Candy.Web.Controllers" }
             );
             routes.MapRoute(
                 "Topic",
-                string.Concat(AppConstants.TopicUrlIdentifier, "/{id}"),
+                string.Concat(AppConstants.TopicUrlIdentifier, "/{id}.html"),
                 new { controller = "Topic", action = "Show", id = UrlParameter.Optional },
                 new string[] { "Candy.Web.Controllers" }
             );
             routes.MapRoute(
                 "User",
-                string.Concat(AppConstants.UserUrlIdentifier, "/{username}"),
+                string.Concat(AppConstants.UserUrlIdentifier, "/{username}.html"),
                 new { controller = "User", action = "Index", slug = UrlParameter.Optional },
                 new string[] { "Candy.Web.Controllers" }
             );
