@@ -112,15 +112,42 @@
     <Content Include="Plugins\Admin\js\jquery.min.js" />
     <Content Include="Plugins\Admin\js\select2.min.js" />
     <Content Include="Plugins\Admin\js\simditor-all.min.js" />
+    <Content Include="Themes\Default\img\jquery.fs.selecter-arrow.png" />
+    <Content Include="Themes\Default\img\logo.png" />
+    <Content Include="Themes\Default\js\jquery.fs.selecter.js" />
+    <Content Include="Themes\Default\js\jquery.taginput.src.js" />
+    <Content Include="Themes\Worktile\css\animate.min.css" />
+    <Content Include="Themes\Worktile\css\common.css" />
+    <Content Include="Themes\Worktile\css\font-awesome.css" />
+    <Content Include="Themes\Worktile\css\font-awesome.min.css" />
+    <Content Include="Themes\Worktile\css\login.css" />
+    <Content Include="Themes\Worktile\css\simditor.css" />
+    <Content Include="Themes\Worktile\css\style.css" />
+    <Content Include="Themes\Worktile\fonts\fontawesome-webfont.svg" />
+    <Content Include="Themes\Worktile\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Themes\Worktile\img\bg_small.jpg" />
+    <Content Include="Themes\Worktile\img\image.png" />
+    <Content Include="Themes\Worktile\img\loading-upload.gif" />
+    <Content Include="Themes\Worktile\img\login_bg.jpg" />
+    <Content Include="Themes\Worktile\img\login_icon.png" />
+    <Content Include="Themes\Worktile\img\login_logo.png" />
+    <Content Include="Themes\Worktile\img\logo.jpg" />
+    <Content Include="Themes\Worktile\img\section.png" />
+    <Content Include="Themes\Worktile\js\bootstrap-tagsinput-angular.js" />
+    <Content Include="Themes\Worktile\js\bootstrap-tagsinput.min.js" />
+    <Content Include="Themes\Worktile\js\bootstrap.js" />
+    <Content Include="Themes\Worktile\js\bootstrap.min.js" />
+    <Content Include="Themes\Worktile\js\candy.js" />
+    <Content Include="Themes\Worktile\js\jquery.min.js" />
+    <Content Include="Themes\Worktile\js\simditor-all.js" />
+    <Content Include="Themes\Worktile\js\simditor-all.min.js" />
+    <Content Include="Themes\Worktile\js\simditor-markdown.js" />
+    <Content Include="Themes\Worktile\js\uploader.js" />
+    <Content Include="Themes\Worktile\screenshot.png" />
     <Content Include="Themes\Default\css\animate.min.css" />
-    <Content Include="Themes\Default\css\bootstrap-theme.css" />
-    <Content Include="Themes\Default\css\bootstrap-theme.min.css" />
-    <Content Include="Themes\Default\css\bootstrap.css" />
-    <Content Include="Themes\Default\css\bootstrap.min.css" />
-    <Content Include="Themes\Default\css\font-awesome.css" />
-    <Content Include="Themes\Default\css\font-awesome.min.css" />
     <Content Include="Themes\Default\css\login.css" />
     <Content Include="Themes\Default\css\simditor.css" />
+    <Content Include="Themes\Default\css\common.css" />
     <Content Include="Themes\Default\css\style.css" />
     <Content Include="Themes\Default\fonts\fontawesome-webfont.svg" />
     <Content Include="Themes\Default\fonts\glyphicons-halflings-regular.svg" />
@@ -129,13 +156,8 @@
     <Content Include="Themes\Default\img\loading-upload.gif" />
     <Content Include="Themes\Default\img\login_icon.png" />
     <Content Include="Themes\Default\img\login_logo.png" />
-    <Content Include="Themes\Default\img\logo.jpg" />
     <Content Include="Themes\Default\img\section.png" />
     <Content Include="Themes\Default\img\login_bg.jpg" />
-    <Content Include="Themes\Default\js\bootstrap-tagsinput-angular.js" />
-    <Content Include="Themes\Default\js\bootstrap-tagsinput.min.js" />
-    <Content Include="Themes\Default\js\bootstrap.js" />
-    <Content Include="Themes\Default\js\bootstrap.min.js" />
     <Content Include="Themes\Default\js\candy.js" />
     <Content Include="Themes\Default\js\jquery.min.js" />
     <Content Include="Themes\Default\js\simditor-all.js" />
@@ -196,6 +218,10 @@
     <Content Include="Plugins\Admin\Views\tools\about.cshtml" />
     <Content Include="Plugins\Admin\Views\Topic\index.cshtml" />
     <Content Include="Plugins\Admin\Views\Topic\tags.cshtml" />
+    <Content Include="Plugins\Admin\Views\Page\index.cshtml" />
+    <Content Include="Plugins\Admin\Views\Page\new.cshtml" />
+    <None Include="Properties\PublishProfiles\candybbs - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\candybbs - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\icoding - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\icoding - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\icoding - Web Deploy %282%29.pubxml" />
@@ -225,6 +251,43 @@
     <Content Include="Themes\Default\Views\Home\Popular.cshtml" />
     <Content Include="Themes\Default\Views\Home\Sticky.cshtml" />
     <Content Include="Themes\Default\Views\Widget\NewTopics.cshtml" />
+    <Content Include="Themes\Worktile\fonts\fontawesome-webfont.eot" />
+    <Content Include="Themes\Worktile\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Themes\Worktile\fonts\fontawesome-webfont.woff" />
+    <Content Include="Themes\Worktile\fonts\FontAwesome.otf" />
+    <Content Include="Themes\Worktile\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Themes\Worktile\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Themes\Worktile\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Themes\Worktile\Theme.json" />
+    <Content Include="Themes\Worktile\Views\_ViewStart.cshtml" />
+    <Content Include="Themes\Worktile\Views\Category\index.cshtml" />
+    <Content Include="Themes\Worktile\Views\Category\show.cshtml" />
+    <Content Include="Themes\Worktile\Views\Home\index.cshtml" />
+    <Content Include="Themes\Worktile\Views\Home\Popular.cshtml" />
+    <Content Include="Themes\Worktile\Views\Home\Sticky.cshtml" />
+    <Content Include="Themes\Worktile\Views\Shared\_Layout.cshtml" />
+    <Content Include="Themes\Worktile\Views\Shared\_NewTopicLayout.cshtml" />
+    <Content Include="Themes\Worktile\Views\Topic\New.cshtml" />
+    <Content Include="Themes\Worktile\Views\Topic\show.cshtml" />
+    <Content Include="Themes\Worktile\Views\User\index.cshtml" />
+    <Content Include="Themes\Worktile\Views\User\login.cshtml" />
+    <Content Include="Themes\Worktile\Views\User\LoginBox.cshtml" />
+    <Content Include="Themes\Worktile\Views\User\Register.cshtml" />
+    <Content Include="Themes\Worktile\Views\User\settings.cshtml" />
+    <Content Include="Themes\Worktile\Views\Widget\CreateTopic.cshtml" />
+    <Content Include="Themes\Worktile\Views\Widget\HotTags.cshtml" />
+    <Content Include="Themes\Worktile\Views\Widget\HotUsers.cshtml" />
+    <Content Include="Themes\Worktile\Views\Widget\index.cshtml" />
+    <Content Include="Themes\Worktile\Views\Widget\LeftWidget.cshtml" />
+    <Content Include="Themes\Worktile\Views\Widget\loginbox.cshtml" />
+    <Content Include="Themes\Worktile\Views\Widget\NewTopics.cshtml" />
+    <Content Include="Themes\Worktile\Views\Widget\NewUsers.cshtml" />
+    <Content Include="Themes\Worktile\Views\Widget\Status.cshtml" />
+    <Content Include="Themes\Worktile\Views\Widget\UserInfo.cshtml" />
+    <Content Include="Themes\Default\Views\Comment\Index.cshtml" />
+    <Content Include="Themes\Default\Views\Comment\New.cshtml" />
+    <Content Include="Themes\Default\Views\Shared\_UserLayout.cshtml" />
+    <Content Include="Themes\Default\Views\Shared\_Pager.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -252,6 +315,7 @@
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\MenuController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PageController.cs" />
     <Compile Include="Areas\Admin\Controllers\SettingsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ToolsController.cs" />
     <Compile Include="Areas\Admin\Controllers\TopicController.cs" />
@@ -263,8 +327,10 @@
     <Compile Include="Areas\Admin\ViewModels\UserViewModels.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstallController.cs" />
+    <Compile Include="Controllers\TagController.cs" />
     <Compile Include="Controllers\TopicController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\WidgetController.cs" />
@@ -273,8 +339,10 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CategoryViewModel.cs" />
+    <Compile Include="ViewModels\CommentViewModel.cs" />
     <Compile Include="ViewModels\Mapping\ViewModelMapping.cs" />
     <Compile Include="ViewModels\MessageViewModel.cs" />
+    <Compile Include="ViewModels\Pager.cs" />
     <Compile Include="ViewModels\StatusViewModel.cs" />
     <Compile Include="ViewModels\TopicViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
@@ -295,7 +363,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Views\Menu\" />
+    <Folder Include="Views\Comment\" />
+    <Folder Include="Views\Home\" />
+    <Folder Include="Views\Tag\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

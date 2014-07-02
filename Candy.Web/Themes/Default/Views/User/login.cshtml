@@ -15,7 +15,7 @@
     <div id="container">
         <div class="login animated fadeInDown" data-img="@Url.Absolute(Html.Path("img/login_bg.jpg"))" data-width="2560" data-height="1440">
             <a href="@Url.Absolute("~/")" class="logo">
-                <img src="@Url.Absolute(Html.Path("img/login_logo.png"))" title="@AppHelpers.GetSiteName()" />
+                <img src="@Url.Absolute(Html.Path("img/logo.png"))" title="@AppHelpers.GetSiteName()" />
             </a>
             <form action="@Url.Absolute("~/user/loginforjson/")" method="post">
                 <input type="hidden" name="UrlReferrer" value="@Request.UrlReferrer" />

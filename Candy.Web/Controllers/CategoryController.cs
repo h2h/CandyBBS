@@ -33,30 +33,10 @@ namespace Candy.Web.Controllers
         }
         public ActionResult Index()
         {
-            var catViewModel = new List<SubCategoryViewModel>();
-
             using (UnitOfWorkManager.NewUnitOfWork())
             {
-                foreach (var category in this._categoryService.GetAllMainCategories(true))
-                {
-                    var permissionSet = RoleService.GetPermissions(category, UsersRole);
-
-                    var allSubPermissionSets = new Dictionary<Category,PermissionSet>();
-
-                    foreach (var c in this._categoryService.GetAllSubCategories(category.Id))
-                    {
-                        allSubPermissionSets.Add(c, RoleService.GetPermissions(c, UsersRole));
-                    }
-                    var subCategories = new SubCategoryViewModel
-                    {
-                        ParentCategory = category,
-                        AllPermissionSets = allSubPermissionSets
-                    };
-                    catViewModel.Add(subCategories);
-
-                }
+                return View(_categoryService.GetAll());
             }
-            return View(new CategoryViewModel { Categories = catViewModel });
         }
         public ActionResult Show(string slug, int? p)
         {

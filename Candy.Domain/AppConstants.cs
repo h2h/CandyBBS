@@ -6,7 +6,8 @@ namespace Candy.Domain
     {
         post,
         topic,
-        page
+        page,
+        comment
     }
     public static class AppConstants
     {
@@ -18,6 +19,8 @@ namespace Candy.Domain
         public const string DefaultTheme = "Default";
         public const string CurrentTheme = "CurrentTheme";
         public const string MobileTheme = "Mobile";
+
+        public const int PagingGroupSize = 10;
 
         // View Bag Constants
         public const string MessageViewBagName = "Message";

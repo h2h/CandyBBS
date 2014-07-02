@@ -1,0 +1,59 @@
+﻿@model Topic
+@{
+    Layout = null;
+    var comments = Model.Posts.Where(a => a.PostType == PostType.comment.ToString()).ToList();
+}
+<div class="forum-panel" id="comment-list">
+    <div class="page-title">
+        <h2>@Html.Lang("评论")</h2>
+    </div>
+    <div class="comment-list">
+        @if (comments.Any())
+        {
+            for (var i = 0; i < comments.Count(); i++)
+            {
+                var comment = comments[i]; 
+                <div class="comment">
+                    <div class="comment-meta">
+                        <a class="comment-user" href="http://localhost:3173/u/admin.html" title="admin">
+                            <span class="comment-user-avatar">
+                                <img src="http://www.gravatar.com/avatar/d2abcca58cd31c66ad86ae5557327b49?s=30" title="admin">
+                            </span>
+                            <span class="comment-user-name">admin</span>
+                        </a>
+                        <span class="pull-right">
+                            <span class="comment-date">2014-06-30</span>
+                            <span class="comment-reply-link">
+                                <a href="#">回复</a>
+                            </span>
+                            <span class="tips tips-important comment-floor">#1</span>
+                        </span>
+                    </div>
+                    <div class="comment-context">
+                        比较了几个项目， TOWER.IM,TEAMBITION,还有WORKTILE. WORKTILE比较适合我，但是有几个建议： 1.速度，经常会看到类似菊花，在load 2.注册页面，其实可以更简单些。或者是考虑的更加详细 注册中要填用户名，邮箱，公司名，密码等。 ASANA，就只要一个邮箱。 3.还是用户名，其实我不想出现在工作台。但是没想到，在被@答复的时候，显示的是用户名。在工作台中，显示的名称，能否自定义？ --！再次登录的时候，发现显示了真实姓名了，但是我确认我第一次用的时候，显示的是用户名。
+                    </div>
+                </div>
+            } 
+        }else
+        {
+            <div class="empty-panel">
+                <i class="fa fa-comments"></i>
+                <br>
+                <span>暂无评论，来抢沙发</span>
+            </div>
+        }
+    </div>
+    <div class="comment-pager">
+        <ul class="pagination">
+            <li class="disabled">
+                <a href="javascript:;" class="paginator-previous">上一页</a>
+            </li>
+            <li class="active"><a href="?page=1">1</a></li>
+            <li class="paginator-page"><a href="?page=2">2</a></li>
+            <li class="paginator-page"><a href="?page=3">3</a></li>
+            <li class="paginator-page"><a href="?page=4">4</a></li>
+            <li class=""><a href="?page=2" class="paginator-next">下一页</a></li>
+        </ul>
+    </div>
+</div>
+@Html.Partial("New", Model)

@@ -68,13 +68,32 @@ namespace Candy.Services
         }
         public Post Add(Post post)
         {
-            return new Post();
+            return _postRepository.Add(post);
         }
         
         public Post AddNewPost(string postContent, Topic topic, User user, out PermissionSet permissions)
         {
-            permissions = null;
-            return new Post();
+            permissions = _roleService.GetPermissions(topic.Category, UsersRole(user));
+
+            if (permissions[AppConstants.PermissionDenyAccess].IsTicked || permissions[AppConstants.PermissionReadOnly].IsTicked)
+            {
+                throw new ApplicationException("");
+            }
+
+            var comment = new Post
+            {
+                PostContent = postContent,
+                User = user,
+                Topic = topic,
+                IpAddress = StringUtils.GetUsersIpAddress(),
+                PostType = PostType.comment.ToString()
+            };
+
+            comment = SanitizePost(comment);
+
+            Add(comment);
+
+            return comment;
         }
         public bool Delete(Post post)
         {

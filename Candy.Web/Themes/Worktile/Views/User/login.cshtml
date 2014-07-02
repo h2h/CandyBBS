@@ -1,0 +1,269 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@AppHelpers.GetSiteName() > @Html.Lang("登录","登录")</title>
+    <link href="@Url.Absolute(Html.Path("css/animate.min.css"))" rel="stylesheet" />
+    <link href="@Url.Absolute(Html.Path("css/login.css"))" rel="stylesheet" />
+    <script src="@Url.Absolute(Html.Path("js/jquery.min.js"))"></script>
+</head>
+<body>
+    <canvas class="fix" id="blur"></canvas>
+    <div id="container">
+        <div class="login animated fadeInDown" data-img="@Url.Absolute(Html.Path("img/login_bg.jpg"))" data-width="2560" data-height="1440">
+            <a href="@Url.Absolute("~/")" class="logo">
+                <img src="@Url.Absolute(Html.Path("img/login_logo.png"))" title="@AppHelpers.GetSiteName()" />
+            </a>
+            <form action="@Url.Absolute("~/user/loginforjson/")" method="post">
+                <input type="hidden" name="UrlReferrer" value="@Request.UrlReferrer" />
+                <div class="login-container">
+                    <div class="form-group">
+                        <label for="username"><i class="icon icon-user"></i></label>
+                        <input type="text" id="username" name="username" class="text" value="" placeholder="@Html.Lang("请输入帐号或邮箱")" data-message="@Html.Lang("账号不能为空")" />
+                        <div class="tips login-msg">
+                            <span>msg</span>
+                            <i class="tips-arrow">
+                            </i>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password"><i class="icon icon-pass"></i></label>
+                        <input type="password" id="password" name="password" class="text" value="" placeholder="@Html.Lang("请输入密码")" data-message="@Html.Lang("密码不能为空")" />
+                        <a href="@Url.Content("~/forgetpassword/")" class="help" data-ele="pass-help" data-message="@Html.Lang("忘记密码？")">
+                            <i class="icon icon-help"></i>
+                            <span class="tips pass-help">
+                                <span>@Html.Lang("忘记密码？")</span>
+                                <i class="tips-arrow"></i>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="icon icon-checkbox"></i><input type="checkbox" value="RememberMe" id="rememberme" /></label>
+                        <div class="subline">
+                            <span class="rememberme">@Html.Lang("记住登录")</span>
+                            <a href="@Url.Absolute("~/register/")">
+                                @Html.Lang("注册")
+                                <i class="icon icon-adduser"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn">@Html.Lang("登录")</button>
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var Candy = {
+
+            init: function () {
+                Candy.fullScreen();
+            },
+            fullScreen: function () {
+                if (!$('.login').length) return;
+
+                var s = $('.login').data('img'),
+                    w = $('.login').data('width'),
+                    h = $('.login').data('height');
+
+                if (!!document.createElement("canvas").getContext) {
+                    var self, img, bg;
+                    $('#blur').each(function () {
+                        self = this;
+                        img = new Image;
+
+                        img.src = s;
+
+                        img.onload = function () {
+                            bg = new CanvasImage(self, this);
+                            bg.blur(3);
+                            reSize('#blur')
+
+                            $('#blur').fadeOut(3000)
+                            setInterval(function () {
+                                if ($('#blur').is(':hidden')) {
+                                    $('#blur').fadeIn(2900)
+                                } else {
+                                    $('#blur').fadeOut(2900)
+                                }
+                            }, 3000)
+                        };
+                    });
+
+                    $('<img id="cover" class="fix" src="' + s + '" />').load(function () {
+                        reSize('#cover')
+                    }).insertBefore('#blur');
+
+                } else {
+
+                    $('<img id="cover" class="fix" src="' + s + '" />').load(function () {
+                        reSize('#cover')
+                    }).prependTo('body');
+                }
+
+                function reSize(id) {
+                    Candy.fullImage(id, w, h, function (_height) {
+                        $(".login").css('top', (_height - $(".login").height()) / 2);
+                    });
+                    $(window).on('resize', function () {
+                        Candy.fullImage(id, w, h, function (_height) {
+                            $(".login").css('top', (_height - $(".login").height()) / 2);
+                        });
+                    });
+                }
+            },
+            fullImage: function(id, w, h,func) {
+                // reget window height
+                _height = $(window).height();
+                _width = $(window).width();
+
+                var ratio = h / w;
+                if (_height / _width > ratio) {
+                    $(id).height(_height).width(_height / ratio)
+                } else {
+                    $(id).width(_width).height(_width * ratio)
+                };
+                $(id).css('left', (_width - $(id).width()) / 2);
+                $(id).css('top', (_height - $(id).height()) / 2);
+
+                func(_height);
+            },
+            tips: function (ele, msg, m) {
+                if (m) {
+                    if (msg != "" && msg != null && msg != undefined)
+                    {
+                        $(ele).find("span").html(msg);
+                    }
+                    $(ele).removeClass("fadeOutRight animated").addClass("fadeInRight animated");
+                } else {
+                    if ($(ele).hasClass("animated")) {
+                        $(ele).removeClass("fadeInRight animated").addClass("fadeOutRight animated");
+                    }
+                }
+            },
+            shake: function (ele,func) {
+                return ele.each(function () {
+                    var p, w;
+                    p = jQuery(ele).css('position', 'relative');
+                    w = 45;
+                    for (var i = 1; 9 > i; i++) { p.animate({ left: (w - (w / 8) * i) * ((i % 2 == 0) ? 1 : -1) }, 100 - (i * i)) }
+                    setTimeout(func,800);
+                });
+            }
+        };
+
+        var CanvasImage = function (ele, img) {
+            this.element = ele;
+            this.image = img;
+            this.element.width = this.image.width;
+            this.element.height = this.image.height;
+            this.context = this.element.getContext("2d");
+            this.context.drawImage(this.image, 0, 0);
+        };
+        CanvasImage.prototype.blur = function (i) {
+            this.context.globalAlpha = 0.5;
+            for (var y = -i; y <= i; y += 2) {
+                for (var x = -i; x <= i; x += 2) {
+                    this.context.drawImage(this.element, x, y);
+                    if (x >= 0 && y >= 0) {
+                        this.context.drawImage(this.element, -(x - 1), -(y - 1));
+                    }
+                }
+            }
+            this.context.globalAlpha = 1
+        };
+
+        $(document).ready(function () {
+            Candy.init();
+
+            var login_container = $(".login-container");
+            var pass_help = $(".pass-help");
+            var login_msg = $(".login-msg");
+            var username = $("#username");
+            var password = $("#password");
+            var remember = $("#rememberme");
+
+            $(".help").on("mouseenter", function () {
+                Candy.tips(pass_help, $(this).data("message"), true);
+            }).on("mouseleave", function () {
+                Candy.tips(pass_help, $(this).data("message"), false);
+            });
+
+            username.on("focus", function () {
+                Candy.tips(login_msg, "", false);
+                $(this).parent().addClass("active");
+            }).on("blur", function () {
+                if ($(this).val() == "")
+                {
+                    Candy.tips(login_msg, $(this).data("message"), true);
+                }
+                $(this).parent().removeClass("active");
+            });
+
+            password.on("focus", function () {
+                Candy.tips(pass_help, "", false);
+                $(this).parent().addClass("active");
+            }).on("blur", function () {
+                if ($(this).val() == "") {
+                    Candy.tips(pass_help, $(this).data("message"), true);
+                }
+                $(this).parent().removeClass("active");
+            });
+
+            remember.on("change", function () {
+                if ($(this).prop("checked")) {
+                    $(".icon-checkbox").addClass("active");
+                } else {
+                    $(".icon-checkbox").removeClass("active");
+                }
+            });
+
+            $(".rememberme").on("click", function () {
+                if (remember.prop("checked")) {
+                    remember.prop("checked", false);
+                    $(".icon-checkbox").removeClass("active");
+                } else {
+                    remember.prop("checked", true);
+                    $(".icon-checkbox").addClass("active");
+                }
+            });
+            
+            $("button[type=submit]").on("click", function () {
+
+                if (username.val() == "") {
+                    Candy.shake(login_container, function () {
+                        Candy.tips(login_msg, username.data("message"), true);
+                    });
+                    return false;
+                }
+
+                if (password.val() == "") {
+                    Candy.shake(login_container, function () {
+                        Candy.tips(pass_help, password.data("message"), true);
+                    });
+                    return false;
+                }
+
+                $.ajax({
+                    url: $("form").prop("action"),
+                    type: "post",
+                    data: $("form").serialize(),
+                    success: function (data) {
+                        if (data.Result == "true") {
+                            location.href = data.ReturnUrl;
+                        } else {
+                            Candy.shake(login_container, function () {
+                                Candy.tips(login_msg, data.Message, true);
+                            });
+                        }
+                    }
+                });
+                return false;
+            });
+                
+        });
+    </script>
+</body>
+</html>

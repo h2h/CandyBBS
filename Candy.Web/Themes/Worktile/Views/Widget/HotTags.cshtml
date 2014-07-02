@@ -1,0 +1,22 @@
+﻿@model Dictionary<TopicTag,int>
+@{
+    Layout = null;
+}
+<div class="widget" id="hottags">
+    <div class="widget-title">
+        <h3>
+            @Html.Lang("热门标签")
+        </h3>
+        <a class="tips tips-important" href="@Url.Absolute("~/Tags/")">标签云</a>
+    </div>
+    <div class="widget-body">
+        <ul class="widget-tags">
+            @foreach (var tag in Model)
+            {
+                <li>
+                    <a href="@Url.Absolute(tag.Key.NiceUrl)">@tag.Key.Tag</a>
+                </li> 
+            }
+        </ul>
+    </div>
+</div>

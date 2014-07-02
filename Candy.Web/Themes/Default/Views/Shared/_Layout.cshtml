@@ -10,33 +10,30 @@
     <meta property="og:url" content="" />
     @RenderSection("SocialMeta", false)
     <link rel="alternate" type="application/rss+xml" title="RSS 2.0 Feed" href="" />
-    <link href="@Url.Absolute(Html.Path("css/bootstrap.css"))" rel="stylesheet" />
-    <link href="@Url.Absolute(Html.Path("css/bootstrap-theme.css"))" rel="stylesheet" />
-    <link href="@Url.Absolute(Html.Path("css/font-awesome.css"))" rel="stylesheet" />
+    <link href="@Url.Absolute(Html.Path("css/common.css"))" rel="stylesheet" />
     <link href="@Url.Absolute(Html.Path("css/style.css"))" rel="stylesheet" />
     <script src="@Url.Absolute(Html.Path("js/jquery.min.js"))"></script>
     <script src="@Url.Absolute(Html.Path("js/candy.js"))"></script>
-    <script src="@Url.Absolute(Html.Path("js/bootstrap.js"))"></script>
     @RenderSection("Header", false)
 </head>
 <body>
     <div class="page-container">
         <header id="header" class="header header-fixed">
             <div class="container">
-                <div class="row row-l-250">
+                <div class="row-l-250">
                     <div class="col-l-250">
                         <div class="logo">
                             <a href="">
-                                <img src="@Url.Absolute(Html.Path("img/logo.jpg"))" title="@Html.Lang("Candy BBS")" />
+                                <img src="@Url.Absolute(Html.Path("img/logo.png"))" title="@Html.Lang("Candy BBS")" />
                             </a>
                         </div>
                     </div>
                     <div class="col-l-100">
-                        <div class="row row-r-300">
-                            <div class="col-r-100">
-                                <div class="row row-r-300">
-                                    <div class="col-r-100">
-                                        <ul class="nav navbar-nav navbar-left nav-pills" id="left-nav">
+                        <div class="row-r-300">
+                            <div class="col-l-300">
+                                <div class="row-r-300">
+                                    <div class="col-l-300">
+                                        <ul class="nav navbar-nav" id="header-left-menu">
                                             <li class="active">
                                                 <a href="@Url.Absolute("~/")">@Html.Lang("首页")</a>
                                             </li>
@@ -58,7 +55,7 @@
                                 </div>
                             </div>
                             <div class="col-r-300">
-                                <ul class="nav nav-pills navbar-right" id="right-nav">
+                                <ul class="nav" id="header-right-menu">
                                     @if (User.Identity.IsAuthenticated)
                                     {
                                         var currentUser = DependencyResolver.Current.GetService<IUserService>().GetUser(User.Identity.Name);
@@ -103,46 +100,19 @@
         </header>
         <section class="main-content">
             <div class="container">
-                <div class="row row-l-250">
-                    <div class="col-l-250 leftsidebar">
-                        @Html.Action("LeftWidget", "Widget")
+                <div class="row-r-300">
+                    <div class="col-l-300 content">
+                        @RenderBody()
                     </div>
-                    <div class="col-l-100">
-                        <div class="row row-r-300">
-                            <div class="col-r-100 content">
-                                @RenderBody()
-                            </div>
-                            <div class="col-r-300 rightsidebar">
-                                @Html.Action("Index", "Widget")
-                            </div>
-                        </div>
+                    <div class="col-r-300">
+                        @Html.Action("Index", "Widget")
                     </div>
                 </div>
             </div>
         </section>
         <footer id="footer">
             <div class="container">
-                <div class="row">
-                    <div class="col-xs-6">
-                        <p>All Right Reserved by <a href="http://www.icoding.me" target="_blank">iCoding.Me</a></p>
-                    </div>
-                    <div class="col-xs-6">
-                        <ul class="nav navbar-nav nav-pills navbar-right">
-                            <li>
-                                <a href="">@Html.Lang("首页", "首页")</a>
-                            </li>
-                            <li>
-                                <a href="#">@Html.Lang("关于", "关于")</a>
-                            </li>
-                            <li>
-                                <a href="#">@Html.Lang("服务", "服务")</a>
-                            </li>
-                            <li>
-                                <a href="#">@Html.Lang("帮助", "帮助")</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <p>All Right Reserved by <a href="http://www.icoding.me" target="_blank">iCoding.Me</a></p>
             </div>
         </footer>
     </div>

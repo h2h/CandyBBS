@@ -1,0 +1,26 @@
+﻿@model ShowTopicViewModel
+@{
+    ViewBag.Title = Model.Topic.Name;
+}
+<div class="page-title">
+    <h2>@Model.Topic.Name</h2>
+</div>
+<div class="meta">
+    <span>
+        <a href="@Url.Absolute(Model.Topic.User.NiceUrl)" title="@Model.Topic.User.Slug">@Model.Topic.User.Slug</a>
+        &nbsp;发布于&nbsp;@DatesUI.GetPrettyDate(Model.Topic.Posts.FirstOrDefault().DateCreated)&nbsp;
+    </span>
+    <span>
+        回复(@Model.Topic.Posts.Where(p => p.PostType == PostType.post.ToString()).Count())
+    </span>
+    <span>
+        阅读(@Model.Topic.Views)
+    </span>
+    <span>
+        最后回复来自
+        <a href="@Url.Absolute("~/user/info/1")" title="@Model.Topic.User.Slug">@Model.Topic.User.Slug</a>
+    </span>
+</div>
+<div class="topic-context typo">
+    @Html.Raw(Model.TopicStarterPost.PostContent)
+</div>

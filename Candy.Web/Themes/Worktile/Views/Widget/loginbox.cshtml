@@ -1,0 +1,38 @@
+﻿@{
+    Layout = null;
+}
+<div class="widget" id="loginbox">
+    <ul class="tab">
+        <li class="lb-login">
+            <span>@Html.Lang("登录")</span>
+        </li>
+        <li class="lb-register">
+            <a href="@Url.Absolute("~/register/")"><span>@Html.Lang("注册")</span></a>
+        </li>
+    </ul>
+    <form action="@Url.Absolute("~/login")" method="post" class="wd-loginform">
+        <input type="hidden" name="returnurl" value="" />
+        <p>
+            <label for="username"><i class="fa fa-user"></i></label>
+            <input type="text" name="username" id="username" value="" placeholder="@Html.Lang("请输入用户名")" />
+        </p>
+        <p>
+            <label for="password"><i class="fa fa-lock"></i></label>
+            <input type="password" name="password" id="password" value="" placeholder="@Html.Lang("请输入密码")"/>
+        </p>
+        <p class="btns">
+            <button type="submit">@Html.Lang("登录")</button>
+        </p>
+    </form>
+    <ul class="other-login">
+        <li class="qqlogin">
+            <a href="">QQ</a>
+        </li>
+        <li class="weibologin">
+            <a href="">微博</a>
+        </li>
+        <li class="glogin">
+            <a href="">G+</a>
+        </li>
+    </ul>
+</div>

@@ -143,6 +143,21 @@
                         </li>
                     </ul>
                 </li>
+                <li @(controller == "page" ? "class=open":"")>
+                    <a href="#">
+                        <i class="fa fa-cog"></i>
+                        <span class="title">@Html.Lang("页面")</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li @(action == "index" && controller == "page" ? "class=active" : "")>
+                            <a href="@Url.Absolute("~/admin/page/index/")">@Html.Lang("所有页面")</a>
+                        </li>
+                        <li @(action == "new" && controller == "page" ? "class=active" : "")>
+                            <a href="@Url.Absolute("~/admin/page/new/")">@Html.Lang("添加新页面")</a>
+                        </li>
+                    </ul>
+                </li>
                 <li @(controller == "topic" ? "class=open" : "")>
                     <a href="#">
                         <i class="fa fa-cog"></i>

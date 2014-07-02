@@ -1,0 +1,58 @@
+﻿@model CategoryViewModel
+@{
+    ViewBag.Title = Html.Lang("版块列表");
+}
+<div class="page-title">
+    <h2>@Html.Lang("版块列表")</h2>
+</div>
+<div id="section">
+    @foreach (var m in Model.Categories)
+    {
+            <div class="panel">
+            <div class="panel-header">
+                <h3>@m.ParentCategory.Name</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    @foreach (var s in m.AllPermissionSets.Keys)
+                    {
+                        if (m.AllPermissionSets[s][AppConstants.PermissionDenyAccess].IsTicked)
+                        {
+                            continue;
+                        }
+                        //话题总数
+                        var topicCount = s.Topics.Count;
+                        //今日话题
+                        var todayTopicCount = s.Topics.Where(x => x.CreateDate.ToShortDateString() == DateTime.UtcNow.ToShortDateString()).Count();
+
+                        var lastTopic = s.Topics.OrderByDescending(x => x.CreateDate).FirstOrDefault();
+                        <div class="col-xs-6">
+                            <div class="forum-avatar">
+                                <a href="@Url.Absolute(s.NiceUrl)">
+                                    <img src="@Url.Absolute(Html.Path("img/section.png"))" />
+                                </a>
+                            </div>
+                            <div class="forum-info">
+                                <h3 class="forum-title">
+                                    <a href="@Url.Absolute(s.NiceUrl)">@s.Name</a>
+                                </h3>
+                                @if (lastTopic != null)
+                                {
+                                    <a href="@Url.Absolute(lastTopic.NiceUrl)" class="new-topic">@lastTopic.Name</a>
+                                }
+                                else
+                                {
+                                    <p>@s.Description</p>
+                                }
+                            </div>
+                            <div class="forum-meta">
+                                <span class="tcount" title="@Html.Lang("今日话题")">@todayTopicCount</span>
+                                <span class="ncount" title="@Html.Lang("话题统计")">@topicCount</span>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>

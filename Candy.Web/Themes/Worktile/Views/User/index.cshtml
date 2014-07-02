@@ -1,0 +1,63 @@
+﻿@model Candy.Domain.Models.User
+@{
+    ViewBag.Title = Html.Lang("个人主页");
+    var avatar = string.Empty;
+    if (Model.Avatar.IsNullEmpty())
+    {
+        avatar = StringUtils.GetGravatarImage(Model.Email, 300);
+        if (avatar.IsNullEmpty())
+        {
+            avatar = DependencyResolver.Current.GetService<Candy.Domain.Interfaces.Services.ISettingsService>().Get(AppConstants.DefaultUserAvatar).Value;
+        }
+    }
+    else
+    {
+        avatar = Url.Content(Model.Avatar);
+    }
+}
+<div id="main" class="grid grid-left-300">
+    <div id="sidebar" class="col-3-300">
+        <div class="panel">
+            <div class="panel-body nopadding">
+                <div class="user-avatar">
+                    <a href="">
+                        <img src="@avatar" width="300" alt="@Model.UserName" title="@Model.UserName" />
+                        <span class="reavatar">@Html.Lang("修改头像")</span>
+                    </a>
+                </div>
+                <div class="user-menu">
+                    <ul>
+                        <li class="username">
+                            <span>@Model.Slug</span>
+                        </li>
+                        <li class="active">
+                            <a href="">@Html.Lang("动态")</a>
+                        </li>
+                        <li>
+                            <a href="">@Html.Lang("主题")</a>
+                        </li>
+                        <li>
+                            <a href="">@Html.Lang("回复")</a>
+                        </li>
+                        <li>
+                            <a href="">
+                                @Html.Lang("消息")
+                                <em>(9)</em>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Absolute("~/settings/")">@Html.Lang("设置")</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="section" class="col-4-300">
+        <div class="panel">
+            <div class="panel-body">
+                Section
+            </div>
+        </div>
+    </div>
+</div>

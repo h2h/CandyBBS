@@ -1,60 +1,58 @@
 ﻿@model CreateTopicViewModel
 @{
-    Layout = "~/Themes/Default/Views/Shared/_NewTopicLayout.cshtml";
     ViewBag.Title = Html.Lang("发布主题");
 }
-<div id="main" class="grid grid-right-300">
-    <div class="col-1-300">
-        <div class="panel">
-            <div class="panel-body no-padding">
-                <form method="post" action="@Url.Absolute("~/Topic/New/")" id="topic-form" class="form-box">
-                    <div class="form-group">
-                        <input type="text" id="name" name="name" value="@Model.Name" class="form-control" placeholder="@Html.Lang("请输入主题标题")" />
-                    </div>
-                    <div class="form-group">
-                        <textarea name="content" id="editor" class="text" placeholder="@Html.Lang("请输入主题内容")"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="tags" id="tags" data-role="tagsinput" class="text" placeholder="@Html.Lang("请输入主题标签")" />
-                    </div>
+<div class="forum-panel">
+    <div class="page-title">
+        <h2>@Html.Lang("发表主题")</h2>
+    </div>
+    <div class="topic-editor">
+        <form method="post" action="@Url.Absolute("~/Topic/New/")" id="topic-form" class="form-box">
+            <div class="input-group">
+                <div class="input-group-btn">
                     @if (Model.Category == 0)
                     {
-                        <div class="form-group">
-                            <select name="category">
-                                @if (Model.Categories.Any())
+                        <select name="category" id="categories" class="selecter">
+                            @if (Model.Categories.Any())
+                            {
+                                foreach (var c in Model.Categories)
                                 {
-                                    foreach(var c in Model.Categories)
-                                    {
-                                        <option value="@c.Id">@c.Name</option> 
-                                    }
+                                    <option value="@c.Id">@c.Name</option>
                                 }
-                            </select>
-                        </div> 
-                    }else
-                    {
-                        <input type="hidden" name="category" value="@Model.Category" />
+                            }
+                        </select>
                     }
-                    <div class="form-group">
-                        <button type="submit" name="submit" class="btn btn-success">@Html.Lang("发布")</button>
-                    </div>
-                </form>
+                </div>
+                <input type="text" id="name" name="name" value="@Model.Name" class="form-control" placeholder="@Html.Lang("请输入主题标题")" />
             </div>
-        </div>
+            <div class="form-group" style="margin-bottom:0px;">
+                <textarea name="content" id="editor" class="text" placeholder="@Html.Lang("请输入主题内容")"></textarea>
+            </div>
+            <div class="form-group">
+                <input type="text" name="tags" id="tags" data-role="tagsinput" class="text" placeholder="@Html.Lang("请输入主题标签")" />
+            </div>
+            <div class="form-btns">
+                <button type="submit" name="submit" class="btn btn-success">@Html.Lang("发布")</button>
+            </div>
+        </form>
     </div>
 </div>
 @section Header
 {
-<link rel="stylesheet" type="text/css" href="@Url.Absolute(Html.Path("css/simditor.css"))" />
+<script type="text/javascript" src="@Url.Absolute(Html.Path("js/jquery.taginput.src.js"))"></script>
 <script type="text/javascript" src="@Url.Absolute(Html.Path("js/simditor-all.js"))"></script>
 <script type="text/javascript" src="@Url.Absolute(Html.Path("js/simditor-markdown.js"))"></script>
-<script type="text/javascript" src="@Url.Absolute(Html.Path("js/bootstrap-tagsinput.min.js"))"></script>
-<script type="text/javascript" src="@Url.Absolute(Html.Path("js/bootstrap-tagsinput-angular.js"))"></script>
 <script type="text/javascript">
     $(function () {
         var editor = new Simditor({
             textarea: $('#editor'),
             markdown: true,
             toolbarFloat:true
+        });
+
+        $("#tags").taginput({
+            style: "bootstrap",
+            placeholder:"添加标签"
         });
     });
 </script>

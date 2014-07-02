@@ -1,0 +1,65 @@
+﻿@model Pager
+@if (Model.TotalPages > 0)
+{
+    const int cGroupSize = AppConstants.PagingGroupSize;
+        
+    Model.CurrentPage = Math.Max(Model.CurrentPage, 1);
+    Model.CurrentPage = Math.Min(Model.CurrentPage, Model.TotalPages);
+
+    var urlHelper = new UrlHelper(Html.ViewContext.RequestContext, Html.RouteCollection);
+    var actionName = Html.ViewContext.RouteData.GetRequiredString("Action");
+        
+    var lastGroupNumber = Model.CurrentPage;
+    while ((lastGroupNumber % cGroupSize != 0))
+    {
+        lastGroupNumber++;
+    }
+        
+    var groupEnd = Math.Min(lastGroupNumber, Model.TotalPages);
+    var groupStart = lastGroupNumber - (cGroupSize - 1);
+        
+    <div class="forum-pager">
+        <ul class="pagination">
+        @if (Model.CurrentPage > 1)
+        {
+            var routingValues = new RouteValueDictionary(Model.RouteValues) { { "p", Model.CurrentPage-1} };
+            <li>
+                <a href="@urlHelper.Action(actionName,routingValues)" class="paginator-previous">@Html.Lang("上一页")</a>
+            </li>
+        }else
+        {
+            <li class="disabled">
+                <a href="#" class="paginator-previous">@Html.Lang("上一页")</a>
+            </li>
+        }
+        
+        @if(Model.CurrentPage > cGroupSize)
+        {
+            var routingValues = new RouteValueDictionary(Model.RouteValues) {{"p", groupStart - cGroupSize}};
+            <li>
+                <a href="@urlHelper.Action(actionName,routingValues)">...</a>
+            </li>
+        }
+        
+        @for(var i = groupStart;i<=groupEnd;i++)
+        {
+            var routingValues = new RouteValueDictionary(Model.RouteValues) { { "p", i } };
+            <li @(i==Model.CurrentPage?"class=active":"")>
+                <a href="@urlHelper.Action(actionName, routingValues)">@i</a>
+            </li>
+        }
+        @if (Model.CurrentPage < Model.TotalPages)
+        {
+            var routingValues = new RouteValueDictionary(Model.RouteValues) { { "p", Model.CurrentPage+1} };
+            <li>
+                <a href="@urlHelper.Action(actionName,routingValues)" class="paginator-previous">@Html.Lang("下一页")</a>
+            </li> 
+        }else
+        {
+            <li class="disabled">
+                <a href="#" class="paginator-previous">@Html.Lang("下一页")</a>
+            </li>
+        }
+        </ul>
+    </div>
+}
