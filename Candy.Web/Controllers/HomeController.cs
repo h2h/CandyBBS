@@ -36,11 +36,11 @@ namespace Candy.Web.Controllers
             {
                 if (p.HasValue)
                 {
-                    return View(this._topicService.GetPagedTopics(p.Value, int.Parse(SettingsService.Get(AppConstants.PageSize).Value), int.MaxValue));
+                    return View(this._topicService.GetPagedTopics(p.Value, int.Parse(SettingsService.Get(AppConstants.TopicsPerPage).Value), int.MaxValue));
                 }
                 else
                 {
-                    return View(this._topicService.GetPagedTopics(1, int.Parse(SettingsService.Get(AppConstants.PageSize).Value), int.MaxValue));
+                    return View(this._topicService.GetPagedTopics(1, int.Parse(SettingsService.Get(AppConstants.TopicsPerPage).Value), int.MaxValue));
                 }
             }
         }
@@ -55,11 +55,11 @@ namespace Candy.Web.Controllers
             {
                 if (p.HasValue)
                 {
-                    return View(this._topicService.GetPagedTopics(p.Value, int.Parse(SettingsService.Get(AppConstants.PageSize).Value), int.MaxValue));
+                    return View(this._topicService.GetPagedTopicForPopular(p.Value, int.Parse(SettingsService.Get(AppConstants.TopicsPerPage).Value), int.MaxValue));
                 }
                 else
                 {
-                    return View(this._topicService.GetPagedTopics(1, int.Parse(SettingsService.Get(AppConstants.PageSize).Value), int.MaxValue));
+                    return View(this._topicService.GetPagedTopicForPopular(1, int.Parse(SettingsService.Get(AppConstants.TopicsPerPage).Value), int.MaxValue));
                 }
             }
         }
@@ -74,11 +74,11 @@ namespace Candy.Web.Controllers
             {
                 if (p.HasValue)
                 {
-                    return View(this._topicService.GetPagedTopics(p.Value, int.Parse(SettingsService.Get(AppConstants.PageSize).Value), int.MaxValue));
+                    return View(this._topicService.GetPagedTopics(p.Value, int.Parse(SettingsService.Get(AppConstants.TopicsPerPage).Value), int.MaxValue));
                 }
                 else
                 {
-                    return View(this._topicService.GetPagedTopics(1, int.Parse(SettingsService.Get(AppConstants.PageSize).Value), int.MaxValue));
+                    return View(this._topicService.GetPagedTopics(1, int.Parse(SettingsService.Get(AppConstants.TopicsPerPage).Value), int.MaxValue));
                 }
             }
         }
@@ -91,6 +91,11 @@ namespace Candy.Web.Controllers
                 list = this._categoryService.GetAllMainCategories(true).ToList();
             }
             return View(list);
+        }
+
+        public ActionResult ImportData()
+        {
+            return View();
         }
 	}
 }

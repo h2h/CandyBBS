@@ -5,12 +5,18 @@
     {
         currentUser = DependencyResolver.Current.GetService<IUserService>().GetUser(User.Identity.Name);
     }
+
+    var routeData = RouteTable.Routes.GetRouteData(Context).Values;
+    var action = routeData["action"].ToString().ToLower();
+    var controller = routeData["controller"].ToString().ToLower();
+    var menu = ViewBag.Menu;
+    var subMenu = ViewBag.SubMenu;
 }
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title - Candy</title>
+    <title>@ViewBag.Title - @Html.Settings(AppConstants.SiteName)</title>
     <meta name="description" property="og:description" itemprop="description" content="" />
     <meta name="keywords" content="" />
     <meta property="og:site_name" content="" />
@@ -20,8 +26,6 @@
     <link href="@Url.Absolute(Html.Path("css/common.css"))" rel="stylesheet" />
     <link href="@Url.Absolute(Html.Path("css/style.css"))" rel="stylesheet" />
     <script src="@Url.Absolute(Html.Path("js/jquery.min.js"))"></script>
-    <script src="@Url.Absolute(Html.Path("js/candy.js"))"></script>
-    @RenderSection("Header", false)
 </head>
 <body>
     <div class="page-container">
@@ -31,7 +35,7 @@
                     <div class="col-l-250">
                         <div class="logo">
                             <a href="">
-                                <img src="@Url.Absolute(Html.Path("img/logo.png"))" title="@Html.Lang("Candy BBS")" />
+                                <img src="@Url.Absolute(Html.Path("img/logo.png"))" title="@Html.Settings(AppConstants.SiteName)" />
                             </a>
                         </div>
                     </div>
@@ -124,7 +128,7 @@
                                         <a href="@Url.Absolute(currentUser.NiceUrl)">@Html.Lang("动态")</a>
                                     </li>
                                     <li>
-                                        <a href="">@Html.Lang("帖子")</a>
+                                        <a href="@Url.Absolute("~/User/Topics/")">@Html.Lang("帖子")</a>
                                     </li>
                                     <li>
                                         <a href="">@Html.Lang("消息")</a>
@@ -136,7 +140,7 @@
                                         <a href="">@Html.Lang("用户组")</a>
                                     </li>
                                     <li>
-                                        <a href="@Url.Absolute("~/Settings/")">@Html.Lang("设置")</a>
+                                        <a href="@Url.Absolute("~/User/Settings/")">@Html.Lang("设置")</a>
                                     </li>
                                 </ul>
                             </div>
@@ -145,7 +149,7 @@
                             
                         }
                     </div>
-                    <div class="col-r-250 content" style="padding-left:20px;">
+                    <div class="col-r-250 content" style="padding:0px 0px 0px 20px;">
                         @RenderBody()
                     </div>
                 </div>
@@ -156,6 +160,14 @@
                 <p>All Right Reserved by <a href="http://www.icoding.me" target="_blank">iCoding.Me</a></p>
             </div>
         </footer>
+    </div>
+    <script src="@Url.Absolute(Html.Path("js/candy.js"))"></script>
+    @RenderSection("Scripts", false)
+    <div style="display:none">
+        <script type="text/javascript">
+            var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+            document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fa769ace86b6e57cbc43ff720efc5e35f' type='text/javascript'%3E%3C/script%3E"));
+        </script>
     </div>
 </body>
 </html>

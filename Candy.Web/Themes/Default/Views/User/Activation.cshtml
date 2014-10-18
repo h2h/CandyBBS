@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = Html.Lang("激活账号");
+    Layout = Html.Path("Views/Shared/_FullWidthLayout.cshtml");
+}
+<div class="base-settings">
+    <div class="forum-panel">
+        <div class="page-title">
+            <h2>@Html.Lang("激活账号")</h2>
+        </div>
+        <div class="activation">
+            @if (ViewBag.Type == "Register")
+            {
+                <div class="register-success">
+                    <i class="fa fa-check"></i>
+                    <p>
+                        注册成功
+                    </p>
+                    <p>
+                        一封激活邮件已经发送到邮箱<em>@ViewBag.Email</em>，请查收邮件并激活帐号。
+                    </p>
+                </div>
+            }
+            else if (ViewBag.Type == "Success")
+            {
+                <div class="activation-success">
+                    <i class="fa fa-check"></i>
+                    <p>激活成功</p>
+                </div> 
+            }
+            else if (ViewBag.Type == "Error")
+            {
+                <div class="activation-error">
+                    <i class="fa fa-times"></i>
+                    <p>
+                        激活失败
+                    </p>
+                    <p>
+                        @ViewBag.Message
+                    </p>
+                </div> 
+            }
+        </div>
+    </div>
+</div>

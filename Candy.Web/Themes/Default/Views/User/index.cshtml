@@ -1,26 +1,119 @@
 ﻿@model Candy.Domain.Models.User
 @{
-    Layout = "~/Themes/Default/Views/Shared/_UserLayout.cshtml";
+    Layout = "~/Themes/Default/Views/Shared/_UserProfile.cshtml";
     ViewBag.Title = Html.Lang("个人主页");
-    var avatar = string.Empty;
-    if (Model.Avatar.IsNullEmpty())
-    {
-        avatar = StringUtils.GetGravatarImage(Model.Email, 300);
-        if (avatar.IsNullEmpty())
-        {
-            avatar = DependencyResolver.Current.GetService<Candy.Domain.Interfaces.Services.ISettingsService>().Get(AppConstants.DefaultUserAvatar).Value;
-        }
-    }
-    else
-    {
-        avatar = Url.Content(Model.Avatar);
-    }
 }
-<div class="forum-panel">
-    <div class="page-title">
-        <h2>@Html.Lang("动态")</h2>
-    </div>
-    <div class="feed-list">
-
+<div class="container">
+    <header class="user-header">
+        <div class="row-l-250">
+            <div class="col-l-250">
+                <img class="user-profile-avatar" src="@Url.Absolute(Html.GetAvatar(Model,250))" />
+            </div>
+            <div class="col-l-100">
+                <div class="user-profile-simple">
+                    <h4>@Model.Slug</h4>
+                    <p class="user-signature">@Model.Signature</p>
+                    @if (AppHelpers.GetLoggedUser() != Model)
+                    {
+                        <a href="" class="add-friends"><i class="fa fa-plus-circle"></i>@Html.Lang("加为好友")</a>
+                    }
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="user-content">
+        <div class="row-l-250">
+            <div class="col-l-250">
+                <div class="widget">
+                    <div class="widget-title">
+                        <h3 class="title">个人资料</h3>
+                    </div>
+                    <div class="widget-body">
+                        <ul class="user-details">
+                            <li>
+                                <span>@Html.Lang("昵称:")</span><span>@Model.Slug</span>
+                            </li>
+                            @if (Model.UserMeta.Any(u => u.MetaKey == AppConstants.UserGender))
+                            {
+                                <li>
+                                    <span>@Html.Lang("性别:")</span><span>@AppHelpers.GetGender(Model.UserMeta.FirstOrDefault(u => u.MetaKey == AppConstants.UserGender).MetaValue)</span>
+                                </li>
+                            }
+                            @if (Model.UserMeta.Any(u => u.MetaKey == AppConstants.UserBirthday))
+                            {
+                                var birthday = DateTime.Parse(Model.UserMeta.FirstOrDefault(u => u.MetaKey == AppConstants.UserBirthday).MetaValue);
+                                <li>
+                                    <span>@Html.Lang("生日:")</span><span>@birthday.ToString(Html.Lang("yyyy年MM月dd日"))</span>
+                                </li>
+                            }
+                            @if (Model.UserMeta.Any(u => u.MetaKey == AppConstants.UserProvince))
+                            {
+                                <li>
+                                    <span>@Html.Lang("位置:")</span><span>@Model.UserMeta.FirstOrDefault(u => u.MetaKey == AppConstants.UserCity).MetaValue</span>
+                                </li>
+                            }
+                            <li class="more">
+                                <a href="" class="btn btn-danger">@Html.Lang("查看更多")</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-l-100" style="padding-left:20px;">
+                <div class="forum-panel">
+                    <div class="filter">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="">主题</a>
+                            </li>
+                            <li>
+                                <a href="">回复</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="topics">
+                        @if (Model.Topics.Any())
+                        {
+                            foreach (var topic in Model.Topics)
+                            {
+                                <div class="topic">
+                                    <div class="topic-info">
+                                        <div class="topic-title">
+                                            <a class="tips tips-important" href="@Url.Absolute(topic.Category.NiceUrl)">@topic.Category.Name<i class="tips-arrow"></i></a>
+                                            <h2 class="topic-title">
+                                                <a href="@Url.Absolute(topic.NiceUrl)">@topic.Name</a>
+                                            </h2>
+                                            <a class="tips tips-important topic-total-comment" href="@Url.Absolute(topic.NiceUrl)#comment-list" title="@Html.Lang("{0}条评论",topic.Posts.Where(a=>a.PostType == PostType.comment.ToString()).Count())">
+                                                <i class="fa fa-comments"></i>@topic.Posts.Where(a => a.PostType == PostType.comment.ToString()).Count()
+                                            </a>
+                                        </div>
+                                        <div class="topic-meta">
+                                            <span>
+                                                <a href="@Url.Absolute(topic.User.NiceUrl)" title="@topic.User.Slug">@topic.User.Slug</a>
+                                                &nbsp;发布于&nbsp;@DatesUI.GetPrettyDate(DatesUI.GetLocalDate(topic.Posts.FirstOrDefault().DateCreated))&nbsp;
+                                            </span>
+                                            <span>
+                                                阅读(@topic.Views)
+                                            </span>
+                                            <span class="pull-right topic-last-comment">
+                                                @if (topic.Posts.Any(a => a.PostType == PostType.comment.ToString()))
+                                                {
+                                                    <a href="@Url.Absolute("~/user/info/1")" title="@topic.User.Slug">@topic.User.Slug</a>
+                                                    @Html.Lang("最后回复于{0}", DatesUI.GetPrettyDate(DatesUI.GetLocalDate(topic.Posts.LastOrDefault(a => a.PostType == PostType.comment.ToString()).DateCreated)))
+                                                }
+                                                else
+                                                {
+                                                    <a href="@Url.Absolute(topic.NiceUrl)">@Html.Lang("还没有任何回复")</a>
+                                                }
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

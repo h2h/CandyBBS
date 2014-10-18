@@ -3,18 +3,18 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title - Candy</title>
+    <title>@ViewBag.Title - @Html.Settings(AppConstants.SiteName)</title>
     <meta name="description" property="og:description" itemprop="description" content="" />
     <meta name="keywords" content="" />
     <meta property="og:site_name" content="" />
     <meta property="og:url" content="" />
+    <meta property="qc:admins" content="44215237776316412236727" />
     @RenderSection("SocialMeta", false)
     <link rel="alternate" type="application/rss+xml" title="RSS 2.0 Feed" href="" />
     <link href="@Url.Absolute(Html.Path("css/common.css"))" rel="stylesheet" />
     <link href="@Url.Absolute(Html.Path("css/style.css"))" rel="stylesheet" />
     <script src="@Url.Absolute(Html.Path("js/jquery.min.js"))"></script>
     <script src="@Url.Absolute(Html.Path("js/candy.js"))"></script>
-    @RenderSection("Header", false)
 </head>
 <body>
     <div class="page-container">
@@ -24,7 +24,7 @@
                     <div class="col-l-250">
                         <div class="logo">
                             <a href="">
-                                <img src="@Url.Absolute(Html.Path("img/logo.png"))" title="@Html.Lang("Candy BBS")" />
+                                <img src="@Url.Absolute(Html.Path("img/logo.png"))" title="@Html.Settings(AppConstants.SiteName)" />
                             </a>
                         </div>
                     </div>
@@ -115,6 +115,13 @@
                 <p>All Right Reserved by <a href="http://www.icoding.me" target="_blank">iCoding.Me</a></p>
             </div>
         </footer>
+    </div>
+    @RenderSection("Scripts", false)
+    <div style="display:none">
+        <script type="text/javascript">
+            var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+            document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fa769ace86b6e57cbc43ff720efc5e35f' type='text/javascript'%3E%3C/script%3E"));
+        </script>
     </div>
 </body>
 </html>

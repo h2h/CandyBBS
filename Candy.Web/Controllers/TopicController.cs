@@ -55,7 +55,7 @@ namespace Candy.Web.Controllers
                 var topic = this._topicService.Get(id);
                 if (topic != null)
                 {
-                    var posts = this._postService.GetPagedPostsByTopic(pageIndex, pageSize, int.MaxValue, topic.Id);
+                    var comments = this._postService.GetPagedCommentsByTopic(pageIndex, pageSize, int.MaxValue, topic.Id);
 
                     var topicStarter = this._postService.GetTopicStarterPost(topic.Id);
 
@@ -68,9 +68,11 @@ namespace Candy.Web.Controllers
                     var viewModel = new ShowTopicViewModel
                     {
                         Topic = topic,
-                        Posts = posts,
-                        PageIndex = posts.PageIndex,
-                        TotalCount = posts.TotalCount,
+                        Comments = comments,
+                        PageIndex = comments.PageIndex,
+                        TotalCount = comments.TotalCount,
+                        TotalPages = comments.TotalPages,
+                        PageSize = comments.PageSize,
                         Permissions = permissions,
                         User = LoggedOnUser,
                         TopicStarterPost = topicStarter
@@ -123,7 +125,6 @@ namespace Candy.Web.Controllers
         {
             if(ModelState.IsValid)
             {
-                var successfullyCreated = false;
                 Category category;
                 var topic = new Topic();
                 using (var unitOfWork = UnitOfWorkManager.NewUnitOfWork())
@@ -158,7 +159,6 @@ namespace Candy.Web.Controllers
                             try
                             {
                                 unitOfWork.Commit();
-                                successfullyCreated = true;
                                 return Redirect(topic.NiceUrl);
                             }
                             catch (Exception ex)

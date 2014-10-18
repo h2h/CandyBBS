@@ -1,7 +1,7 @@
 ﻿@model Candy.Domain.Models.User
 @{
     Layout = "~/Themes/Default/Views/Shared/_UserLayout.cshtml";
-    ViewBag.Title = Html.Lang("设置");
+    ViewBag.Title = Html.Lang("基本资料");
     var avatar = string.Empty;
     if (Model.Avatar.IsNullEmpty())
     {
@@ -15,95 +15,247 @@
     {
         avatar = Url.Content(Model.Avatar);
     }
+    var province = new UserMeta { MetaValue = "请选择" };
+    var city = new UserMeta { MetaValue = "请选择" };
+    var gender = new UserMeta { MetaValue = "" };
+    var sexTrend = new UserMeta { MetaValue = "" };
+    var love = new UserMeta { MetaValue = "" };
+    var blood = new UserMeta { MetaValue = "" };
+    var birthday = new UserMeta { MetaValue = DatesUI.GetLocalDate(DateTime.UtcNow).ToString("yyyy-MM-dd") };
+    var weibo = new UserMeta { MetaValue = "" };
+    var tencentWeibo  = new UserMeta { MetaValue = "" };
+    var tencentQQ  = new UserMeta { MetaValue = "" };
+    var googlePlus  = new UserMeta { MetaValue = "" };
+    var twitter  = new UserMeta { MetaValue = "" };
+    var facebook = new UserMeta { MetaValue = "" };
+    
+    if (Model.UserMeta.Any())
+    {
+        var provinceData = Model.UserMeta.FirstOrDefault(a => a.MetaKey == AppConstants.UserProvince);
+        if (provinceData != null)
+        {
+            province = provinceData;
+        }
+        var cityData = Model.UserMeta.FirstOrDefault(a => a.MetaKey == AppConstants.UserCity);
+        if (cityData != null)
+        {
+            city = cityData;
+        }
+        var genderData = Model.UserMeta.FirstOrDefault(a => a.MetaKey == AppConstants.UserGender);
+        if(genderData != null)
+        {
+            gender = genderData;
+        }
+        var sexTrendData = Model.UserMeta.FirstOrDefault(a => a.MetaKey == AppConstants.UserSexTrend);
+        if (sexTrendData != null)
+        {
+            sexTrend = sexTrendData;
+        }
+        var loveData = Model.UserMeta.FirstOrDefault(a => a.MetaKey == AppConstants.UserLove);
+        if (loveData != null)
+        {
+            love = loveData;
+        }
+        var bloodData = Model.UserMeta.FirstOrDefault(a => a.MetaKey == AppConstants.UserBlood);
+        if (bloodData != null)
+        {
+            blood = bloodData;
+        }
+        var birthdayData = Model.UserMeta.FirstOrDefault(a => a.MetaKey == AppConstants.UserBirthday);
+        if (birthdayData != null)
+        {
+            birthday = birthdayData;
+        }
+        var weiboData = Model.UserMeta.FirstOrDefault(a => a.MetaKey == AppConstants.UserWeibo);
+        if (weiboData != null)
+        {
+            weibo = weiboData;
+        }
+        var tencentWeiboData = Model.UserMeta.FirstOrDefault(a => a.MetaKey == AppConstants.UserTencentWeibo);
+        if (tencentWeiboData != null)
+        {
+            tencentWeibo = tencentWeiboData;
+        }
+        var tencentQQData = Model.UserMeta.FirstOrDefault(a => a.MetaKey == AppConstants.UserTencentQQ);
+        if (tencentQQData != null)
+        {
+            tencentQQ = tencentQQData;
+        }
+        var googlePlusData = Model.UserMeta.FirstOrDefault(a => a.MetaKey == AppConstants.UserGooglePlus);
+        if (googlePlusData != null)
+        {
+            googlePlus = googlePlusData;
+        }
+        var twitterData = Model.UserMeta.FirstOrDefault(a => a.MetaKey == AppConstants.UserTwitter);
+        if (twitterData != null)
+        {
+            twitter = twitterData;
+        }
+        var facebookData = Model.UserMeta.FirstOrDefault(a => a.MetaKey == AppConstants.UserFacebook);
+        if (facebookData != null)
+        {
+            facebook = facebookData;
+        }
+    }
 }
 <div class="forum-panel">
     <div class="filter">
         <ul class="nav nav-tabs">
-            <li class="active"><a href="http://localhost:3173/">基本资料</a></li>
-            <li><a href="http://localhost:3173/Home/Popular/">个人信息</a></li>
-            <li><a href="http://localhost:3173/Home/Sticky/">修改头像</a></li>
+            <li class="active"><a href="@Url.Content("~/User/Settings/")">@Html.Lang("基本资料")</a></li>
+            <li><a href="@Url.Content("~/User/Security/")">@Html.Lang("账号安全")</a></li>
+            <li><a href="http://localhost:3173/Home/Sticky/">@Html.Lang("修改头像")</a></li>
         </ul>
     </div>
     <div class="settings">
-        <form action="@Url.Absolute("~/settings/")" method="Post" id="base-settings" class="form-horizontal">
+        <form action="@Url.Absolute("~/settings/")" method="Post" class="form-horizontal">
             <div class="form-group">
                 <label for="username" class="control-label">
                     @Html.Lang("用户名")
                 </label>
-                <input type="text" name="username" id="username" value="hubert" class="form-control " placeholder="请输入用户名" disabled />
+                <input type="text" name="username" id="username" value="@Model.UserName" class="form-control" placeholder="请输入用户名" disabled />
             </div>
+            <h3 class="form-title">@Html.Lang("个人资料")</h3>
             <div class="form-group">
                 <label for="slug" class="control-label">@Html.Lang("昵称")</label>
-                <input type="text" name="slug" id="slug" value="@Model.Slug" class="form-control " placeholder="请输入昵称">
+                <input type="text" name="slug" id="slug" value="@Model.Slug" class="form-control" placeholder="请输入昵称">
             </div>
             <div class="form-group">
                 <label class="control-label">@Html.Lang("性别")</label>
-                <select name="" class="form-control selecter">
-                    <option value="">@Html.Lang("男")</option>
-                    <option value="">@Html.Lang("女")</option>
-                    <option value="">@Html.Lang("其他")</option>
+                <select name="@AppConstants.UserGender" class="form-control selecter">
+                    <option value="0" @(gender.MetaValue == "0" ? " selected" : "")>@Html.Lang("男")</option>
+                    <option value="1" @(gender.MetaValue == "1" ? " selected" : "")>@Html.Lang("女")</option>
+                    <option value="9" @(gender.MetaValue == "9" ? " selected" : "")>@Html.Lang("其他")</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">@Html.Lang("性取向")</label>
+                <select name="@AppConstants.UserSexTrend" class="form-control selecter">
+                    <option value="0" @(sexTrend.MetaValue == "0" ? " selected" : "")>@Html.Lang("男")</option>
+                    <option value="1" @(sexTrend.MetaValue == "1" ? " selected" : "")>@Html.Lang("女")</option>
+                    <option value="9" @(sexTrend.MetaValue == "9" ? " selected" : "")>@Html.Lang("其他")</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">@Html.Lang("感情状况")</label>
+                <select name="@AppConstants.UserLove" class="form-control selecter">
+                    <option value="1" @(love.MetaValue == "1" ? " selected" : "")>@Html.Lang("单身")</option>
+                    <option value="2" @(love.MetaValue == "2" ? " selected" : "")>@Html.Lang("求交往")</option>
+                    <option value="3" @(love.MetaValue == "3" ? " selected" : "")>@Html.Lang("暗恋中")</option>
+                    <option value="4" @(love.MetaValue == "4" ? " selected" : "")>@Html.Lang("暧昧中")</option>
+                    <option value="5" @(love.MetaValue == "5" ? " selected" : "")>@Html.Lang("恋爱中")</option>
+                    <option value="6" @(love.MetaValue == "6" ? " selected" : "")>@Html.Lang("订婚")</option>
+                    <option value="7" @(love.MetaValue == "7" ? " selected" : "")>@Html.Lang("已婚")</option>
+                    <option value="8" @(love.MetaValue == "8" ? " selected" : "")>@Html.Lang("分居")</option>
+                    <option value="9" @(love.MetaValue == "9" ? " selected" : "")>@Html.Lang("离异")</option>
+                    <option value="10" @(love.MetaValue == "10" ? " selected" : "")>@Html.Lang("丧偶")</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">@Html.Lang("血型")</label>
+                <select name="@AppConstants.UserBlood" class="form-control selecter">
+                    <option value="A" @(blood.MetaValue == "A" ? " selected" : "")>@Html.Lang("A型")</option>
+                    <option value="B" @(blood.MetaValue == "B" ? " selected" : "")>@Html.Lang("B型")</option>
+                    <option value="AB" @(blood.MetaValue == "AB" ? " selected" : "")>@Html.Lang("AB型")</option>
+                    <option value="O" @(blood.MetaValue == "O" ? " selected" : "")>@Html.Lang("O型")</option>
+                    <option value="Z" @(blood.MetaValue == "Z" ? " selected" : "")>@Html.Lang("其他")</option>
                 </select>
             </div>
             <div class="form-group">
                 <label class="control-label">@Html.Lang("生日")</label>
+                <input class="form-control datepicker" type="text" name="@AppConstants.UserBirthday" id="@AppConstants.UserBirthday" value="@(DateTime.Parse(birthday.MetaValue).ToString("yyyy-MM-dd"))" placeholder="请输入生日">
+            </div>
+            <div class="form-group">
+                <label class="control-label">@Html.Lang("所在地")</label>
                 <div class="input-group">
-                    <select name="" class="form-control selecter">
-                        @for (var i = 1900; i <= DateTime.Now.Year; i++)
-                        {
-                            <option value="@i">@i</option>
-                        }
-                    </select>
-                    @*<input type="text" name="year" id="" value="" class="form-control" placeholder="年">*@
-                    <span class="input-group-addon" style="border-left:none;">年</span>
-                    <select name="" class="form-control selecter">
-                        <option value="1">一</option>
-                        <option value="2">二</option>
-                        <option value="3">三</option>
-                        <option value="4">四</option>
-                        <option value="5">五</option>
-                        <option value="6">六</option>
-                        <option value="7">七</option>
-                        <option value="8">八</option>
-                        <option value="9">九</option>
-                        <option value="10">十</option>
-                        <option value="11">十一</option>
-                        <option value="12">十二</option>
-                    </select>
-                    <span class="input-group-addon" style="border-left:none;">@Html.Lang("月")</span>
-                    <select name="" class="form-control selecter">
-                        <option value="">1</option>
-                        <option value="">2</option>
-                        <option value="">3</option>
-                        <option value="">4</option>
-                        <option value="">5</option>
-                        <option value="">6</option>
-                    </select>
-                    <span class="input-group-addon">日</span>
+                    <select name="@AppConstants.UserProvince" id="UserProvince" class="form-control selecter" data-value="@province.MetaValue"></select>
+                    <span class="input-group-addon" style="border-left:none;">@Html.Lang("省")</span>
+                    <select name="@AppConstants.UserCity" id="UserCity" class="form-control selecter" data-value="@city.MetaValue"></select>
+                    <span class="input-group-addon" style="border-left:none;">@Html.Lang("市")</span>
                 </div>
             </div>
             <div class="form-group">
-                <label for="email" class="control-label">
-                    @Html.Lang("电子邮箱")
-                </label>
-                <input type="email" name="email" id="email" value="@Model.Email" class="form-control" placeholder="请输入邮箱">
+                <label class="control-label">@Html.Lang("个人简介")</label>
+                <textarea class="form-control" name="Signature" placeholder="@Html.Lang("请输入个人简介")">@Model.Signature</textarea>
             </div>
+            <h3 class="form-title">@Html.Lang("联系信息")</h3>
             <div class="form-group">
-                <label for="website" class="control-label">个人网站</label>
+                <label for="website" class="control-label">@Html.Lang("个人网站")</label>
                 <input type="url" name="website" id="website" value="@Model.Website" class="form-control" placeholder="请输入个人网站">
             </div>
             <div class="form-group">
-                <label for="weibo" class="control-label">新浪微博</label>
-                <input type="text" name="weibo" id="weibo" value="" class="form-control" placeholder="新浪微博">
+                <label for="weibo" class="control-label">@Html.Lang("新浪微博")</label>
+                <input type="text" name="@AppConstants.UserWeibo" id="weibo" value="@weibo.MetaValue" class="form-control" placeholder="新浪微博">
             </div>
             <div class="form-group">
-                <label for="gplus" class="control-label">Google+</label>
-                <input type="text" name="gplus" id="gplus" value="" class="form-control" placeholder="Google+">
+                <label for="gplus" class="control-label">@Html.Lang("腾讯微博")</label>
+                <input type="text" name="@AppConstants.UserTencentWeibo" id="gplus" value="@tencentWeibo.MetaValue" class="form-control" placeholder="腾讯微博">
             </div>
             <div class="form-group">
+                <label for="gplus" class="control-label">@Html.Lang("QQ")</label>
+                <input type="text" name="@AppConstants.UserTencentQQ" id="gplus" value="@tencentQQ.MetaValue" class="form-control" placeholder="QQ">
+            </div>
+            <div class="form-group">
+                <label for="gplus" class="control-label">@Html.Lang("Google+")</label>
+                <input type="text" name="@AppConstants.UserGooglePlus" id="gplus" value="@googlePlus.MetaValue" class="form-control" placeholder="Google+">
+            </div>
+            <div class="form-group">
+                <label for="gplus" class="control-label">@Html.Lang("Twitter")</label>
+                <input type="text" name="@AppConstants.UserTwitter" id="gplus" value="@twitter.MetaValue" class="form-control" placeholder="Twitter">
+            </div>
+            <div class="form-group">
+                <label for="gplus" class="control-label">@Html.Lang("Facebook")</label>
+                <input type="text" name="@AppConstants.UserFacebook" id="gplus" value="@facebook.MetaValue" class="form-control" placeholder="Facebook">
+            </div>
+            <div class="form-btns">
                 <div class="sm-line">
-                    <button type="submit" class="btn btn-danger">更新个人信息</button>
+                    <button type="submit" class="btn btn-danger">@Html.Lang("更新")</button>
                 </div>
             </div>
         </form>
     </div>
 </div>
+@section Scripts{
+    <script type="text/javascript" src="@Url.Absolute(Html.Path("js/SiteData.js"))"></script>
+    <script type="text/javascript">
+        $(function () {
+            var provinceEle = $("#UserProvince");
+            var cityEle = $("#UserCity");
+
+            $.each(arrCity, function (i, data) {
+                if (data.name == provinceEle.data("value")) {
+                    provinceEle.append('<option value="' + data.name + '" selected>' + data.name + '</option>');
+                    if (provinceEle.val() != "请选择") {
+                        $.each(data.sub, function (k, value) {
+                            if (value.name == cityEle.data("value")) {
+                                cityEle.append('<option value="' + value.name + '" selected>' + value.name + '</option>');
+                            } else {
+                                cityEle.append('<option value="' + value.name + '">' + value.name + '</option>');
+                            }
+                        });
+                        cityEle.selecter("refresh");
+                    }
+                } else {
+                    provinceEle.append('<option value="' + data.name + '">' + data.name + '</option>');
+                }
+            });
+
+            provinceEle.selecter("refresh");
+            
+            provinceEle.on("change", function () {
+                var province = $(this).val();
+                console.log("1:"+province);
+                $.each(arrCity, function (i, data) {
+                    if (data.name == province)
+                    {
+                        cityEle.empty();
+                        $.each(data.sub, function (k, value) {
+                            cityEle.append('<option value="' + value.name + '">' + value.name + '</option>');
+                        });
+                        cityEle.selecter("refresh");
+                        return false;
+                    }
+                });
+            });
+        });
+    </script>
+}

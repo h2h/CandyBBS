@@ -8,218 +8,232 @@
     <meta name="keywords" content="" />
     <meta property="og:site_name" content="" />
     <meta property="og:url" content="" />
-    <link rel="alternate" type="application/rss+xml" title="RSS 2.0 Feed" href="" />
-    <link href="@Url.Absolute(Html.AdminPath("css/font.css"))" rel="stylesheet" />
-    <link href="@Url.Absolute(Html.AdminPath("css/bootstrap-theme.css"))" rel="stylesheet" />
-    <link href="@Url.Absolute(Html.AdminPath("css/bootstrap.css"))" rel="stylesheet" />
-    <link href="@Url.Absolute(Html.AdminPath("css/responsive.css"))" rel="stylesheet" />
+    <link href="@Url.Absolute(Html.AdminPath("css/common.css"))" rel="stylesheet" />
     <link href="@Url.Absolute(Html.AdminPath("css/style.css"))" rel="stylesheet" />
     <script src="@Url.Absolute(Html.AdminPath("js/jquery.min.js"))"></script>
-    <script src="@Url.Absolute(Html.AdminPath("js/bootstrap.min.js"))"></script>
+    <script src="@Url.Absolute(Html.AdminPath("js/jquery.gridly.js"))"></script>
     <script src="@Url.Absolute(Html.AdminPath("js/candy.js"))"></script>
     <script type="text/javascript">
         var app_base = "@Url.Absolute("~/")";
     </script>
 </head>
 <body>
-    <!-- Begin Header -->
-    <div class="header navbar navbar-inverse">
-        <!-- Begin Top Navigation Bar -->
-        <div class="navbar-inner">
-            <div class="header-seperation">
-                <ul class="nav pull-left notifcation-center" id="main-menu-toggle-wrapper" style="display:none">
-                    <li class="dropdown"> 
-                        <a id="main-menu-toggle" href="#main-menu" class=""> 
-                            <i class="fa fa-bars"></i>
-                        </a> 
-                    </li>
-                </ul>
-                <!-- Begin  Logo -->
-                <a href="@Url.Absolute("~/admin/")" title="@Html.Lang("Candy BBS")">
-                    <img class="logo" src="@Url.Absolute(Html.Path("img/logo.jpg"))" title="@Html.Lang("Candy BBS")" />
-                </a>
-                <!-- End Logo -->
-            </div>
-            <!-- End Responsive Menu Toggle -->
-            <div class="header-quick-nav">
-                <!-- Begin Top Navigation Menu -->
-                <div class="pull-left">
-                    <ul class="nav quick-section">
-                        <li class="quicklinks">
-                            <a href="@Url.Absolute("~/Admin/")">@Html.Lang("后台首页")</a>
-                        </li>
-                        <li class="quicklinks">
-                            <a href="@Url.Absolute("~/")">@Html.Lang("网站首页")</a>
-                        </li>
-                    </ul>
-                </div>
-                @{
-                    var currentUser = DependencyResolver.Current.GetService<IUserService>().GetUser(User.Identity.Name);
-                    var avatar = string.Empty;
-                    if (currentUser.Avatar.IsNullEmpty())
-                    {
-                        avatar = StringUtils.GetGravatarImage(currentUser.Email, 48);
-                        if (avatar.IsNullEmpty())
-                        {
-                            avatar = DependencyResolver.Current.GetService<ISettingsService>().Get(AppConstants.DefaultUserAvatar).Value;
-                        }
-                    }
-                    else
-                    {
-                        avatar = Url.Content(currentUser.Avatar);
-                    }
-                }
-                <!-- End Top Navigation Menu -->
-                <div class="pull-right">
-                    <div class="chat-toggler">
-                        <a href="#" class="dropdown-toggle" id="my-profile" data-placement="bottom" data-content="" data-toggle="dropdown" data-original-title="Notifications">
-                            <div class="user-details">
-                                <div class="username">
-                                    <span>@currentUser.Slug</span>
-                                </div>
-                            </div>
-                            <i class="fa fa-arrow-down"></i>
-                        </a>
-                        <div id="my-profile-detail" style="display:none">
-                            个人信息
-                        </div>
-                        <div class="profile-pic">
-                            <img src="@avatar" width="48" alt="@currentUser.UserName" title="@currentUser.UserName" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="page-container row">
-        @{
-            var routeData = RouteTable.Routes.GetRouteData(Context).Values;
-            var action = routeData["action"].ToString().ToLower();
-            var controller = routeData["controller"].ToString().ToLower();
-            var menu = ViewBag.Menu;
-            var subMenu = ViewBag.SubMenu;
-        }
-        <div class="page-sidebar" id="main-menu">
+    <header id="header">
+        <a id="header_logo" href="@Url.Content("~")" title="@Html.Lang("管理后台")">
+            <img src="@Url.Absolute(Html.AdminPath("img/logo.png"))" />
+        </a>
+        <div class="left-menu">
             <ul>
-                <li @(controller == "settings" ? "class=open" : "")>
-                    <a href="#">
-                        <i class="fa fa-cog"></i>
-                        <span class="title">@Html.Lang("设置")</span>
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub-menu">
-                        <li @(action == "index" && controller == "settings" ? "class=active" : "")>
-                            <a href="@Url.Absolute("~/admin/settings/")">@Html.Lang("基本设置")</a>
-                        </li>
-                        <li>
-                            <a href="@Url.Absolute("~/admin/menu/")">@Html.Lang("菜单")</a>
-                        </li>
-                        <li @(action == "theme" && controller == "settings" ? "class=active" : "")>
-                            <a href="@Url.Absolute("~/admin/theme/")">@Html.Lang("主题")</a>
-                        </li>
-                        <li @(action == "email" && controller == "settings" ? "class=active" : "")>
-                            <a href="@Url.Absolute("~/admin/email/")">@Html.Lang("邮箱")</a>
-                        </li>
-                        <li @(action == "points" && controller == "settings" ? "class=active" : "")>
-                            <a href="@Url.Absolute("~/admin/points/")">@Html.Lang("积分")</a>
-                        </li>
-                        <li @(action == "permissions" && controller == "settings" ? "class=active" : "")>
-                            <a href="@Url.Absolute("~/admin/Permissions/")">@Html.Lang("权限")</a>
-                        </li>
-                    </ul>
+                <li>
+                    <a href="@Url.Content("~/admin/")">@Html.Lang("后台首页")</a>
                 </li>
-                <li @(controller == "category" ? "class=open" : "")>
-                    <a href="#">
-                        <i class="fa fa-cog"></i>
-                        <span class="title">@Html.Lang("版块")</span>
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub-menu">
-                        <li @(action == "index" && controller == "category" ? "class=active" : "")>
-                            <a href="@Url.Absolute("~/admin/category/index/")">@Html.Lang("所有版块")</a>
-                        </li>
-                        <li @(action == "new" && controller == "category" ? "class=active" : "")>
-                            <a href="@Url.Absolute("~/admin/category/new/")">@Html.Lang("添加版块")</a>
-                        </li>
-                    </ul>
+                <li>
+                    <a href="@Url.Content("~")">@Html.Lang("网站首页")</a>
                 </li>
-                <li @(controller == "page" ? "class=open":"")>
-                    <a href="#">
-                        <i class="fa fa-cog"></i>
-                        <span class="title">@Html.Lang("页面")</span>
-                        <span class="arrow"></span>
+            </ul>
+        </div>        
+        @{
+            var currentUser = DependencyResolver.Current.GetService<IUserService>().GetUser(User.Identity.Name);
+            var avatar = string.Empty;
+            if (currentUser.Avatar.IsNullEmpty())
+            {
+                avatar = StringUtils.GetGravatarImage(currentUser.Email, 48);
+                if (avatar.IsNullEmpty())
+                {
+                    avatar = DependencyResolver.Current.GetService<ISettingsService>().Get(AppConstants.DefaultUserAvatar).Value;
+                }
+            }
+            else
+            {
+                avatar = Url.Content(currentUser.Avatar);
+            }
+        }
+        <div class="user-menu">
+            <a class="user-avatar" title="@currentUser.Slug" href="javascript:;">
+                <span class="avatar-face"><img src="@avatar" alt="@currentUser.Slug"></span>
+                <span class="avatar-name">@currentUser.Slug</span>
+                <span class="avatar-append">
+                    <span class="fa fa-caret-down"></span>
+                </span>
+            </a>
+        </div>
+        <div class="quick-menu">
+            <ul>
+                <li>
+                    <a href="">
+                        <i class="fa fa-plus"></i>
+                        新建
                     </a>
-                    <ul class="sub-menu">
-                        <li @(action == "index" && controller == "page" ? "class=active" : "")>
-                            <a href="@Url.Absolute("~/admin/page/index/")">@Html.Lang("所有页面")</a>
-                        </li>
-                        <li @(action == "new" && controller == "page" ? "class=active" : "")>
-                            <a href="@Url.Absolute("~/admin/page/new/")">@Html.Lang("添加新页面")</a>
-                        </li>
-                    </ul>
                 </li>
-                <li @(controller == "topic" ? "class=open" : "")>
-                    <a href="#">
-                        <i class="fa fa-cog"></i>
-                        <span class="title">@Html.Lang("帖子")</span>
-                        <span class="arrow"></span>
+                <li>
+                    <a href="">
+                        <i class="fa fa-bell"></i>
+                        <span class="tips">0</span>
                     </a>
-                    <ul class="sub-menu">
-                        <li @(action == "index" && controller == "topic" ? "class=active" : "")>
-                            <a href="@Url.Absolute("~/admin/topic/index/")">@Html.Lang("所有帖子")</a>
-                        </li>
-                        <li @(action == "tags" && controller == "topic" ? "class=active" : "")>
-                            <a href="@Url.Absolute("~/admin/topic/tags/")">@Html.Lang("帖子标签")</a>
-                        </li>
-                    </ul>
-                </li>
-                <li @(controller == "user" ? "class=open" : "")>
-                    <a href="#">
-                        <i class="fa fa-cog"></i>
-                        <span class="title">@Html.Lang("用户")</span>
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub-menu">
-                        <li @(action == "index" && controller == "user" ? "class=active" : "")>
-                            <a href="@Url.Absolute("~/admin/user/index")">@Html.Lang("用户管理")</a>
-                        </li>
-                        <li @(action == "role" && controller == "user" ? "class=active" : "")>
-                            <a href="@Url.Absolute("~/admin/user/role/")">@Html.Lang("用户组")</a>
-                        </li>
-                    </ul>
-                </li>
-                <li @(controller == "tools" ? "class=open" : "")>
-                    <a href="#">
-                        <i class="fa fa-cog"></i>
-                        <span class="title">@Html.Lang("工具")</span>
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub-menu">
-                        <li @(subMenu == "导入导出" ? "class=active" : "")>
-                            <a href="">@Html.Lang("导入导出")</a>
-                        </li>
-                        <li @(subMenu == "批量操作" ? "class=active" : "")>
-                            <a href="">@Html.Lang("批量操作")</a>
-                        </li>
-                        <li @(subMenu == "邮箱黑名单" ? "class=active" : "")>
-                            <a href="">@Html.Lang("邮箱黑名单")</a>
-                        </li>
-                        <li @(subMenu == "日志" ? "class=active" : "")>
-                            <a href="">@Html.Lang("日志")</a>
-                        </li>
-                        <li @(action == "about" ? "class=active":"")>
-                            <a href="@Url.Absolute("~/admin/about/")">关于</a>
-                        </li>
-                    </ul>
                 </li>
             </ul>
         </div>
-        <div class="page-content">
-            <div class="content">
-                @Html.Partial("_GenericMessage")
-                @RenderBody()
+    </header>
+    <div id="wrap-all">
+        <div id="main">
+            @{
+                var routeData = RouteTable.Routes.GetRouteData(Context).Values;
+                var action = routeData["action"].ToString().ToLower();
+                var controller = routeData["controller"].ToString().ToLower();
+                var menu = ViewBag.Menu;
+                var subMenu = ViewBag.SubMenu;
+            }
+            <div class="page-sidebar" id="main-menu">
+                <div class="main-menu">
+                    <ul>
+                        <li @(controller == "settings" ? "class=open" : "")>
+                            <a href="#">
+                                <i class="fa fa-cogs"></i>
+                                <span class="title">@Html.Lang("设置")</span>
+                                <span class="arrow">
+                                    <i class="fa fa-chevron-circle-down"></i>
+                                </span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li @(action == "index" && controller == "settings" ? "class=active" : "")>
+                                    <a href="@Url.Absolute("~/admin/settings/")">
+                                        <i class="fa fa-cog"></i>
+                                        @Html.Lang("基本设置")
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Absolute("~/admin/menu/")">
+                                        <i class="fa fa-bars"></i>
+                                        @Html.Lang("菜单")
+                                    </a>
+                                </li>
+                                <li @(action == "theme" && controller == "settings" ? "class=active" : "")>
+                                    <a href="@Url.Absolute("~/admin/theme/")">
+                                        <i class="fa fa-leaf"></i>
+                                        @Html.Lang("主题")
+                                    </a>
+                                </li>
+                                <li @(action == "email" && controller == "settings" ? "class=active" : "")>
+                                    <a href="@Url.Absolute("~/admin/email/")">
+                                        <i class="fa fa-envelope-o"></i>
+                                        @Html.Lang("邮箱")
+                                    </a>
+                                </li>
+                                <li @(action == "points" && controller == "settings" ? "class=active" : "")>
+                                    <a href="@Url.Absolute("~/admin/points/")">
+                                        <i class="fa fa-tasks"></i>
+                                        @Html.Lang("积分")
+                                    </a>
+                                </li>
+                                <li @(action == "permissions" && controller == "settings" ? "class=active" : "")>
+                                    <a href="@Url.Absolute("~/admin/Permissions/")">
+                                        <i class="fa fa-unlock-alt"></i>
+                                        @Html.Lang("权限")
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li @(controller == "category" ? "class=open" : "")>
+                            <a href="#">
+                                <i class="fa fa-list"></i>
+                                <span class="title">@Html.Lang("版块")</span>
+                                <span class="arrow"><i class="fa fa-chevron-circle-down"></i></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li @(action == "index" && controller == "category" ? "class=active" : "")>
+                                    <a href="@Url.Absolute("~/admin/category/index/")">
+                                        <i class="fa fa-list"></i>
+                                        @Html.Lang("所有版块")
+                                    </a>
+                                </li>
+                                <li @(action == "new" && controller == "category" ? "class=active" : "")>
+                                    <a href="@Url.Absolute("~/admin/category/new/")">
+                                        <i class="fa fa-plus"></i>
+                                        @Html.Lang("添加版块")
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li @(controller == "page" ? "class=open" : "")>
+                            <a href="#">
+                                <i class="fa fa-cog"></i>
+                                <span class="title">@Html.Lang("页面")</span>
+                                <span class="arrow"><i class="fa fa-chevron-circle-down"></i></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li @(action == "index" && controller == "page" ? "class=active" : "")>
+                                    <a href="@Url.Absolute("~/admin/page/index/")">@Html.Lang("所有页面")</a>
+                                </li>
+                                <li @(action == "new" && controller == "page" ? "class=active" : "")>
+                                    <a href="@Url.Absolute("~/admin/page/new/")">@Html.Lang("添加新页面")</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li @(controller == "topic" ? "class=open" : "")>
+                            <a href="#">
+                                <i class="fa fa-cog"></i>
+                                <span class="title">@Html.Lang("帖子")</span>
+                                <span class="arrow"><i class="fa fa-chevron-circle-down"></i></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li @(action == "index" && controller == "topic" ? "class=active" : "")>
+                                    <a href="@Url.Absolute("~/admin/topic/index/")">@Html.Lang("所有帖子")</a>
+                                </li>
+                                <li @(action == "tags" && controller == "topic" ? "class=active" : "")>
+                                    <a href="@Url.Absolute("~/admin/topic/tags/")">@Html.Lang("帖子标签")</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li @(controller == "user" ? "class=open" : "")>
+                            <a href="#">
+                                <i class="fa fa-cog"></i>
+                                <span class="title">@Html.Lang("用户")</span>
+                                <span class="arrow"><i class="fa fa-chevron-circle-down"></i></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li @(action == "index" && controller == "user" ? "class=active" : "")>
+                                    <a href="@Url.Absolute("~/admin/user/index")">@Html.Lang("用户管理")</a>
+                                </li>
+                                <li @(action == "role" && controller == "user" ? "class=active" : "")>
+                                    <a href="@Url.Absolute("~/admin/user/role/")">@Html.Lang("用户组")</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li @(controller == "tools" ? "class=open" : "")>
+                            <a href="#">
+                                <i class="fa fa-cog"></i>
+                                <span class="title">@Html.Lang("工具")</span>
+                                <span class="arrow"><i class="fa fa-chevron-circle-down"></i></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li @(subMenu == "导入导出" ? "class=active" : "")>
+                                    <a href="">@Html.Lang("导入导出")</a>
+                                </li>
+                                <li @(subMenu == "批量操作" ? "class=active" : "")>
+                                    <a href="">@Html.Lang("批量操作")</a>
+                                </li>
+                                <li @(subMenu == "邮箱黑名单" ? "class=active" : "")>
+                                    <a href="">@Html.Lang("邮箱黑名单")</a>
+                                </li>
+                                <li @(subMenu == "日志" ? "class=active" : "")>
+                                    <a href="">@Html.Lang("日志")</a>
+                                </li>
+                                <li @(action == "about" ? "class=active" : "")>
+                                    <a href="@Url.Absolute("~/admin/about/")">关于</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="page-content">
+                <div class="content">
+                    @Html.Partial("_GenericMessage")
+                    @RenderBody()
+                </div>
             </div>
         </div>
     </div>
+    @RenderSection("Scripts",false)
 </body>
 </html>

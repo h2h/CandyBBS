@@ -1,68 +1,62 @@
 ﻿@{
     ViewBag.Title = Html.Lang("管理首页");
 }
-<div class="row">
-    <div class="col-md-6">
-        <div class="grid simple">
-            <div class="grid-title no-border">
-                <h4>@Html.Lang("今日主题")</h4>
-            </div>
-            <div class="grid-body no-border">                
-                @Html.Action("TodaysTopics")
-            </div>
-        </div> 
-    </div>
-    <div class="col-md-6">
-        <div class="grid simple">
-            <div class="grid-title no-border">
-                <h4>@Html.Lang("更新推送")</h4>
-            </div>
-            <div class="grid-body no-border">
-                <p>更新推送</p>
-            </div>
-        </div>
+<div class="mod_navbar">
+    <div class="title">
+        <h3 class="ng-binding ng-scope">
+            <i class="fa fa-home"></i>
+            @Html.Lang("管理首页")
+        </h3>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-6">
-        <div class="grid simple">
-            <div class="grid-title no-border">
-                <h4>@Html.Lang("最新用户")</h4>
+<div class="main-content" id="home">
+    <div class="gridly">
+        <div class="forum-panel brick">
+            <div class="forum-title">
+                <h3>@Html.Lang("今日主题")</h3>
             </div>
-            <div class="grid-body no-border">
+            <div class="forum-body">
+                @Html.Action("TodaysTopics")
+            </div>
+        </div>
+        <div class="forum-panel brick">
+            <div class="forum-title">
+                <h3>@Html.Lang("更新推送")</h3>
+            </div>
+            <div class="forum-body">
+                更新推送
+            </div>
+        </div>
+        <div class="forum-panel brick">
+            <div class="forum-title">
+                <h3>@Html.Lang("最新用户")</h3>
+            </div>
+            <div class="forum-body">
                 @Html.Action("LatestUsers")
             </div>
         </div>
-    </div>
-    <div class="col-md-6">
-        <div class="grid simple">
-            <div class="grid-title no-border">
-                <h4>@Html.Lang("活跃用户")</h4>
+        <div class="forum-panel brick">
+            <div class="forum-title">
+                <h3>@Html.Lang("活跃用户")</h3>
             </div>
-            <div class="grid-body no-border">
-                <p>活跃用户</p>
+            <div class="forum-body">
+                活跃用户
             </div>
         </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-6">
-        <div class="grid simple">
-            <div class="grid-title no-border">
-                <h4>@Html.Lang("热门主题")</h4>
+        <div class="forum-panel brick">
+            <div class="forum-title">
+                <h3>@Html.Lang("热门主题")</h3>
             </div>
-            <div class="grid-body no-border">
-                <p>热门主题</p>
+            <div class="forum-body">
+                热门主题
             </div>
         </div>
-    </div>
-    <div class="col-md-6">
-        <div class="grid simple">
-            <div class="grid-title no-border">
-                <h4>@Html.Lang("官方动态")</h4>
+        <div class="forum-panel brick">
+            <div class="forum-title">
+                <h3>@Html.Lang("官方动态")</h3>
             </div>
-            <div class="grid-body no-border">
-                <p>官方动态</p>
+            <div class="forum-body">
+                官方动态
             </div>
         </div>
     </div>

@@ -1,0 +1,76 @@
+﻿@model User
+@{
+    Layout = "~/Themes/Default/Views/Shared/_UserLayout.cshtml";
+    ViewBag.Title = Html.Lang("账号安全");
+}
+
+<div class="forum-panel">
+    <div class="filter">
+        <ul class="nav nav-tabs">
+            <li><a href="@Url.Content("~/User/Settings/")">@Html.Lang("基本资料")</a></li>
+            <li class="active"><a href="@Url.Content("~/User/Security/")">@Html.Lang("账号安全")</a></li>
+            <li><a href="http://localhost:3173/Home/Sticky/">@Html.Lang("修改头像")</a></li>
+        </ul>
+    </div>
+    <div class="settings">
+        <form action="@Url.Absolute("~/Secutiry/")" method="Post" id="" class="form-horizontal">
+            <div class="form-group">
+                <label for="username" class="control-label">
+                    @Html.Lang("用户名")
+                </label>
+                <input type="text" name="username" id="username" value="@Model.UserName" class="form-control" placeholder="@Html.Lang("请输入用户名")" disabled />
+            </div>
+            <h3 class="form-title">@Html.Lang("安全邮箱")</h3>
+            <div class="form-group">
+                <label for="username" class="control-label">@Html.Lang("安全邮箱")</label>
+                <input type="text" name="username" id="username" value="@Model.Email" class="form-control" placeholder="@Html.Lang("请输入用户名")" disabled />
+            </div>
+            <div class="form-btns" style="margin-bottom:20px;">
+                <div class="sm-line">
+                    <button type="button" class="btn btn-default">@Html.Lang("修改安全邮箱")</button>
+                </div>
+            </div>
+            <h3 class="form-title">@Html.Lang("安全问题")</h3>
+            <div class="form-group">
+                <label for="PasswordQuestion" class="control-label">@Html.Lang("密码保护问题")</label>
+                <select name="PasswordQuestion" id="PasswordQuestion" class="form-control selecter">
+                    <option value="请选择一个问题">请选择一个问题</option>
+                    <option value="母亲的名字">母亲的名字</option>
+                    <option value="爷爷的名字">爷爷的名字</option>
+                    <option value="父亲出生的城市">父亲出生的城市</option>
+                    <option value="您其中一位老师的名字">您其中一位老师的名字</option>
+                    <option value="您个人计算机的型号">您个人计算机的型号</option>
+                    <option value="您最喜欢的餐馆名称">您最喜欢的餐馆名称</option>
+                    <option value="驾驶执照最后四位数字">驾驶执照最后四位数字</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="PasswordAnswer" class="control-label">@Html.Lang("答案")</label>
+                <input type="text" name="PasswordAnswer" id="PasswordAnswer" value="" class="form-control" placeholder="@Html.Lang("请输入密保问题答案")">
+            </div>
+            <div class="form-btns" style="margin-bottom:20px;">
+                <div class="sm-line">
+                    <button type="button" class="btn btn-default">@Html.Lang("修改密保问题")</button>
+                </div>
+            </div>
+            <h3 class="form-title">@Html.Lang("修改密码")</h3>
+            <div class="form-group">
+                <label for="slug" class="control-label">@Html.Lang("当前密码")</label>
+                <input type="password" name="slug" id="slug" value="" class="form-control" placeholder="@Html.Lang("请输入当前密码")">
+            </div>
+            <div class="form-group">
+                <label for="slug" class="control-label">@Html.Lang("新密码")</label>
+                <input type="password" name="slug" id="slug" value="" class="form-control" placeholder="@Html.Lang("请输入新密码")">
+            </div>
+            <div class="form-group">
+                <label for="slug" class="control-label">@Html.Lang("确认密码")</label>
+                <input type="password" name="slug" id="slug" value="" class="form-control" placeholder="@Html.Lang("请输入再次输入新密码")">
+            </div>
+            <div class="form-btns">
+                <div class="sm-line">
+                    <button type="submit" class="btn btn-danger">@Html.Lang("更新")</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

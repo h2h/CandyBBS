@@ -44,9 +44,9 @@ namespace Candy.Services
         {
             return this._postRepository.GetByUser(userId, amountToTake);
         }
-        public PagedList<Post> GetPagedPostsByTopic(int pageIndex, int pageSize, int amountToTake, int topicId)
+        public PagedList<Post> GetPagedCommentsByTopic(int pageIndex, int pageSize, int amountToTake, int topicId)
         {
-            return this._postRepository.GetPagedPostsByTopic(pageIndex, pageSize, amountToTake, topicId);
+            return this._postRepository.GetPagedCommentsByTopic(pageIndex, pageSize, amountToTake, topicId);
         }
         public Post GetTopicStarterPost(int topicId)
         {
@@ -86,7 +86,9 @@ namespace Candy.Services
                 User = user,
                 Topic = topic,
                 IpAddress = StringUtils.GetUsersIpAddress(),
-                PostType = PostType.comment.ToString()
+                PostType = PostType.comment.ToString(),
+                DateCreated = DateTime.UtcNow,
+                DateEdited = DateTime.UtcNow
             };
 
             comment = SanitizePost(comment);

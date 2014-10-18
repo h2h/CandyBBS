@@ -15,6 +15,7 @@ namespace Candy.Data
         public DbSet<Category> Category { get; set; }
         public DbSet<CategoryPermissionForRole> CategoryPermissionForRole { get; set; }
         public DbSet<User> User { get; set; }
+        public DbSet<UserMeta> UserMeta { get; set; }
         public DbSet<Role> Role { get; set; }
         public DbSet<Permission> Permission { get; set; }
         public DbSet<Post> Post { get; set; }

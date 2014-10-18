@@ -22,5 +22,6 @@ namespace Candy.Domain.Interfaces.Repositories
         void Update(User item);
         PagedList<User> SearchMembers(string search, int pageIndex, int pageSize);
         PagedList<User> GetAll(int pageIndex, int pageSize);
+        User GetByActivation(string key);
     }
 }

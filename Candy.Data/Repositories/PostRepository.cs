@@ -45,16 +45,16 @@ namespace Candy.Data.Repositories
                 .ToList();
         }
 
-        public PagedList<Post> GetPagedPostsByTopic(int pageIndex, int pageSize, int amountToTake, int topicId)
+        public PagedList<Post> GetPagedCommentsByTopic(int pageIndex, int pageSize, int amountToTake, int topicId)
         {
-            var postType = PostType.post.ToString();
+            var postType = PostType.comment.ToString();
             var total = this._context.Post.Count(x=>x.PostType == postType && x.Topic.Id == topicId);
             if(amountToTake < total)
                 total = amountToTake;
             var results = this._context.Post
                 .Include(x=>x.User)
                 .Where(x => x.PostType == postType && x.Topic.Id == topicId)
-                .OrderByDescending(x=>x.DateCreated)
+                .OrderBy(x=>x.DateCreated)
                 .Skip((pageIndex -1 )*pageSize)
                 .Take(pageSize)
                 .ToList();

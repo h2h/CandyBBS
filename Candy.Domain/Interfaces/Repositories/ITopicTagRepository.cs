@@ -7,6 +7,7 @@ namespace Candy.Domain.Interfaces.Repositories
     public interface ITopicTagRepository
     {
         IEnumerable<TopicTag> GetAll();
+        TopicTag GetBySlug(string slug);
         IEnumerable<TopicTag> GetByTopic(Topic topic);
         PagedList<TopicTag> GetPagedGroupedTags(int pageIndex, int pageSize);
         PagedList<TopicTag> SearchPagedGroupedTags(string search, int pageIndex, int pageSize);

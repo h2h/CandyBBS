@@ -2,57 +2,57 @@
 @{
     ViewBag.Title = Html.Lang("邮箱设置");
 }
-<div class="row">
-    <div class="col-md-12">
-        <div class="grid simple">
-            <div class="grid-title no-border">
-                <h4>@Html.Lang("邮箱设置")</h4>
-            </div>
-            <div class="grid-body no-border">
-                <form action="@Url.Absolute("~/admin/settings/update/")" method="post" class="form-box">
-                    <div class="form-group">
-                        <label class="form-label" for="@AppConstants.AdminEmailAddress">@Html.Lang("管理员邮箱")</label>
-                        <div class="controls">
-                            <input type="email" name="@AppConstants.AdminEmailAddress" value="@Model.Settings[AppConstants.AdminEmailAddress].Value" id="@AppConstants.AdminEmailAddress" class="form-control" placeholder="@Html.Lang("请输入管理员邮箱")" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="@AppConstants.NotificationReplyEmail">@Html.Lang("通知邮箱")</label>
-                        <div class="controls">
-                            <input type="email" name="@AppConstants.NotificationReplyEmail" value="@Model.Settings[AppConstants.NotificationReplyEmail].Value" id="@AppConstants.NotificationReplyEmail" class="form-control" placeholder="@Html.Lang("请输入通知邮箱")" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="@AppConstants.SMTPServer">@Html.Lang("SMTP 服务器")</label>
-                        <div class="controls">
-                            <input type="text" name="@AppConstants.SMTPServer" value="@Model.Settings[AppConstants.SMTPServer].Value" id="@AppConstants.SMTPServer" class="form-control" placeholder="@Html.Lang("请输入 SMTP 服务器")" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="@AppConstants.SMTPUsername">@Html.Lang("SMTP 用户名")</label>
-                        <div class="controls">
-                            <input type="text" name="@AppConstants.SMTPUsername" value="@Model.Settings[AppConstants.SMTPUsername].Value" id="@AppConstants.SMTPUsername" class="form-control" placeholder="@Html.Lang("请输入 SMTP 用户名")" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="@AppConstants.SMTPPassword">@Html.Lang("SMTP 密码")</label>
-                        <div class="controls">
-                            <input type="text" name="@AppConstants.SMTPPassword" value="@Model.Settings[AppConstants.SMTPPassword].Value" id="@AppConstants.SMTPPassword" class="form-control" placeholder="@Html.Lang("请输入 SMTP 密码")" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="@AppConstants.SMTPPort">@Html.Lang("SMTP 端口")</label>
-                        <div class="controls">
-                            <input type="text" name="@AppConstants.SMTPPort" value="@Model.Settings[AppConstants.SMTPPort].Value" id="@AppConstants.SMTPPort" class="form-control" placeholder="@Html.Lang("请输入 SMTP 端口")" />
-                        </div>
-                    </div>
-                    <div class="form-actions">
-                        <div class="pull-left">
-                            <button type="submit" name="submit" class="btn btn-success btn-cons">@Html.Lang("保存设置")</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
+<div class="mod_navbar">
+    <div class="title">
+        <h3 class="ng-binding ng-scope">
+            <i class="fa fa-envelope-o"></i>
+            @Html.Lang("邮箱设置")
+        </h3>
     </div>
 </div>
+<div class="main-content">
+    <div class="forum-panel">
+        <form action="@Url.Absolute("~/admin/settings/update/")" method="post" class="form-horizontal">
+            <div class="form-group">
+                <label class="control-label" for="@AppConstants.AdminEmailAddress">@Html.Lang("管理员邮箱")</label>
+                <input type="email" name="@AppConstants.AdminEmailAddress" value="@Model.Settings[AppConstants.AdminEmailAddress].Value" id="@AppConstants.AdminEmailAddress" class="form-control" placeholder="@Html.Lang("请输入管理员邮箱")" />
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="@AppConstants.NotificationReplyEmail">@Html.Lang("通知邮箱")</label>
+                <input type="email" name="@AppConstants.NotificationReplyEmail" value="@Model.Settings[AppConstants.NotificationReplyEmail].Value" id="@AppConstants.NotificationReplyEmail" class="form-control" placeholder="@Html.Lang("请输入通知邮箱")" />
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="@AppConstants.SMTPServer">@Html.Lang("SMTP 服务器")</label>
+                <input type="text" name="@AppConstants.SMTPServer" value="@Model.Settings[AppConstants.SMTPServer].Value" id="@AppConstants.SMTPServer" class="form-control" placeholder="@Html.Lang("请输入 SMTP 服务器")" />
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="@AppConstants.SMTPUsername">@Html.Lang("SMTP 用户名")</label>
+                <input type="text" name="@AppConstants.SMTPUsername" value="@Model.Settings[AppConstants.SMTPUsername].Value" id="@AppConstants.SMTPUsername" class="form-control" placeholder="@Html.Lang("请输入 SMTP 用户名")" />
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="@AppConstants.SMTPPassword">@Html.Lang("SMTP 密码")</label>
+                <input type="text" name="@AppConstants.SMTPPassword" value="@Model.Settings[AppConstants.SMTPPassword].Value" id="@AppConstants.SMTPPassword" class="form-control" placeholder="@Html.Lang("请输入 SMTP 密码")" />
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="@AppConstants.SMTPPort">@Html.Lang("SMTP 端口")</label>
+                <input type="text" name="@AppConstants.SMTPPort" value="@Model.Settings[AppConstants.SMTPPort].Value" id="@AppConstants.SMTPPort" class="form-control" placeholder="@Html.Lang("请输入 SMTP 端口")" />
+            </div>
+            <div class="form-btns">
+                <div class="sm-line">
+                    <button type="submit" class="btn btn-danger">@Html.Lang("保存设置")</button>
+                    <button type="submit" class="btn btn-default" id="TestEmailSettings">@Html.Lang("测试连接")</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $("#TestEmailSettings").on("click", function () {
+                $("form").prop("action", "@Url.Content("~/admin/settings/TestEmailSettings/")");
+            });
+        });
+    </script>
+}

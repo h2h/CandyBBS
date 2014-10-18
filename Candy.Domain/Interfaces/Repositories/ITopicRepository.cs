@@ -14,5 +14,6 @@ namespace Candy.Domain.Interfaces.Repositories
         PagedList<Topic> GetPagedTopics(int pageIndex, int pageSize, int amountToTake);
         PagedList<Topic> GetPagedTopicsByCategory(int pageIndex, int pageSize, int amountToTake, int categoryId);
         IList<Topic> GetTodaysTopics(int amountToTake);
+        PagedList<Topic> GetPagedTopicsByUser(int pageIndex, int pageSize, int amountToTake, int userId);
     }
 }

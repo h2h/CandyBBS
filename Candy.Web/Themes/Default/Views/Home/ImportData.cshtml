@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = Html.Lang("数据导入");
+    Layout = Html.Path("Views/Shared/_FullWidthLayout.cshtml");
+}
+<div class="activation">
+    <div class="forum-panel">
+        <h3 class="title">@Html.Lang("数据导入")</h3>
+        <div class="register">
+            <form method="post" action="@Url.Absolute("~/register/")" id="base-settings" class="form-horizontal" style="padding:0px;">
+                <div class="form-group">
+                    <div class="sm-line">
+                        <button type="submit" class="btn btn-danger">注册</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

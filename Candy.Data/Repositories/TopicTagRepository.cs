@@ -20,6 +20,10 @@ namespace Candy.Data.Repositories
         {
             return _context.TopicTag.ToList();
         }
+        public TopicTag GetBySlug(string slug)
+        {
+            return _context.TopicTag.FirstOrDefault(a => a.Slug == slug);
+        }
 
         public Dictionary<TopicTag, int> GetPopularTags(int? amountToTake)
         {

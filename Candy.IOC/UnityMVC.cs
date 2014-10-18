@@ -56,9 +56,11 @@ namespace Candy.IOC
             container.BindInRequestScope<IPermissionService, PermissionService>();
             container.BindInRequestScope<IRoleService, RoleService>();
             container.BindInRequestScope<IUserService, UserService>();
+            container.BindInRequestScope<IUserMetaService, UserMetaService>();
             container.BindInRequestScope<IPostService, PostService>();
             container.BindInRequestScope<ITopicService, TopicService>();
             container.BindInRequestScope<ITopicTagService, TopicTagService>();
+            container.BindInRequestScope<IEmailService, EmailService>();
 
             container.BindInRequestScope<ISettingsRepository, SettingsRepository>();
             container.BindInRequestScope<ICategoryRepository, CategoryRepository>();
@@ -66,6 +68,7 @@ namespace Candy.IOC
             container.BindInRequestScope<IPermissionRepository, PermissionRepository>();
             container.BindInRequestScope<IRoleRepository, RoleRepository>();
             container.BindInRequestScope<IUserRepository, UserRepository>();
+            container.BindInRequestScope<IUserMetaRepository, UserMetaRepository>();
             container.BindInRequestScope<IPostRepository, PostRepository>();
             container.BindInRequestScope<ITopicRepository, TopicRepository>();
             container.BindInRequestScope<ITopicTagRepository, TopicTagRepository>();

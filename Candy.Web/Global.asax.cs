@@ -52,6 +52,12 @@ namespace Candy.Web
                 new string[] { "Candy.Web.Controllers" }
             );
             routes.MapRoute(
+                "Activation",
+                "Activation/{key}",
+                new { controller = "User", action = "Activation", key = UrlParameter.Optional },
+                new string[] { "Candy.Web.Controllers" }
+            );
+            routes.MapRoute(
                 "LogOut",
                 "logout",
                 new { controller = "User", action = "LogOut" },
@@ -61,12 +67,6 @@ namespace Candy.Web
                 "ForgetPassword",
                 "forgetpassword",
                 new { controller = "User", action = "ForgetPassword" },
-                new string[] { "Candy.Web.Controllers" }
-            );
-            routes.MapRoute(
-                "Activation",
-                "activation",
-                new { controller = "User", action = "Activation" },
                 new string[] { "Candy.Web.Controllers" }
             );
             routes.MapRoute(
@@ -89,8 +89,8 @@ namespace Candy.Web
             );
             routes.MapRoute(
                 "User",
-                string.Concat(AppConstants.UserUrlIdentifier, "/{username}.html"),
-                new { controller = "User", action = "Index", slug = UrlParameter.Optional },
+                string.Concat(AppConstants.UserUrlIdentifier, "/{id}.html"),
+                new { controller = "User", action = "Index", id = UrlParameter.Optional },
                 new string[] { "Candy.Web.Controllers" }
             );
             routes.MapRoute(
@@ -100,9 +100,9 @@ namespace Candy.Web
                 new string[] { "Candy.Web.Controllers" }
             );
             routes.MapRoute(
-                "Tag",
-                string.Concat(AppConstants.TagsUrlIdentifier, "/{tag}"),
-                new { controller = "Topic", action = "TopicsByTag", tag = UrlParameter.Optional },
+                "Tags",
+                string.Concat(AppConstants.TagsUrlIdentifier, "/{slug}.html"),
+                new { controller = "Tag", action = "Show", slug = UrlParameter.Optional },
                 new string[] { "Candy.Web.Controllers" }
             );
             routes.MapRoute(
@@ -202,6 +202,13 @@ namespace Candy.Web
                 }
             }
 
+            var domain = Request.Url.Authority;
+            var siteUrl = SettingsService.Get()[AppConstants.SiteUrl].Value;
+            if (!domain.Equals(siteUrl.Split('/')[2]))
+            {
+                Response.Redirect(siteUrl + Request.Url.AbsolutePath);
+            }
+
         }
         protected void Application_Error(object sender, EventArgs e)
         {
@@ -217,6 +224,7 @@ namespace Candy.Web
             {
                 Session[AppConstants.CurrentTheme] = Application[AppConstants.CurrentTheme];
             }
+
         }
     }
 }

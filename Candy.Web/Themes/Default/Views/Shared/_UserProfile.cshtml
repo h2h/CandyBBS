@@ -1,0 +1,118 @@
+﻿@{
+    Candy.Domain.Models.User currentUser = AppHelpers.GetLoggedUser();
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title - @Html.Settings(AppConstants.SiteName)</title>
+    <meta name="description" property="og:description" itemprop="description" content="" />
+    <meta name="keywords" content="" />
+    <meta property="og:site_name" content="" />
+    <meta property="og:url" content="" />
+    @RenderSection("SocialMeta", false)
+    <link rel="alternate" type="application/rss+xml" title="RSS 2.0 Feed" href="" />
+    <link href="@Url.Absolute(Html.Path("css/common.css"))" rel="stylesheet" />
+    <link href="@Url.Absolute(Html.Path("css/style.css"))" rel="stylesheet" />
+    <script src="@Url.Absolute(Html.Path("js/jquery.min.js"))"></script>
+</head>
+<body>
+    <div class="page-container">
+        <header id="header" class="header header-fixed">
+            <div class="container">
+                <div class="row-l-250">
+                    <div class="col-l-250">
+                        <div class="logo">
+                            <a href="">
+                                <img src="@Url.Absolute(Html.Path("img/logo.png"))" title="@Html.Settings(AppConstants.SiteName)" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-l-100">
+                        <div class="row-r-300">
+                            <div class="col-l-300">
+                                <div class="row-r-300">
+                                    <div class="col-l-300">
+                                        <ul class="nav navbar-nav" id="header-left-menu">
+                                            <li class="active">
+                                                <a href="@Url.Absolute("~/")">@Html.Lang("首页")</a>
+                                            </li>
+                                            <li>
+                                                <a href="@Url.Absolute("~/forum")">@Html.Lang("版块")</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-r-300">
+                                        <form action="" method="get" class="header-search-form pull-right">
+                                            <div class="input-group">
+                                                <input type="text" id="search-text" class="form-control no-border" name="search" value="" placeholder="@Html.Lang("搜索")" />
+                                                <span class="input-group-btn">
+                                                    <button type="submit" id="search-button" class="btn"><i class="fa fa-search"></i></button>
+                                                </span>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-r-300">
+                                <ul class="nav" id="header-right-menu">
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        <li class="header-user">
+                                            <a href="@Url.Absolute(currentUser.NiceUrl)" data-toggle="dropdown">
+                                                <img src="@Url.Content(currentUser.GetAvatar(48))" width="48" alt="@currentUser.UserName" title="@currentUser.UserName" />
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-menu-right mg-r-xs">
+                                                @if (currentUser.IsAdmin)
+                                                {
+                                                    <li>
+                                                        <a href="@Url.Absolute("~/admin/")">@Html.Lang("管理后台")</a>
+                                                    </li>
+                                                }
+                                                <li>
+                                                    <a href="@Url.Absolute(currentUser.NiceUrl)">@Html.Lang("个人主页")</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Absolute("~/Settings/")">@Html.Lang("资料设置")</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Absolute("~/logout/")">@Html.Lang("退出")</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="header-login">
+                                            <a href="@Url.Absolute("~/login")">@Html.Lang("登录")</a>
+                                        </li>
+                                        <li class="header-register">
+                                            <a href="@Url.Absolute("~/register")">@Html.Lang("注册")</a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <section class="user-profile">
+            @RenderBody()
+        </section>
+        <footer id="footer">
+            <div class="container">
+                <p>All Right Reserved by <a href="http://www.icoding.me" target="_blank">iCoding.Me</a></p>
+            </div>
+        </footer>
+    </div>
+    <script src="@Url.Absolute(Html.Path("js/candy.js"))"></script>
+    @RenderSection("Scripts", false)
+    <div style="display:none">
+        <script type="text/javascript">
+            var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+            document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fa769ace86b6e57cbc43ff720efc5e35f' type='text/javascript'%3E%3C/script%3E"));
+        </script>
+    </div>
+</body>
+</html>

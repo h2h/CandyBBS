@@ -52,9 +52,11 @@
     <Compile Include="Interfaces\Repositories\ITopicRepository.cs" />
     <Compile Include="Interfaces\Repositories\ITopicTagRepository.cs" />
     <Compile Include="Interfaces\Repositories\IUploadedFileRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IUserMetaRepository.cs" />
     <Compile Include="Interfaces\Repositories\IUserRepository.cs" />
     <Compile Include="Interfaces\Services\ICategoryPermissionForRoleService.cs" />
     <Compile Include="Interfaces\Services\ICategoryService.cs" />
+    <Compile Include="Interfaces\Services\IEmailService.cs" />
     <Compile Include="Interfaces\Services\ILocalizationService.cs" />
     <Compile Include="Interfaces\Services\IPermissionService.cs" />
     <Compile Include="Interfaces\Services\IPostService.cs" />
@@ -63,9 +65,12 @@
     <Compile Include="Interfaces\Services\ITopicService.cs" />
     <Compile Include="Interfaces\Services\ITopicTagService.cs" />
     <Compile Include="Interfaces\Services\IUploadedFileService.cs" />
+    <Compile Include="Interfaces\Services\IUserMetaService.cs" />
     <Compile Include="Interfaces\Services\IUserService.cs" />
     <Compile Include="Models\CategoryPermissionForRole.cs" />
     <Compile Include="Models\CategoryWithSubCategories.cs" />
+    <Compile Include="Models\Email.cs" />
+    <Compile Include="Models\GenericMessage.cs" />
     <Compile Include="Models\Language.cs" />
     <Compile Include="Models\PagedList.cs" />
     <Compile Include="Models\Permission.cs" />

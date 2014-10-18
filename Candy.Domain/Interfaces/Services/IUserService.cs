@@ -37,5 +37,6 @@ namespace Candy.Domain.Interfaces.Services
         bool Delete(User user);
         IList<User> GetLatestUsers(int amountToTake);
         int MemberCount();
+        User GetByActivation(string key);
     }
 }

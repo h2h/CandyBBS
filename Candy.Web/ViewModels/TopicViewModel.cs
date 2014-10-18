@@ -25,10 +25,12 @@ namespace Candy.Web.ViewModels
     {
         public Post TopicStarterPost { get; set; }
         public Topic Topic { get; set; }
-        public PagedList<Post> Posts { get; set; }
+        public PagedList<Post> Comments { get; set; }
         public PermissionSet Permissions { get; set; }
         public int? PageIndex { get; set; }
         public int? TotalCount { get; set; }
+        public int? TotalPages { get; set; }
+        public int? PageSize { get; set; }
         public User User { get; set; }
     }
 

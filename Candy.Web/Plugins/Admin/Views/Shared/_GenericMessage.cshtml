@@ -1,17 +1,19 @@
 ﻿@{
-    var generucMessage = new GenericMessageViewModel();
+    var generucMessage = new GenericMessage();
     if(TempData[AppConstants.MessageViewBagName] != null)
     {
-        generucMessage = (GenericMessageViewModel)TempData[AppConstants.MessageViewBagName];
+        generucMessage = (GenericMessage)TempData[AppConstants.MessageViewBagName];
     }else if(ViewBag.Message != null)
     {
-        generucMessage = (GenericMessageViewModel)ViewBag.Message;
+        generucMessage = (GenericMessage)ViewBag.Message;
     }
 }
 @if(!string.IsNullOrEmpty(generucMessage.Message))
 {
-<div class="alert alert-@generucMessage.MessageType.ToString()">
-    <button class="close" data-dismiss="alert"><i class="fa fa-times-circle"></i></button>
-    @generucMessage.Message
-</div>
+    <div class="notifications center-top">
+        <div class="alert in fade alert-@generucMessage.MessageType.ToString()">
+            <a class="close pull-right">×</a>
+            @generucMessage.Message
+        </div>
+    </div>
 }

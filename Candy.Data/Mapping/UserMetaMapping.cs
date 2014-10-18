@@ -9,7 +9,7 @@ namespace Candy.Data.Mapping
         {
             HasKey(x => x.Id);
 
-            HasRequired(x => x.User).WithMany(x => x.UserMeta).Map(x => x.MapKey("User_Id"));
+            HasRequired(x => x.User).WithMany(x => x.UserMeta).Map(x => x.MapKey("UserId"));
         }
     }
 }

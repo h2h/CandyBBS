@@ -67,10 +67,10 @@ namespace Candy.Web.Areas.Admin.Controllers
                     throw new Exception(LocalizerHelper.Lang("添加用户组发生错误"));
                 }
             }
-            TempData[AppConstants.MessageViewBagName] = new GenericMessageViewModel
+            TempData[AppConstants.MessageViewBagName] = new GenericMessage
             {
                 Message = LocalizerHelper.Lang("添加用户组"),
-                MessageType = GenericMessages.success
+                MessageType = GenericMessageType.success
             };
             return Redirect("~/admin/user/role");
         }
@@ -101,10 +101,10 @@ namespace Candy.Web.Areas.Admin.Controllers
                     throw new Exception(LocalizerHelper.Lang("编辑用户组发生错误"));
                 }
             }
-            TempData[AppConstants.MessageViewBagName] = new GenericMessageViewModel
+            TempData[AppConstants.MessageViewBagName] = new GenericMessage
             {
                 Message = LocalizerHelper.Lang("保存成功"),
-                MessageType = GenericMessages.success
+                MessageType = GenericMessageType.success
             };
             return Redirect("~/admin/User/Role");
         }
@@ -128,10 +128,10 @@ namespace Candy.Web.Areas.Admin.Controllers
                     }
                 }
             }
-            TempData[AppConstants.MessageViewBagName] = new GenericMessageViewModel
+            TempData[AppConstants.MessageViewBagName] = new GenericMessage
             {
                 Message = LocalizerHelper.Lang("删除成功"),
-                MessageType = GenericMessages.success
+                MessageType = GenericMessageType.success
             };
             return Redirect("~/admin/user/role/");
         }

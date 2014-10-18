@@ -61,6 +61,11 @@ namespace Candy.Web.Areas.Admin.Controllers
                 });
             }
         }
+        [HttpPost]
+        public ActionResult Edit()
+        {
+            return View();
+        }
         private CategotyViewModels SanitizeCategory(IEnumerable<Category> categories,Category model)
         {
             var catModel = new CategotyViewModels();

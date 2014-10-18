@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="CategoryPermissionForRoleService.cs" />
     <Compile Include="CategoryService.cs" />
+    <Compile Include="EmailService.cs" />
     <Compile Include="LocalizationService.cs" />
     <Compile Include="LoggingService.cs" />
     <Compile Include="PermissionService.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="ThemeService.cs" />
     <Compile Include="TopicService.cs" />
     <Compile Include="TopicTagService.cs" />
+    <Compile Include="UserMetaService.cs" />
     <Compile Include="UserService.cs" />
   </ItemGroup>
   <ItemGroup>

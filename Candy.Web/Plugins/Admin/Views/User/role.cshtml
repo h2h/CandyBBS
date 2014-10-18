@@ -3,38 +3,37 @@
     ViewBag.Menu = "用户";
     ViewBag.SubMenu = "用户组";
 }
-<div class="row">
-    <div class="col-md-12">
-        <div class="grid simple">
-            <div class="grid-title no-border">
-                <h4>@Html.Lang("用户组")</h4>
+<div class="mod_navbar">
+    <div class="title">
+        <h3 class="ng-binding ng-scope">
+            <i class="fa fa-tasks"></i>
+            @Html.Lang("所有用户")
+        </h3>
+    </div>
+</div>
+<div class="main-content">
+    <div class="forum-panel">
+        <div class="row-l-500">
+            <div class="col-l-500">
+                <form action="@Url.Absolute("~/admin/user/addrole/")" method="post" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="control-label">@Html.Lang("名称")</label>
+                        <input type="text" name="name" value="" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">@Html.Lang("别名")</label>
+                        <input type="text" name="slug" value="" class="form-control" />
+                    </div>
+                    <div class="form-btns">
+                        <div class="sm-line">
+                            <button type="submit" class="btn btn-danger">@Html.Lang("添加")</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="grid-body no-border">
-                <div class="row">
-                    <div class="col-md-4">
-                        <form action="@Url.Absolute("~/admin/user/addrole/")" method="post">
-                            <div class="form-group">
-                                <label>@Html.Lang("名称")</label>
-                                <div class="controls">
-                                    <input type="text" name="name" value="" class="form-control" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>@Html.Lang("别名")</label>
-                                <div class="controls">
-                                    <input type="text" name="slug" value="" class="form-control" />
-                                </div>
-                            </div>
-                            <div class="form-actions">
-                                <div class="pull-left">
-                                    <button type="submit" class="btn btn-danger btn-cons">添加</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="col-md-8">
-                        @Html.Action("RoleList")
-                    </div>
+            <div class="col-r-500">
+                <div class="form-horizontal">
+                    @Html.Action("RoleList")
                 </div>
             </div>
         </div>

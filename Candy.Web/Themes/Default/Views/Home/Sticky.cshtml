@@ -25,15 +25,14 @@
                         <h2 class="topic-title">
                             <a href="@Url.Absolute(topic.NiceUrl)">@topic.Name</a>
                         </h2>
-                        <span class="tips tips-important topic-total-comment">@topic.Posts.Count</span>
+                        <a class="tips tips-important topic-total-comment" href="@Url.Absolute(topic.NiceUrl)#comment-list" title="@Html.Lang("{0}条评论",topic.Posts.Where(a=>a.PostType == PostType.comment.ToString()).Count())">
+                            <i class="fa fa-comments"></i>@topic.Posts.Where(a => a.PostType == PostType.comment.ToString()).Count()
+                        </a>
                     </div>
                     <div class="topic-meta">
                         <span>
                             <a href="@Url.Absolute(topic.User.NiceUrl)" title="@topic.User.Slug">@topic.User.Slug</a>
                             &nbsp;发布于&nbsp;@DatesUI.GetPrettyDate(topic.Posts.FirstOrDefault().DateCreated)&nbsp;
-                        </span>
-                        <span>
-                            回复(@topic.Posts.Where(p => p.PostType == PostType.post.ToString()).Count())
                         </span>
                         <span>
                             阅读(@topic.Views)
@@ -47,16 +46,16 @@
             </div>
         }
     </div>
-    <div class="forum-pager">
-        <ul class="pagination">
-            <li class="disabled">
-                <a href="javascript:;" class="paginator-previous">上一页</a>
-            </li>
-            <li class="active"><a href="?page=1">1</a></li>
-            <li class="paginator-page"><a href="?page=2">2</a></li>
-            <li class="paginator-page"><a href="?page=3">3</a></li>
-            <li class="paginator-page"><a href="?page=4">4</a></li>
-            <li class=""><a href="?page=2" class="paginator-next">下一页</a></li>
-        </ul>
-    </div>
+    @if (Model.TotalPages > 1)
+    {
+        var pager = new Pager
+        {
+            CurrentPage = Model.PageIndex,
+            PageSize = Model.PageSize,
+            TotalItemCount = Model.TotalCount,
+            TotalPages = Model.TotalPages,
+            RouteValues = null
+        };
+        Html.RenderPartial("_Pager", pager);
+    }
 </div>

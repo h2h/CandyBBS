@@ -24,24 +24,12 @@ namespace Candy.Web.ViewModels
     {
         [Required]
         public string UserName { get; set; }
-
         [Required]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
-
-        public string PasswordQuestion { get; set; }
-        public string PasswordAnswer { get; set; }
-
-        [DataType(DataType.Url)]
-        public string Website { get; set; }
-
         [Required]
         [StringLength(64,MinimumLength=6)]
         [DataType(DataType.Password)]
         public string Password { get; set; }
-
-        [DataType(DataType.Password)]
-        [Compare("Password")]
-        public string RePassword { get; set; }
     }
 }

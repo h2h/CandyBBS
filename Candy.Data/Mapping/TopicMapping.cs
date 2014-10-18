@@ -9,6 +9,8 @@ namespace Candy.Data.Mapping
         {
             HasKey(x => x.Id);
 
+            HasMany(a => a.Posts).WithOptional(a => a.Topic).Map(a => a.MapKey(""));
+
             HasRequired(t => t.Category).WithMany(c => c.Topics).Map(m => m.MapKey("Category_Id"));
 
             HasRequired(t => t.User).WithMany(c => c.Topics).Map(m => m.MapKey("User_Id"));

@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Candy.Domain.Models;
-using Candy.Domain.Interfaces.Services;
-using Candy.Domain.Interfaces.Repositories;
-using Candy.Utilities;
 using System.Security.Cryptography;
 using System.Text;
 using System.Data.SqlTypes;
 using System.Web;
 using System.Web.Security;
 using Candy.Domain;
+using Candy.Domain.Models;
+using Candy.Domain.Interfaces.Services;
+using Candy.Domain.Interfaces.Repositories;
+using Candy.Utilities;
 
 namespace Candy.Services
 {
@@ -21,36 +21,53 @@ namespace Candy.Services
         private readonly ISettingsRepository _settingsRepository;
         private readonly ILoggingService _loggingService;
         private readonly IRoleRepository _roleRepository;
+        private readonly IEmailService _emailService;
+        private readonly ILocalizationService _localizationService;
 
         private LoginAttemptStatus _lastLoginStatus = LoginAttemptStatus.LoginSuccessful;
 
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="membershipRepository"> </param>
-        /// <param name="settingsRepository"> </param>
-        /// <param name="emailService"> </param>
-        /// <param name="localizationService"> </param>
-        /// <param name="activityService"> </param>
-        /// <param name="privateMessageService"> </param>
-        /// <param name="UserPointsService"> </param>
-        /// <param name="topicNotificationService"> </param>
-        /// <param name="voteService"> </param>
-        /// <param name="badgeService"> </param>
-        /// <param name="categoryNotificationService"> </param>
-        /// <param name="api"> </param>
-        /// <param name="loggingService"></param>
-        public UserService(IUserRepository userRepository, ISettingsRepository settingsRepository, ILoggingService loggingService, IRoleRepository roleRepository)
+        public UserService(IUserRepository userRepository, 
+            ISettingsRepository settingsRepository, 
+            ILoggingService loggingService, 
+            IRoleRepository roleRepository,
+            IEmailService emailService,
+            ILocalizationService localizationService)
         {
             this._userRepository = userRepository;
             this._settingsRepository = settingsRepository;
             this._loggingService = loggingService;
             this._roleRepository = roleRepository;
+            this._emailService = emailService;
+            this._localizationService = localizationService;
         }
 
         public string ErrorCodeToString(UserStatus createStatus)
         {
-            return createStatus.ToString();
+            switch (createStatus)
+            {
+                case UserStatus.DuplicateEmail:
+                    return "邮箱已存在";
+                case UserStatus.DuplicateUserName:
+                    return "用户名已存在";
+                case UserStatus.InvalidAnswer:
+                    return "无效的答案";
+                case UserStatus.InvalidEmail:
+                    return "无效的邮箱";
+                case UserStatus.InvalidPassword:
+                    return "无效的密码";
+                case UserStatus.InvalidQuestion:
+                    return "无效的问题";
+                case UserStatus.InvalidUserName:
+                    return "无效的用户名";
+                case UserStatus.ProviderError:
+                    return "提供程序错误";
+                case UserStatus.Success:
+                    return "添加用户成功";
+                case UserStatus.UserRejected:
+                    return "用户拒绝";
+                default:
+                    return "未知错误";
+            }
         }
         public User SanitizeUser(User User)
         {
@@ -175,7 +192,17 @@ namespace Candy.Services
                     {
                         model.ActivationKey = GeneratePasswordHash(model.UserName).Substring(8, 8);
                         var result = this._userRepository.Add(model);
-                        //发送邮件
+                        // 发送邮件给管理员，
+                        // 发送激活信息给注册用户
+                        var email = new Email 
+                        {
+                            Body = _emailService.ActivationTemplate(model.UserName,model.ActivationKey),
+                            EmailFrom = _settingsRepository.Get(AppConstants.NotificationReplyEmail).Value,
+                            EmailTo = model.Email,
+                            NameTo = model.UserName,
+                            Subject = string.Format("{0}{1}",_settingsRepository.Get(AppConstants.SiteName).Value, _localizationService.Get("账号激活邮件"))
+                        };
+                        _emailService.SendMail(email);
                     }
                     else
                     {
@@ -349,6 +376,10 @@ namespace Candy.Services
         /// <param name="resetPasswordAttempts">If true, also reset password attempts to zero</param>
         public void UnlockUser(string username, bool resetPasswordAttempts)
         {
+        }
+        public User GetByActivation(string key)
+        {
+            return _userRepository.GetByActivation(key);
         }
     }
 }

@@ -1,0 +1,52 @@
+﻿@model User
+@{
+    Layout = "~/Themes/Default/Views/Shared/_UserLayout.cshtml";
+    ViewBag.Title = Html.Lang("帖子");
+}
+<div class="forum-panel">
+    <div class="filter">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="@Url.Content("~/User/Topics/")">@Html.Lang("主题")</a></li>
+            <li><a href="@Url.Content("~/User/Comments/")">@Html.Lang("回复")</a></li>
+        </ul>
+    </div>
+    <div class="topics">
+        @if (Model.Topics.Any())
+        {
+            foreach (var topic in Model.Topics)
+            {
+                <div class="topic">
+                    <div class="topic-user-avatar">
+                        <a href="@Url.Absolute(topic.User.NiceUrl)">
+                            <img src="@Url.Absolute(topic.User.GetAvatar(48))" class="avatar" />
+                        </a>
+                    </div>
+                    <div class="topic-info">
+                        <div class="topic-title">
+                            <a class="tips tips-important" href="@Url.Absolute(topic.Category.NiceUrl)">@topic.Category.Name<i class="tips-arrow"></i></a>
+                            <h2 class="topic-title">
+                                <a href="@Url.Absolute(topic.NiceUrl)">@topic.Name</a>
+                            </h2>
+                            <a class="tips tips-important topic-total-comment" href="@Url.Absolute(topic.NiceUrl)#comment-list" title="@Html.Lang("{0}条评论",topic.Posts.Where(a=>a.PostType == PostType.comment.ToString()).Count())">
+                                <i class="fa fa-comments"></i>@topic.Posts.Where(a => a.PostType == PostType.comment.ToString()).Count()
+                            </a>
+                        </div>
+                        <div class="topic-meta">
+                            <span>
+                                <a href="@Url.Absolute(topic.User.NiceUrl)" title="@topic.User.Slug">@topic.User.Slug</a>
+                                &nbsp;发布于&nbsp;@DatesUI.GetPrettyDate(topic.Posts.FirstOrDefault().DateCreated)&nbsp;
+                            </span>
+                            <span>
+                                阅读(@topic.Views)
+                            </span>
+                            <span class="pull-right topic-last-comment">
+                                <a href="@Url.Absolute("~/user/info/1")" title="@topic.User.Slug">@topic.User.Slug</a> 最后回复于
+                                @DatesUI.GetPrettyDate(topic.Posts.FirstOrDefault().DateCreated)
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

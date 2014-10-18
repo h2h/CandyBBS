@@ -1,0 +1,13 @@
+﻿@model User
+@{
+    Layout = "~/Themes/Default/Views/Shared/_UserLayout.cshtml";
+    ViewBag.Title = Html.Lang("回复");
+}
+<div class="forum-panel">
+    <div class="filter">
+        <ul class="nav nav-tabs">
+            <li><a href="@Url.Content("~/User/Topics/")">@Html.Lang("主题")</a></li>
+            <li class="active"><a href="@Url.Content("~/User/Comments/")">@Html.Lang("回复")</a></li>
+        </ul>
+    </div>
+</div>

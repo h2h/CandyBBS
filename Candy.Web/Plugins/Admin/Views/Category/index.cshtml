@@ -4,12 +4,12 @@
     ViewBag.Title = Html.Lang("所有版块");
 }
 @functions{
-    public IHtmlString DisplayTree(List<CategotyViewModels> cats,System.Text.StringBuilder sb,string plain)
+    public IHtmlString DisplayTree(List<CategotyViewModels> cats, System.Text.StringBuilder sb, string plain)
     {
-        foreach(var cat in cats)
+        foreach (var cat in cats)
         {
             sb.Append(DisplayCategory(cat.Category, plain).ToHtmlString());
-            if(cat.SubCategories.Any())
+            if (cat.SubCategories.Any())
             {
                 DisplayTree(cat.SubCategories, sb, plain + "&nbsp;&nbsp;&nbsp;&nbsp;");
             }
@@ -17,13 +17,14 @@
         return new HtmlString(sb.ToString());
     }
 }
-@helper DisplayCategory(Category cat,string plain)
+@helper DisplayCategory(Category cat, string plain)
 {
     <tr>
-        @if(cat.ParentCategory != null)
+        @if (cat.ParentCategory != null)
         {
             <td>@Html.Raw(plain)-&nbsp;@(cat.Name)</td>
-        }else
+        }
+        else
         {
             <td>@cat.Name</td>
         }
@@ -36,32 +37,35 @@
         </td>
     </tr>
 }
-<div class="row">
-    <div class="col-md-12">
-        <div class="grid simple">
-            <div class="grid-title no-border">
-                <h4>@Html.Lang("所有版块")</h4>
-            </div>
-            <div class="grid-body no-border">
-                <table class="table table-striped dataTable" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th>
-                                @Html.Lang("版块")
-                            </th>
-                            <th>
-                                @Html.Lang("帖子")
-                            </th>
-                            <th class="center short">
-                                @Html.Lang("操作")
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @DisplayTree(Model.Categories, new System.Text.StringBuilder(), string.Empty)
-                    </tbody>
-                </table>
-            </div>
+<div class="mod_navbar">
+    <div class="title">
+        <h3 class="ng-binding ng-scope">
+            <i class="fa fa-tasks"></i>
+            @Html.Lang("所有版块")
+        </h3>
+    </div>
+</div>
+<div class="main-content">
+    <div class="forum-panel">
+        <div class="form-horizontal">
+            <table class="table table-hover table-bordered" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.Lang("版块")
+                        </th>
+                        <th>
+                            @Html.Lang("帖子")
+                        </th>
+                        <th class="center short">
+                            @Html.Lang("操作")
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @DisplayTree(Model.Categories, new System.Text.StringBuilder(), string.Empty)
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

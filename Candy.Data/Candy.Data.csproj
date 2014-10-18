@@ -74,6 +74,7 @@
     <Compile Include="Repositories\SettingsRepository.cs" />
     <Compile Include="Repositories\TopicRepository.cs" />
     <Compile Include="Repositories\TopicTagRepository.cs" />
+    <Compile Include="Repositories\UserMetaRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="UnitOfWork\UnitOfWork.cs" />
     <Compile Include="UnitOfWork\UnitOfWorkManager.cs" />

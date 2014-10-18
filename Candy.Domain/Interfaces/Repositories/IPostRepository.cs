@@ -11,7 +11,7 @@ namespace Candy.Domain.Interfaces.Repositories
         IEnumerable<Post> GetAllWithTopics();
         IList<Post> GetByUser(int userId, int amountToTake);
         IList<Post> GetPostsByTopic(int topicId);
-        PagedList<Post> GetPagedPostsByTopic(int pageIndex, int pageSize, int amountToTake, int topicId);
+        PagedList<Post> GetPagedCommentsByTopic(int pageIndex, int pageSize, int amountToTake, int topicId);
         IList<Post> GetPostsByUser(int userId);
         PagedList<Post> SearchPosts(int pageIndex, int pageSize, int amountToTake, string searchTerm);
         int PostCount();

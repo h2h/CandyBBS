@@ -32,11 +32,11 @@ namespace Candy.Web.Controllers
             this._postService = postService;
             LoggedUser = UserIsAuthenticated ? UserService.GetUser(Username) : null;
         }
-        public ActionResult Index(int id)
+        public ActionResult Index(int topicId,int p = 0)
         {
             using (UnitOfWorkManager.NewUnitOfWork())
             {
-                var result = _topicService.Get(id);
+                var result = _postService.GetPagedCommentsByTopic(p, int.Parse(SettingsService.Get()[AppConstants.PageSize].Value), int.MaxValue, topicId);
                 return View(result);
             }
         }
@@ -60,6 +60,7 @@ namespace Candy.Web.Controllers
                 try
                 {
                     unitOfWork.Commit();
+                    return RedirectToAction("Show", "Topic", new { id = topic.Id });
                 }
                 catch (Exception ex)
                 {

@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
+using Candy.Domain;
+using Candy.Domain.Interfaces.Services;
 
 namespace Candy.Web.Application
 {
-    public class DatesUI
+    public static class DatesUI
     {
         public static string GetPrettyDate(DateTime date)
         {
             // 获取时间差
-            var span = DateTime.UtcNow.Subtract(date);
+            var span = DateTime.Now.Subtract(date);
             var totalDays = (int)span.TotalDays;
             var totalSeconds = (int)span.TotalSeconds;
             if (totalDays < 0 || totalDays >= 0x1f)
@@ -49,6 +52,16 @@ namespace Candy.Web.Application
                 return LocalizerHelper.Lang("{0}周前", Math.Ceiling((double)(((double)totalDays) / 7.0)));
             }
             return string.Empty;
+        }
+        /// <summary>
+        /// 获取本地时间
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public static DateTime GetLocalDate(DateTime date)
+        {
+            var timeZone = TimeZoneInfo.FindSystemTimeZoneById(AppHelpers.Settings(AppConstants.TimeZone));
+            return date.Add(timeZone.BaseUtcOffset);
         }
     }
 }

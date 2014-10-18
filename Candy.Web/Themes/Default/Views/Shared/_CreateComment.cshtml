@@ -1,0 +1,41 @@
+﻿@model Topic
+<div class="forum-panel">
+    <div class="page-title">
+        <h2>@Html.Lang("回复")</h2>
+    </div>
+    <div class="comment-editor">
+        @if(User.Identity.IsAuthenticated)
+        {
+            <form name="comment-form" action="@Url.Content("~/Comment/New/")" method="post">
+                <input type="hidden" name="topic" value="@Model.Id" />
+                <div class="form-group" style="margin-bottom:0px;">
+                    <textarea name="context" id="comment-context" class="form-simditor"></textarea>
+                </div>
+                <div class="form-btns">
+                    <button type="submit" class="btn btn-success comment-submit-btn">发表评论</button>
+                </div>
+            </form>
+        }else
+        {
+            <div class="comment-plz-signin text-center">
+                <p>
+                </p><h4>您还没有登录，请您登录后参与讨论：</h4><br>
+                <a class="btn btn-danger" href="@Url.Absolute("~/Login/")">登录</a>
+                &nbsp;或&nbsp;
+                <a class="btn btn-success" href="@Url.Absolute("~/Register/")">立即注册</a>
+                <p></p>
+            </div>
+        }
+    </div>
+</div>
+@if (User.Identity.IsAuthenticated)
+{
+    <script type="text/javascript">
+        $(function () {
+            var editor = new Simditor({
+                textarea: $("#comment-context"),
+                markdown: true
+            });
+        });
+    </script>
+}

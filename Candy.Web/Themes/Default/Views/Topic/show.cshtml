@@ -14,10 +14,10 @@
             <span class="topic-user-name">@Model.Topic.User.Slug</span>
         </a>
         <span>
-            &nbsp;发布于&nbsp;@DatesUI.GetPrettyDate(Model.Topic.Posts.FirstOrDefault().DateCreated)&nbsp;
+            &nbsp;发布于&nbsp;@DatesUI.GetPrettyDate(Model.TopicStarterPost.DateCreated)&nbsp;
         </span>
         <span>
-            回复(@Model.Topic.Posts.Where(p => p.PostType == PostType.post.ToString()).Count())
+            回复(@Model.Comments.Count())
         </span>
         <span>
             阅读(@Model.Topic.Views)
@@ -31,4 +31,4 @@
         @Html.Raw(Model.TopicStarterPost.PostContent)
     </div>
 </div>
-@Html.Action("Index", "Comment", new { id=Model.Topic.Id })
+@Html.Partial("_Comments",Model)

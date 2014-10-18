@@ -2,51 +2,54 @@
 @{
     ViewBag.Title = Html.Lang("用户管理");
 }
-<div class="row">
-    <div class="col-md-12">
-        <div class="grid simple">
-            <div class="grid-title no-border">
-                <h4>@Html.Lang("所有用户")</h4>
-            </div>
-            <div class="grid-body no-border">
-                <table class="table table-striped dataTable" cellspacing="0">
-                    <thead>
+<div class="mod_navbar">
+    <div class="title">
+        <h3 class="ng-binding ng-scope">
+            <i class="fa fa-tasks"></i>
+            @Html.Lang("所有用户")
+        </h3>
+    </div>
+</div>
+<div class="main-content">
+    <div class="forum-panel">
+        <div class="form-horizontal">
+            <table class="table table-hover table-bordered" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>@Html.Lang("用户名")</th>
+                        <th>@Html.Lang("锁定")</th>
+                        <th>@Html.Lang("用户组")</th>
+                        <th>@Html.Lang("帖子")</th>
+                        <th>@Html.Lang("操作")</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model.Users)
+                    {
                         <tr>
-                            <th>@Html.Lang("用户名")</th>
-                            <th>@Html.Lang("锁定")</th>
-                            <th>@Html.Lang("用户组")</th>
-                            <th>@Html.Lang("帖子")</th>
-                            <th>@Html.Lang("操作")</th>
+                            <td>
+                                <b>@user.UserName</b>
+                            </td>
+                            <td>
+                                <span class="checkbox check-default">
+                                    <input type="checkbox" value="0" />
+                                    <label for=""></label>
+                                </span>
+                            </td>
+                            <td>
+                                @user.Role.RoleName
+                            </td>
+                            <td>
+                                <a href="#" title="@(Html.Lang("查看 {0} 的所有帖子",user.UserName))">@user.Topics.Count</a>
+                            </td>
+                            <td>
+                                <a href="@Url.Absolute("~/admin/user/edituser/"+user.Id)" title="@Html.Lang("编辑")"><i class="fa fa-plus-circle"></i></a>
+                                <a href="@Url.Absolute("~/admin/user/deleteuser/"+user.Id)" title="@Html.Lang("删除")"><i class="fa fa-times-circle"></i></a>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var user in Model.Users)
-                        {
-                            <tr>
-                                <td>
-                                    <b>@user.UserName</b>
-                                </td>
-                                <td>
-                                    <span class="checkbox check-default">
-                                        <input type="checkbox" value="0" />
-                                        <label for=""></label>
-                                    </span>
-                                </td>
-                                <td>
-                                    @user.Role.RoleName
-                                </td>
-                                <td>
-                                    <a href="#" title="@(Html.Lang("查看 {0} 的所有帖子",user.UserName))">@user.Topics.Count</a>
-                                </td>
-                                <td>
-                                    <a href="@Url.Absolute("~/admin/user/edituser/"+user.Id)" title="@Html.Lang("编辑")"><i class="fa fa-plus-circle"></i></a>
-                                    <a href="@Url.Absolute("~/admin/user/deleteuser/"+user.Id)" title="@Html.Lang("删除")"><i class="fa fa-times-circle"></i></a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
+                    }
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

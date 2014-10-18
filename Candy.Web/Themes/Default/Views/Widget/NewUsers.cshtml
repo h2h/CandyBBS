@@ -15,7 +15,7 @@
                 <li>
                     <div>
                         <a class="user-avatar" href="@Url.Absolute(user.NiceUrl)" title="@user.Slug">
-                            <img src="@user.GetAvatar(36)" />
+                            <img src="@Url.Absolute(Html.GetAvatar(user,36))" />
                         </a>
                         <a class="user-name" href="@Url.Absolute(user.NiceUrl)" title="@user.Slug"><b>@user.Slug</b></a>
                         @if (user.Topics.Any())

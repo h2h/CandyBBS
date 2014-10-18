@@ -7,6 +7,7 @@ namespace Candy.Domain.Interfaces.Services
     public interface ITopicTagService
     {
         IEnumerable<TopicTag> GetAll();
+        TopicTag GetBySlug(string slug);
         void DeleteByName(string tagName);
         IEnumerable<TopicTag> GetByTopic(Topic topic);
         TopicTag Add(TopicTag topic);

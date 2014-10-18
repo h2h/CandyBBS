@@ -22,7 +22,10 @@ namespace Candy.Services
         {
             return this._tagRepository.GetAll();
         }
-
+        public TopicTag GetBySlug(string slug)
+        {
+            return this._tagRepository.GetBySlug(slug);
+        }
         public void DeleteByName(string tagName)
         {
             var tag = this._tagRepository.GetTagName(tagName);

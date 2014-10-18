@@ -2,25 +2,26 @@
 @{
     ViewBag.Title = Html.Lang("帖子标签");
 }
-<div class="row">
-    <div class="col-md-12">
-        <div class="grid simple">
-            <div class="grid-title no-border">
-                <h4>@Html.Lang("所有帖子")</h4>
-            </div>
-            <div class="grid-body no-border">
-                @if (Model.Count > 0)
-                {
-                    foreach(var tag in Model)
-                    {
-                        <a href="@Url.Absolute(tag.NiceUrl)"><span class="label label-important">@string.Format("{0}({1})", tag.Tag, tag.Topics.Count)</span></a>
-                    }
-                }
-                else
-                {
-                     <p class="center-text">@Html.Lang("还没有标签")</p>
-                }
-            </div>
-        </div>
+<div class="mod_navbar">
+    <div class="title">
+        <h3 class="ng-binding ng-scope">
+            <i class="fa fa-tasks"></i>
+            @Html.Lang("帖子标签")
+        </h3>
+    </div>
+</div>
+<div class="main-content">
+    <div class="forum-panel">
+        @if (Model.Count > 0)
+        {
+            foreach (var tag in Model)
+            {
+                <a href="@Url.Absolute(tag.NiceUrl)"><span class="label label-important">@string.Format("{0}({1})", tag.Tag, tag.Topics.Count)</span></a>
+            }
+        }
+        else
+        {
+            <p class="center-text">@Html.Lang("还没有标签")</p>
+        }
     </div>
 </div>

@@ -16,8 +16,6 @@ namespace Candy.Web.Controllers
     {
         private readonly ITopicTagService _topicTagService;
 
-        private User LoggedOnUser;
-        private Role UsersRole;
         public TagController(ILoggingService loggingService, 
             IUnitOfWorkManager unitOfWorkManager, 
             IUserService userService, 
@@ -28,12 +26,13 @@ namespace Candy.Web.Controllers
         {
             _topicTagService = topicTagService;
         }
-        public ActionResult Show(string slug)
+        public ActionResult Show(string Slug)
         {
             using (UnitOfWorkManager.NewUnitOfWork())
             {
+                var result = _topicTagService.GetBySlug(Slug);
+                return View(result);
             }
-            return View();
         }
 	}
 }

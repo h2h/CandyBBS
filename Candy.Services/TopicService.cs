@@ -55,7 +55,10 @@ namespace Candy.Services
         {
             return this._topicRepository.GetPagedTopicsByCategory(pageIndex, pageSize, amountToTake, categoryId);
         }
-
+        public PagedList<Topic> GetPagedTopicForPopular(int pageIndex, int pageSize, int amountToTake)
+        {
+            return null;
+        }
         public IList<Topic> GetTodaysTopics(int amountToTake)
         {
             return this._topicRepository.GetTodaysTopics(amountToTake);
@@ -79,6 +82,10 @@ namespace Candy.Services
             this._postRepository.Add(post);
             topic.Posts.Add(post);
             return topic;
+        }
+        public PagedList<Topic> GetPagedTopicsByUser(int pageIndex, int pageSize, int amountToTake, int userId)
+        {
+            return _topicRepository.GetPagedTopicsByUser(pageIndex, pageSize, amountToTake, userId);
         }
     }
 }

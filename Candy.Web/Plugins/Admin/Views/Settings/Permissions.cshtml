@@ -1,54 +1,56 @@
 ﻿@model PermissionsViewModels
 @{
-    ViewBag.Title = Html.Lang("权限");
+    ViewBag.Title = Html.Lang("权限设置");
 }
-<div class="row-fluid">
-    <div class="span12">
-        <div class="grid simple">
-            <div class="grid-title no-border">
-                <h4>@Html.Lang("权限设置")</h4>
+<div class="mod_navbar">
+    <div class="title">
+        <h3 class="ng-binding ng-scope">
+            <i class="fa fa-tasks"></i>
+            @Html.Lang("权限设置")
+        </h3>
+    </div>
+</div>
+<div class="main-content">
+    <div class="forum-panel" id="permissions">
+        <div class="form-horizontal">
+            <div class="form-group">
+                <label class="control-label">@Html.Lang("用户角色")</label>
+                <select name="user-role" id="permissioninrole" class="form-control selecter">
+                    @foreach (var role in Model.Roles)
+                    {
+                        <option value="@role.Id">@role.RoleName</option>
+                    }
+                </select>
             </div>
-            <div class="grid-body no-border">
-                <div class="row">
-                    <div class="span12">
-                        <select name="user-role" id="permissioninrole">
-                            @foreach (var role in Model.Roles)
+            <table class="table table-hover table-bordered" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th></th>
+                        @foreach (var permission in Model.Permissions)
+                        {
+                            <th>@permission.Name</th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var category in Model.Categories)
+                    {
+                        <tr>
+                            <td>@category.Name</td>
+                            @foreach (var permission in Model.Permissions)
                             {
-                                <option value="@role.Id">@role.RoleName</option>
+                                var isChecked = "";
+                                <td>
+                                    <span class="permissioncheckbox checkbox check-default">
+                                        <input data-permisssion="@permission.Id" data-category="@category.Id" data-role="" type="checkbox" id="@permission.Id-@category.Id" @isChecked />
+                                        <label for="@permission.Id-@category.Id"></label>
+                                    </span>
+                                </td>
                             }
-                        </select>
-                    </div>
-                    <table class="table table-striped dataTable" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                @foreach (var permission in Model.Permissions)
-                                {
-                                    <th>@permission.Name</th>
-                                }
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var category in Model.Categories)
-                            {
-                                <tr>
-                                    <td>@category.Name</td>
-                                    @foreach (var permission in Model.Permissions)
-                                    {
-                                        var isChecked = "";
-                                        <td>
-                                            <span class="permissioncheckbox checkbox check-default">
-                                                <input data-permisssion="@permission.Id" data-category="@category.Id" data-role="" type="checkbox" id="@permission.Id-@category.Id" @isChecked />
-                                                <label for="@permission.Id-@category.Id"></label>
-                                            </span>
-                                        </td>
-                                    }
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

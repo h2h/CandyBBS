@@ -7,16 +7,46 @@ namespace Candy.Domain.Models
 {
     public enum UserStatus
     {
-        Success,            //成功
-        DuplicateUserName,  //重复的用户名
-        DuplicateEmail,     //重复的邮箱
-        InvalidPassword,    //无效的密码
-        InvalidEmail,       //无效的邮箱
-        InvalidAnswer,      //无效的答案
-        InvalidQuestion,    //无效的问题
-        InvalidUserName,    //无效的用户名
-        ProviderError,      //提供程序错误
-        UserRejected        //用户拒绝
+        /// <summary>
+        /// 成功
+        /// </summary>
+        Success,
+        /// <summary>
+        /// 重复的用户名
+        /// </summary>
+        DuplicateUserName,
+        /// <summary>
+        /// 重复的邮箱
+        /// </summary>
+        DuplicateEmail,
+        /// <summary>
+        /// 无效的密码
+        /// </summary>
+        InvalidPassword,  
+        /// <summary>
+        /// 无效的邮箱
+        /// </summary>
+        InvalidEmail,
+        /// <summary>
+        /// 无效的答案
+        /// </summary>
+        InvalidAnswer,
+        /// <summary>
+        /// 无效的问题
+        /// </summary>
+        InvalidQuestion,
+        /// <summary>
+        /// 无效的用户名
+        /// </summary>
+        InvalidUserName,
+        /// <summary>
+        /// 提供程序错误
+        /// </summary>
+        ProviderError,
+        /// <summary>
+        /// 用户拒绝
+        /// </summary>
+        UserRejected 
     }
     public class User : Entity
     {
@@ -79,7 +109,7 @@ namespace Candy.Domain.Models
 
         public string NiceUrl
         {
-            get { return UrlTypes.GenerateUrl(UrlType.Member, this.UserName); }
+            get { return UrlTypes.GenerateUrl(UrlType.Member, this.Id.ToString()); }
         }
         /// <summary>
         /// 获取用户头像

@@ -2,66 +2,67 @@
 @{
     ViewBag.Title = Html.Lang("添加版块");
 }
-<div class="row">
-    <div class="col-md-12">
-        <div class="grid simple">
-            <div class="grid-title no-border">
-                <h4>@Html.Lang("添加版块")</h4>
-            </div>
-            <div class="grid-body no-border">
-                <form action="@Url.Absolute("~/admin/category/new/")" method="post" class="form-box">
-                    <div class="form-group">
-                        <label class="form-label" for="name">@Html.Lang("名称")</label>
-                        <div class="controls">
-                            <input type="text" name="name" id="name" value="" class="form-control" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="sortorder">@Html.Lang("排序")</label>
-                        <div class="controls">
-                            <input type="number" name="sortorder" id="sortorder" value="0" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="parent">@Html.Lang("父级")</label>
-                        <div class="controls">
-                            <select name="parent">
-                                <option>@Html.Lang("无")</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="icon">@Html.Lang("图标")</label>
-                        <div class="controls">
-                            <input type="file" name="icon" id="icon" class="form-control file" value="" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="description">@Html.Lang("简介")</label>
-                        <div class="controls">
-                            <textarea name="description" id="description" class="form-control"></textarea>
-                        </div>
-                    </div>
-                    <div class="form-actions">
-                        <div class="pull-left">
-                            <button type="submit" name="submit" class="btn btn-success btn-cons">@Html.Lang("添加")</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
+@functions{
+    public IHtmlString DisplayTree(List<CategotyViewModels> cats, System.Text.StringBuilder sb, string plain)
+    {
+        foreach (var cat in cats)
+        {
+            sb.Append(string.Format("<option value={0}>{1}</option>", cat.Category.Id, plain + cat.Category.Name));
+            if (cat.SubCategories.Any())
+            {
+                DisplayTree(cat.SubCategories, sb, plain + "&nbsp;&nbsp;&nbsp;&nbsp;");
+            }
+        }
+        return new HtmlString(sb.ToString());
+    }
+}
+<div class="mod_navbar">
+    <div class="title">
+        <h3 class="ng-binding ng-scope">
+            <i class="fa fa-tasks"></i>
+            @Html.Lang("添加版块")
+        </h3>
     </div>
 </div>
-<link rel="stylesheet" type="text/css" href="@Url.Absolute(Html.AdminPath("css/simditor.css"))" />
+<div class="main-content">
+    <div class="forum-panel">
+        <form action="@Url.Absolute("~/admin/category/new/")" method="post" class="form-horizontal" enctype="multipart/form-data">
+            <div class="form-group">
+                <label class="control-label" for="name">@Html.Lang("名称")</label>
+                <input type="text" name="name" id="name" value="" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="sortorder">@Html.Lang("排序")</label>
+                <input type="number" name="sortorder" id="sortorder" value="0" class="form-control">
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="parent">@Html.Lang("父级")</label>
+                <select name="parent" class="form-control selecter">
+                    <option value="0">@Html.Lang("无")</option>
+                    @DisplayTree(Model.Categories, new System.Text.StringBuilder(), string.Empty)
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="icon">@Html.Lang("图标")</label>
+                <input type="file" name="icon" id="icon" class="form-control file" value="" />
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="description">@Html.Lang("简介")</label>
+                <textarea name="description" id="description" class="form-control"></textarea>
+            </div>
+            <div class="form-btns">
+                <div class="sm-line">
+                    <button type="submit" class="btn btn-danger">@Html.Lang("添加")</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 <script type="text/javascript" src="@Url.Absolute(Html.AdminPath("js/simditor-all.min.js"))"></script>
-<script type="text/javascript" src="@Url.Absolute(Html.AdminPath("js/select2.min.js"))"></script>
 <script type="text/javascript">
     $(function () {
         var editor = new Simditor({
             textarea: $('#description')
-        });
-        $("#parent").select2({
-            width: "100%"
         });
     });
 </script>

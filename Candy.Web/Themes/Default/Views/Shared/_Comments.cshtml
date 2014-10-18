@@ -1,0 +1,51 @@
+﻿@model ShowTopicViewModel
+@{
+    Layout = null;
+}
+<div class="forum-panel" id="comment-list">
+    <div class="page-title">
+        <h2>@Html.Lang("评论")</h2>
+    </div>
+    <div class="comment-list">
+        @if (Model.Comments.Any())
+        {
+            for (var i = 0; i < Model.Comments.Count(); i++)
+            {
+                var comment = Model.Comments[i];
+                <div class="comment">
+                    <div class="comment-meta">
+                        <a class="comment-user" href="@Url.Absolute(comment.User.NiceUrl)" title="@comment.User.Slug">
+                            <span class="comment-user-avatar">
+                                <img src="@Url.Absolute(Html.GetAvatar(comment.User,30))" title="@comment.User.Slug">
+                            </span>
+                            <span class="comment-user-name">@comment.User.Slug</span>
+                        </a>
+                        <span class="pull-right">
+                            <span class="comment-date">@DatesUI.GetPrettyDate(DatesUI.GetLocalDate(comment.DateCreated))</span>
+                            <span class="comment-reply-link">
+                                <a href="#">@Html.Lang("回复")</a>
+                            </span>
+                            <span class="tips tips-important comment-floor">@((Model.PageIndex.Value - 1) * Model.PageSize.Value + i + 1)#</span>
+                        </span>
+                    </div>
+                    <div class="comment-context">
+                        @Html.Raw(comment.PostContent)
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="empty-panel">
+                <i class="fa fa-comments"></i>
+                <br>
+                <span>暂无评论，来抢沙发</span>
+            </div>
+        }
+    </div>
+    @if (Model.TotalPages > 0)
+    {
+        Html.RenderPartial("_Pager", new Pager { CurrentPage = Model.PageIndex.Value, PageSize = Model.PageSize.Value, TotalItemCount = Model.TotalCount.Value, TotalPages = Model.TotalPages.Value, RouteValues = null });
+    }
+</div>
+@Html.Partial("_CreateComment", Model.Topic)

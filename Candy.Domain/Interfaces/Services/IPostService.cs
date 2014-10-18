@@ -11,7 +11,7 @@ namespace Candy.Domain.Interfaces.Services
         IEnumerable<Post> GetAll();
         IList<Post> GetByUser(int userId, int amountToTake);
         PagedList<Post> SearchPosts(int pageIndex, int pageSize, int amountToTake, string searchTerm);
-        PagedList<Post> GetPagedPostsByTopic(int pageIndex, int pageSize, int amountToTake, int topicId);
+        PagedList<Post> GetPagedCommentsByTopic(int pageIndex, int pageSize, int amountToTake, int topicId);
         Post Add(Post post);
         Post Get(int postId);
         void SaveOrUpdate(Post post);

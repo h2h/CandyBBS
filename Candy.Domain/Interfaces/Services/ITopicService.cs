@@ -14,6 +14,8 @@ namespace Candy.Domain.Interfaces.Services
         int TopicCount();
         IList<Topic> GetTodaysTopics(int amountToTake);
         PagedList<Topic> GetPagedTopics(int pageIndex, int pageSize, int amountToTake);
+        PagedList<Topic> GetPagedTopicForPopular(int pageIndex, int pageSize, int amountToTake);
         PagedList<Topic> GetPagedTopicsByCategory(int pageIndex, int pageSize, int amountToTake, int categotyId);
+        PagedList<Topic> GetPagedTopicsByUser(int pageIndex, int pageSize, int amountToTake, int userId);
     }
 }

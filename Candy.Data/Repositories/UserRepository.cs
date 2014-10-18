@@ -159,5 +159,9 @@ namespace Candy.Data.Repositories
             }
             this._context.Entry(item).State = EntityState.Modified; 
         }
+        public User GetByActivation(string key)
+        {
+            return this._context.User.FirstOrDefault(a => a.ActivationKey == key);
+        }
     }
 }

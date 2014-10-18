@@ -17,19 +17,22 @@ namespace Candy.Web.Areas.Admin.Controllers
         private readonly IRoleService _roleService;
         private readonly IPermissionService _permissionService;
         private readonly ICategoryService _categoryService;
+        private readonly IEmailService _emailService;
         public SettingsController(ILoggingService loggingService, IUnitOfWorkManager unitOfWorkManager, IUserService userService,
             ISettingsService settingsService,
             ILocalizationService localizationService,
             IThemeService themeService,
             IRoleService roleService,
             IPermissionService permissionService,
-            ICategoryService categoryService)
+            ICategoryService categoryService,
+            IEmailService emailService)
             : base(loggingService, unitOfWorkManager, userService, settingsService,localizationService)
         {
             this._themeService = themeService;
             this._roleService = roleService;
             this._permissionService = permissionService;
             this._categoryService = categoryService;
+            this._emailService = emailService;
         }
         public ActionResult Index()
         {
@@ -94,9 +97,10 @@ namespace Candy.Web.Areas.Admin.Controllers
             }
             return null;
         }
-        [HttpPost]
+        [HttpPost,ValidateInput(false)]
         public ActionResult Update(FormCollection collection)
         {
+            var msg = new GenericMessage();
             using (var unitOfWork = UnitOfWorkManager.NewUnitOfWork())
             {
                 string returnUrl = collection["returnUrl"];
@@ -111,18 +115,62 @@ namespace Candy.Web.Areas.Admin.Controllers
                 try
                 {
                     unitOfWork.Commit();
+                    msg.Message = "设置保存成功！";
+                    msg.MessageType = GenericMessageType.success;
                 }
                 catch (Exception ex)
                 {
                     unitOfWork.Rollback();
                     LoggingService.Error(ex);
+                    msg.Message = "设置保存失败！";
+                    msg.MessageType = GenericMessageType.warning;
                 }
                 if (string.IsNullOrEmpty(returnUrl))
                 {
                     returnUrl = Request.UrlReferrer.AbsolutePath;
                 }
+                TempData[AppConstants.MessageViewBagName] = msg;
                 return Redirect(returnUrl);
             }
+        }
+        [HttpPost]
+        public ActionResult TestEmailSettings(FormCollection collection)
+        {
+            var msg = new GenericMessage();
+            using (var unitOfWork = UnitOfWorkManager.NewUnitOfWork())
+            {
+                foreach (var key in collection.AllKeys)
+                {
+                    var settings = SettingsService.Get(key);
+                    if (settings != null)
+                    {
+                        settings.Value = collection[key];
+                    }
+                }
+                try
+                {
+                    unitOfWork.Commit();
+                    var mail = new Email
+                    {
+                        Subject = string.Format("【{0}】测试邮件", SettingsService.Get()[AppConstants.SiteName].Value),
+                        Body = "测试邮件，请勿回复",
+                        NameTo = "Hubert",
+                        EmailFrom = SettingsService.Get()[AppConstants.NotificationReplyEmail].Value,
+                        EmailTo = SettingsService.Get()[AppConstants.NotificationReplyEmail].Value
+                    };
+                    _emailService.SendMail(mail);
+                    msg.Message = "一份测试邮件已经发送到你的通知邮箱中。";
+                    msg.MessageType = GenericMessageType.success;
+                    TempData[AppConstants.MessageViewBagName] = msg;
+                }
+                catch (Exception ex)
+                {
+                    LoggingService.Error(ex);
+                    msg.Message = "邮件发送失败，请检查你填写的信息是否正确。";
+                    msg.MessageType = GenericMessageType.warning;
+                }
+            }
+            return RedirectToAction("Email");
         }
 	}
 }

@@ -80,5 +80,17 @@ namespace Candy.Data.Repositories
                 .Take(amountToTake)
                 .ToList();
         }
+        public PagedList<Topic> GetPagedTopicsByUser(int pageIndex, int pageSize, int amountToTake, int userId)
+        {
+            var total = this._context.Topic.Where(a=>a.User.Id == userId).Count();
+            var result =  this._context.Topic
+                .Where(a=>a.User.Id == userId)
+                .OrderByDescending(a => a.CreateDate)
+                .Skip((pageIndex - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            return new PagedList<Topic>(result, pageIndex, pageSize, total);
+        }
     }
 }

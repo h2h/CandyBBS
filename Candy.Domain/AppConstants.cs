@@ -9,22 +9,104 @@ namespace Candy.Domain
         page,
         comment
     }
+    public enum EmailType
+    {
+        Activation,
+        ForgotPassword
+    }
     public static class AppConstants
     {
+        public const string EmailActivationTemplatePath = "~/App_Data/EmailTemplates/ActivationTemplate.html";
+        /// <summary>
+        /// 分类 URL 标识
+        /// </summary>
         public const string CategoryUrlIdentifier = "c";
+        /// <summary>
+        /// 帖子 URL 标识
+        /// </summary>
         public const string TopicUrlIdentifier = "t";
+        /// <summary>
+        /// 标签 URL 标识
+        /// </summary>
         public const string TagsUrlIdentifier = "tag";
+        /// <summary>
+        /// 用户 URL 标识
+        /// </summary>
         public const string UserUrlIdentifier = "u";
-
+        /// <summary>
+        /// 默认主题名
+        /// </summary>
         public const string DefaultTheme = "Default";
+        /// <summary>
+        /// 当前主题
+        /// </summary>
         public const string CurrentTheme = "CurrentTheme";
+        /// <summary>
+        /// 移动设备主题
+        /// </summary>
         public const string MobileTheme = "Mobile";
-
+        /// <summary>
+        /// 显示页面数量
+        /// </summary>
         public const int PagingGroupSize = 10;
 
         // View Bag Constants
         public const string MessageViewBagName = "Message";
-        public const string DefaultCategoryViewBagName = "DefauleCategory";
+
+        /// <summary>
+        /// 性别
+        /// </summary>
+        public const string UserGender = "user_gender";
+        /// <summary>
+        /// 感情状况
+        /// </summary>
+        public const string UserLove = "user_love";
+        /// <summary>
+        /// 性取向
+        /// </summary>
+        public const string UserSexTrend = "user_sex_trend";
+        /// <summary>
+        /// 血型
+        /// </summary>
+        public const string UserBlood = "user_blood";
+        /// <summary>
+        /// 生日
+        /// </summary>
+        public const string UserBirthday = "user_birthday";
+        /// <summary>
+        /// 所在省份
+        /// </summary>
+        public const string UserProvince = "user_province";
+        /// <summary>
+        /// 所在城市
+        /// </summary>
+        public const string UserCity = "user_city";
+        /// <summary>
+        /// 新浪微博
+        /// </summary>
+        public const string UserWeibo = "user_weibo";
+        /// <summary>
+        /// 腾讯微博
+        /// </summary>
+        public const string UserTencentWeibo = "user_tencent_weibo";
+        /// <summary>
+        /// 腾讯 QQ
+        /// </summary>
+        public const string UserTencentQQ = "user_tencent_qq";
+        /// <summary>
+        /// Google +
+        /// </summary>
+        public const string UserGooglePlus = "user_google_plus";
+        /// <summary>
+        /// Twitter
+        /// </summary>
+        public const string UserTwitter = "user_twitter";
+        /// <summary>
+        /// Facebook
+        /// </summary>
+        public const string UserFacebook = "user_facebook";
+
+
 
         /// <summary>
         /// 管理员角色
@@ -100,6 +182,10 @@ namespace Candy.Domain
         /// </summary>
         public const string LanguageCulture = "cb_language";
         /// <summary>
+        /// 时区
+        /// </summary>
+        public const string TimeZone = "cb_timezone";
+        /// <summary>
         /// 分页大小
         /// </summary>
         public const string PageSize = "cb_pagesize";
@@ -159,5 +245,18 @@ namespace Candy.Domain
         /// 添加回复获得积分
         /// </summary>
         public const string PointsAddedPerPost = "cb_pointsaddedpost";
+        /// <summary>
+        /// 网站统计代码
+        /// </summary>
+        public const string AnalyticsCode = "cb_analyticscode";
+        /// <summary>
+        /// 头像缓存
+        /// </summary>
+        public const string UseAvatarCache = "cb_useavatarcache";
+        /// <summary>
+        /// 头像缓存路径
+        /// </summary>
+        public const string AvatarCachePath = "~/Uploads/Avatar/Cache/";
+
     }
 }

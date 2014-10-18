@@ -284,5 +284,13 @@ namespace Candy.Utilities
             var ipList = context.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
             return !string.IsNullOrEmpty(ipList) ? ipList.Split(',')[0] : HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
         }
+        /// <summary>
+        /// 获取默认头像
+        /// </summary>
+        /// <returns></returns>
+        public static string GetDefaultAvatar()
+        {
+            return string.Empty;
+        }
     }
 }

@@ -36,7 +36,7 @@ namespace Candy.Services
         private static string MakeLogFileName(bool isArchive)
         {
             return !isArchive ? String.Format("{0}//{1}{2}", LogFileFolder, LogFileNameOnly, LogFileExtension) :
-                String.Format("{0}//{1}_{2}{3}", LogFileFolder, LogFileNameOnly, DateTime.UtcNow.ToString("yyyyMMdd_hhmmss"), LogFileExtension);
+                String.Format("{0}//{1}_{2}{3}", LogFileFolder, LogFileNameOnly, DateTime.Now.ToString("yyyyMMdd_hhmmss"), LogFileExtension);
         }
 
         /// <summary>

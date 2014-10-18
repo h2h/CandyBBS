@@ -1,7 +1,10 @@
 ﻿@{
     Layout = null;
 }
-@Html.Action("CreateTopic", "Widget")
+@if(User.Identity.IsAuthenticated)
+{
+    Html.RenderAction("CreateTopic", "Widget");
+}
 @Html.Action("HotUsers","Widget")
 @Html.Action("HotTags", "Widget")
 @Html.Action("NewTopics", "Widget")

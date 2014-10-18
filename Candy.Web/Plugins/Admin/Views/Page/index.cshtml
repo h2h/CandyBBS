@@ -1,43 +1,47 @@
 ﻿@{
-    ViewBag.Title = Html.Lang("所有帖子");
+    ViewBag.Title = Html.Lang("所有页面");
 }
-<div class="row">
-    <div class="col-md-12">
-        <div class="grid simple">
-            <div class="grid-title no-border">
-                <h4>@Html.Lang("所有帖子")</h4>
-            </div>
-            <div class="grid-body no-border">
-                <table class="table table-striped dataTable" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th>
-                                @Html.Lang("标题")
-                            </th>
-                            <th>
-                                @Html.Lang("作者")
-                            </th>
-                            <th>
-                                @Html.Lang("分类")
-                            </th>
-                            <th>
-                                @Html.Lang("标签")
-                            </th>
-                            <th>
-                                @Html.Lang("回复")
-                            </th>
-                            <th>
-                                @Html.Lang("日期")
-                            </th>
-                            <th class="center short">
-                                @Html.Lang("操作")
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-            </div>
+<div class="mod_navbar">
+    <div class="title">
+        <h3 class="ng-binding ng-scope">
+            <i class="fa fa-tasks"></i>
+            @Html.Lang("所有页面")
+        </h3>
+    </div>
+</div>
+<div class="main-content">
+    <div class="forum-panel">
+        <div class="form-horizontal">
+            <table class="table table-hover table-bordered" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.Lang("标题")
+                        </th>
+                        <th>
+                            @Html.Lang("作者")
+                        </th>
+                        <th>
+                            @Html.Lang("分类")
+                        </th>
+                        <th>
+                            @Html.Lang("标签")
+                        </th>
+                        <th>
+                            @Html.Lang("回复")
+                        </th>
+                        <th>
+                            @Html.Lang("日期")
+                        </th>
+                        <th class="center short">
+                            @Html.Lang("操作")
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
